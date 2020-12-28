@@ -23,18 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.opening);  //connect textview from layout
 
-        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {   //initialize textToSpeech
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int result = mTTS.setLanguage(Locale.CANADA);
-                    TextReader.say(mTTS, tv);
-                } else {
-                    Log.e("TTS", "Initialization failed");
-                }
-            }
-        });
 
+        Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
+        TextReader.say(mTTS, tv);
 
         new CountDownTimer(5000, 1000) {
             @Override
@@ -47,6 +39,5 @@ public class MainActivity extends AppCompatActivity {
                 Navigate.goToSourceSelection(context);
             }
         }.start();
-
     }
 }

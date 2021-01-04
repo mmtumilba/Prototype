@@ -3,4 +3,16 @@
 
     <string name="opening_label">News Reader for the Blind and Visually Impaired</string>
 
+    <string name="source_label">Choose source: \n
+                                1.ABS-CBN. \n
+                                2.GMA. \n
+                                3.Inquirer. \n
+                                4.Philippine Star.
+    </string>
+
+    <string name="source">Source</string>
+
+    <string name="submit">Submit</string>
+
+
 </resources>

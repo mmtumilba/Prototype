@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.opening);  //connect textview from layout
 
-
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         TextReader.say(mTTS, tv);

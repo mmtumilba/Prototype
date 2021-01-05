@@ -70,10 +70,9 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         String temp = et.getText().toString();
         int source = Integer.parseInt(temp);
 
-        if ( (source < 1) || (source >5) ){
-            // add error tv
-            // set error tv visible = true
-            // read error tv
+        if ( (source < 1) || (source > 5) ){
+            mTTS.speak("Try again.", TextToSpeech.QUEUE_FLUSH, null);
+            TextReader.say(mTTS, tv);
         } else {
             String sourceStr = getSourceString(source);
             goToCategorySelectionActivity(context, sourceStr);

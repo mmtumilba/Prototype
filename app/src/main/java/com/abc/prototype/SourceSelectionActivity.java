@@ -6,15 +6,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.abc.prototype.Navigate;
 
-import static com.abc.prototype.Navigate.goToAbsCategorySelection;
+import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
 
 public class SourceSelectionActivity extends AppCompatActivity  {
 
@@ -45,30 +42,41 @@ public class SourceSelectionActivity extends AppCompatActivity  {
 
     }
 
+    private String getSourceString(int source) {
+        String output = "";
+        switch (source) {
+            case 1:
+                output = "abs";
+                break;
+            case 2:
+                output = "";
+                break;
+
+            case 3:
+                output = "";
+                break;
+
+            case 4:
+                output = "";
+                break;
+        }
+
+        return output;
+    }
+
     private void goToSource(EditText et) {
         Context context = getApplicationContext();
 
         String temp = et.getText().toString();
         int source = Integer.parseInt(temp);
 
-        switch (source) {
-            case 1:
-                goToAbsCategorySelection(context);
-                break;
-
-            case 2:
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                break;
-
-            default:
-                // add error tv
-                // set error tv visible = true
-                // read error tv
+        if ( (source < 1) || (source >5) ){
+            // add error tv
+            // set error tv visible = true
+            // read error tv
+        } else {
+            String sourceStr = getSourceString(source);
+            goToCategorySelectionActivity(context, sourceStr);
         }
 
     }

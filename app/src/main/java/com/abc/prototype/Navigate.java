@@ -3,7 +3,6 @@ package com.abc.prototype;
 import android.content.Context;
 import android.content.Intent;
 
-import com.abc.prototype.ABS.AbsCategorySelectionActivity;
 
 public class Navigate {
 
@@ -13,9 +12,22 @@ public class Navigate {
         context.startActivity(intent);
     }
 
-    public static void goToAbsCategorySelection (Context context) {
-        Intent intent = new Intent(context, AbsCategorySelectionActivity.class);
+
+    public static void goToCategorySelectionActivity (Context context, String sourceStr) {
+        Intent intent = new Intent(context, CategorySelectionActivity.class);
+        intent.putExtra("source", sourceStr);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+
+    /*
+     * public static void goToArticleSelectionActivity (Context context, String categoryStr, String subcategoryStr) {
+     *         Intent intent = new Intent(context, CategorySelectionActivity.class);
+     *         intent.putExtra("category", categoryStr);
+     *         intent.putExtra("subcategory", subcategoryStr);
+     *         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+     *         context.startActivity(intent);
+     *
+     * }
+     */
 }

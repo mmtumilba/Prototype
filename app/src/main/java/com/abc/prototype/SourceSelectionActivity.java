@@ -49,15 +49,15 @@ public class SourceSelectionActivity extends AppCompatActivity  {
                 output = "abs";
                 break;
             case 2:
-                output = "";
+                output = "gma";
                 break;
 
             case 3:
-                output = "";
+                output = "inquirer";
                 break;
 
             case 4:
-                output = "";
+                output = "philstar";
                 break;
         }
 

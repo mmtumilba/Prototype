@@ -36,7 +36,7 @@
         android:text="@string/next" />
 
     <Button
-        android:id="@+id/buttonSourceSelectionSubmit"
+        android:id="@+id/buttonCategorySelectionSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit" />

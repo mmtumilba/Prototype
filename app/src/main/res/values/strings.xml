@@ -20,5 +20,32 @@
 
     <string name="tv">TEXT VIIIIIEEEEEEW</string>
 
+    <string name="abs_categories1">Choose a category: \n
+                                    1. News \n
+                                    2. Business \n
+                                    3. Entertainment \n
+                                    4. Life \n
+                                    5. Sports </string>
+
+    <string name="abs_categories2">Choose a category: \n
+                                    1. Overseas \n
+                                    2. Spotlight </string>
+
+    <string name="gma_categories1">Choose category: \n
+                                    1. News \n
+                                    2. Money \n
+                                    3. Sports \n
+                                    4. Pinoy Abroad \n
+                                    5. Sci Tech</string>
+
+    <string name="gma_categories2">Choose a category: \n
+                                    1. Showbiz \n
+                                    2. Lifestyle \n
+                                    3. Opinion \n
+                                    4. Hashtag \n
+                                    5. Serbisiyo Publiko</string>
+
+    <string name="gma_categories3">Choose a category: \n
+                                    1. Community Bulletin Board</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.abc.prototype;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 
 public class Navigate {
@@ -14,10 +15,15 @@ public class Navigate {
 
 
     public static void goToCategorySelectionActivity (Context context, String sourceStr) {
+        Log.e("CHECKPOINT", "nakapasok CategorySelectionActivity");
+
         Intent intent = new Intent(context, CategorySelectionActivity.class);
         intent.putExtra("source", sourceStr);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+
+        Log.e("CHECKPOINT", "palabas ng navigate to CategorySelectionActivity");
+
     }
 
     /*

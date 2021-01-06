@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,8 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             }
         });
 
+        Log.e("CHECKPOINT", "ONcREATE");
+
     }
 
     private String getSourceString(int source) {
@@ -61,11 +64,12 @@ public class SourceSelectionActivity extends AppCompatActivity  {
                 break;
         }
 
+        Log.e("CHECKPOINT", "getSourceString");
         return output;
     }
 
     private void goToSource(EditText et) {
-        Context context = getApplicationContext();
+        Context sourceContext = getApplicationContext();
 
         String temp = et.getText().toString();
         int source = Integer.parseInt(temp);
@@ -75,7 +79,7 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             TextReader.say(mTTS, tv);
         } else {
             String sourceStr = getSourceString(source);
-            goToCategorySelectionActivity(context, sourceStr);
+            goToCategorySelectionActivity(sourceContext, sourceStr);
         }
 
     }

@@ -6,6 +6,8 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Locale;
 
 public class TextReader {
@@ -15,14 +17,13 @@ public class TextReader {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    //int result = mTTS.setLanguage(Locale.CANADA);
-                    //TextReader.say(mTTS, tv);
+//                    int result = mTTS.setLanguage(Locale.CANADA);
+//                    TextReader.say(mTTS, tv);
                 } else {
                     Log.e("TTS", "Initialization failed");
                 }
             }
         });
-
         return tts;
     }
 
@@ -38,9 +39,13 @@ public class TextReader {
                 reader.setSpeechRate(1);
                 reader.setPitch(1);
                 reader.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-
             }
         }.start();
+    }
+
+    public static void invalidInput (TextToSpeech reader, TextView tv) {
+        reader.speak("Try again.", TextToSpeech.QUEUE_FLUSH, null);
+        TextReader.say(reader, tv);
     }
 
 }

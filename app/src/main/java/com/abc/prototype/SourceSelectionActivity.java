@@ -73,15 +73,15 @@ public class SourceSelectionActivity extends AppCompatActivity  {
     private void goToSource(EditText et) {
         Context sourceContext = getApplicationContext();
 
-        String temp = et.getText().toString();
         if (et.length() == 0) {
-            errorOccurred();
+            TextReader.invalidInput(mTTS, tv);
             return;
         }
 
+        String temp = et.getText().toString();
         int source = Integer.parseInt(temp);
         if ( (source < 1) || (source > 5)){
-            errorOccurred();
+            TextReader.invalidInput(mTTS, tv);
         } else {
             String sourceStr = getSourceString(source);
             goToCategorySelectionActivity(sourceContext, sourceStr);
@@ -89,9 +89,6 @@ public class SourceSelectionActivity extends AppCompatActivity  {
 
     }
 
-    private void errorOccurred () {
-        mTTS.speak("Try again.", TextToSpeech.QUEUE_FLUSH, null);
-        TextReader.say(mTTS, tv);
-    }
+
 
 }

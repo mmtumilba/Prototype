@@ -22,10 +22,11 @@ public class Navigate {
     }
 
 
-     public static void goToArticleSelectionActivity (Context context, String categoryStr, String subcategoryStr) {
-         Intent intent = new Intent(context, CategorySelectionActivity.class);
-         intent.putExtra("category", categoryStr);
-         intent.putExtra("subcategory", subcategoryStr);
+     public static void goToArticleSelectionActivity (Context context, String source,  String category, String subcategory) {
+         Intent intent = new Intent(context, ArticleSelectionActivity.class);
+         intent.putExtra("source", source);
+         intent.putExtra("category", category);
+         intent.putExtra("subcategory", subcategory);
          intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
          context.startActivity(intent);
      }

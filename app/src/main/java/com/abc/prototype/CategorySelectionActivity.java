@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
+
 public class CategorySelectionActivity extends AppCompatActivity {
 
     private TextView tv;
@@ -26,7 +28,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
 
     private String source;
     private String category;
-    private String subcategory;
+    private String subcategory = "";
 
     private boolean hasSubcategory = false;
 
@@ -36,7 +38,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
     private final String PHILSTAR = "philstar";
 
     private int setNum = 1;
-    private int setMax;
+    private int setMax, categoryInt;
 
 
     @Override
@@ -47,11 +49,13 @@ public class CategorySelectionActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseCategory);
+        et = findViewById(R.id.editTextNumberInputCategory);
 
         Bundle extras = getIntent().getExtras();
         source = extras.getString("source");     // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
         setTv();
 
+        // TODO: 07/01/2021 stop reader upon action (next/back/submit)
         btnBack = findViewById(R.id.buttonCategorySelectionBack);
         btnBack.setAlpha((float) 0.5);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +75,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                 }
-
             }
         });
 
@@ -99,6 +102,31 @@ public class CategorySelectionActivity extends AppCompatActivity {
 
 
         btnSubmit = findViewById(R.id.buttonCategorySelectionSubmit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et.length() == 0) {
+                    TextReader.invalidInput(mTTS, tv);
+                    return;
+                }
+                String temp = et.getText().toString();
+                categoryInt = Integer.parseInt(temp);
+                switch (source) {
+                    case ABS:
+                        absSubmitButton();
+                        break;
+                    case GMA:
+                        break;
+
+                    case INQUIRER:
+                        break;
+
+                    case PHILSTAR:
+                        break;
+
+                }
+            }
+        });
 
     }
 
@@ -116,36 +144,87 @@ public class CategorySelectionActivity extends AppCompatActivity {
             btnNext.setAlpha((float) 0.5);
 
             tv.setText(R.string.abs_categories2);
-
     }
 
-    private void setTv () {
+    private void absSubmitButton() {
+        Context context = getApplicationContext();
 
-        switch (source) {
-            case ABS:
-                tv.setText(R.string.abs_categories1);
-                setMax = 2;
-                break;
+        //error checking pag walang laman ang et
 
-            case GMA:
-                hasSubcategory = true;
-                tv.setText(R.string.gma_categories1);
-                setMax = 3;
-                break;
 
-            case INQUIRER:
-                hasSubcategory = true;
-                tv.setText(R.string.inquirer_categories1);
-                setMax = 2;
-                break;
-
-            case PHILSTAR:
-                tv.setText(R.string.philstar_categories1);
-                setMax = 2;
-                break;
-
+        if ( (categoryInt < 1)|| (categoryInt > 5) ) {
+            TextReader.invalidInput(mTTS, tv);
+        } else {
+            category = getAbsCategoryString();
+            goToArticleSelectionActivity(context, source, category, subcategory);
         }
     }
+
+    private String getAbsCategoryString() {
+        String output = "";
+
+        switch (setNum) {
+            case 1:
+                switch (categoryInt) {
+                    case 1:
+                        output = "news";
+                        break;
+                    case 2:
+                        output = "business";
+                        break;
+                    case 3:
+                        output = "entertainment";
+                        break;
+                    case 4:
+                        output = "life";
+                        break;
+                    case 5:
+                        output = "sports";
+                        break;
+                }
+                break;
+
+            case 2:
+                switch (categoryInt) {
+                    case 1:
+                        output = "overseas";
+                        break;
+                    case 2:
+                        output = "spotlight";
+                        break;
+                }
+        }
+        return output;
+    }
+
+        private void setTv () {
+
+            switch (source) {
+                case ABS:
+                    tv.setText(R.string.abs_categories1);
+                    setMax = 2;
+                    break;
+
+                case GMA:
+                    hasSubcategory = true;
+                    tv.setText(R.string.gma_categories1);
+                    setMax = 3;
+                    break;
+
+                case INQUIRER:
+                    hasSubcategory = true;
+                    tv.setText(R.string.inquirer_categories1);
+                    setMax = 2;
+                    break;
+
+                case PHILSTAR:
+                    tv.setText(R.string.philstar_categories1);
+                    setMax = 2;
+                    break;
+
+            }
+        }
+
 
 }
 

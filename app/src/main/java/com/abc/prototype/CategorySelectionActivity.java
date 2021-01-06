@@ -35,22 +35,12 @@ public class CategorySelectionActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
-        TextReader.say(mTTS, tv);
-
         tv = findViewById(R.id.textViewChooseCategory);
 
         Bundle extras = getIntent().getExtras();
+        String source = extras.getString("source");     // TODO: 05/01/2021 this may produce null pointerException
+        tv.setText(source);
 
-        //ito yung dati
-
-//        String source = extras.getString("source");     // TODO: 05/01/2021 this may produce null pointerException
-//        tv = findViewById(R.id.textViewTemp);
-//        tv.setText(source);
-
-
-//        Intent intent = getIntent();
-//        String source = intent.getStringExtra("source");     // TODO: 05/01/2021 this may produce null pointerException
-//        tv.setText(source);
 
     }
 }

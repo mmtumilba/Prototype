@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 goToSource(et);
             }
         });
@@ -72,16 +74,24 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         Context sourceContext = getApplicationContext();
 
         String temp = et.getText().toString();
-        int source = Integer.parseInt(temp);
+        if (et.length() == 0) {
+            errorOccurred();
+            return;
+        }
 
-        if ( (source < 1) || (source > 5) ){
-            mTTS.speak("Try again.", TextToSpeech.QUEUE_FLUSH, null);
-            TextReader.say(mTTS, tv);
+        int source = Integer.parseInt(temp);
+        if ( (source < 1) || (source > 5)){
+            errorOccurred();
         } else {
             String sourceStr = getSourceString(source);
             goToCategorySelectionActivity(sourceContext, sourceStr);
         }
 
+    }
+
+    private void errorOccurred () {
+        mTTS.speak("Try again.", TextToSpeech.QUEUE_FLUSH, null);
+        TextReader.say(mTTS, tv);
     }
 
 }

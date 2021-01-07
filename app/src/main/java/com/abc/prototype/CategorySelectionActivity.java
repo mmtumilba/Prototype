@@ -66,6 +66,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         absBackButton();
                         break;
                     case GMA:
+                        gmaBackButton();
                         break;
 
                     case INQUIRER:
@@ -90,6 +91,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         absNextButton();
                         break;
                     case GMA:
+                        gmaNextButton();
                         break;
 
                     case INQUIRER:
@@ -127,6 +129,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                     case PHILSTAR:
+                        philstarSubmitButton();
                         break;
 
                 }
@@ -218,6 +221,41 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
 
+    private void gmaBackButton () {
+        switch (setNum) {
+            case 2: // -> 1
+                setNum--;
+                btnBack.setAlpha((float) 0.5);
+                tv.setText(R.string.gma_categories1);
+                break;
+
+            case 3: // -> 2
+                setNum--;
+                btnNext.setAlpha((float) 1);
+                tv.setText(R.string.gma_categories2);
+                break;
+        }
+    }
+
+    private void gmaNextButton () {
+        switch (setNum) {
+            case 1: // -> 2
+                setNum++;
+                btnBack.setAlpha((float) 1);
+                tv.setText(R.string.gma_categories2);
+                break;
+
+            case 2: // -> 3
+                setNum++;
+                btnNext.setAlpha((float) 0.5);
+                tv.setText(R.string.gma_categories3);
+                break;
+        }
+    }
+
+
+
+
     private void inquirerBackButton () {
         backButton();
         tv.setText(R.string.inquirer_categories1);
@@ -250,9 +288,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
 
     }
-
-    //// TODO: 07/01/2021 clear / reset variables kapag nag next activity
-
 
     private String getInquirerCategoryString () {
         String output = "";
@@ -295,6 +330,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
         return output;
     }
 
+    //// TODO: 07/01/2021 clear / reset variables kapag nag next activity
 
 
     private void philstarBackButton () {
@@ -305,6 +341,72 @@ public class CategorySelectionActivity extends AppCompatActivity {
     private void philstarNextButton () {
         nextButton();
         tv.setText(R.string.philstar_categories2);
+    }
+
+    private void philstarSubmitButton (){
+        Context context = getApplicationContext();
+        switch (setNum) {
+            case 1:
+                if ( (categoryInt < 1)|| (categoryInt > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getPhilstarCategoryString();
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+            case 2:
+                if ( (categoryInt < 1)|| (categoryInt > 4) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getPhilstarCategoryString();
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+        }
+    }
+
+    private String getPhilstarCategoryString () {
+        String output = "";
+
+        switch (setNum) {
+            case 1:
+                switch (categoryInt) {
+                    case 1:
+                        output = "headlines";
+                        break;
+                    case 2:
+                        output = "opinion";
+                        break;
+                    case 3:
+                        output = "nation";
+                        break;
+                    case 4:
+                        output = "world";
+                        break;
+                    case 5:
+                        output = "business";
+                        break;
+                }
+                break;
+
+            case 2:
+                switch (categoryInt) {
+                    case 1:
+                        output = "sports";
+                        break;
+                    case 2:
+                        output = "entertainment";
+                        break;
+                    case 3:
+                        output = "lifestyle";
+                        break;
+                    case 4:
+                        output = "other_sections";
+                        break;
+                }
+        }
+
+        return output;
     }
 
 

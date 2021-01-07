@@ -69,6 +69,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                     case INQUIRER:
+                        inquirerBackButton();
                         break;
 
                     case PHILSTAR:
@@ -91,6 +92,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                     case INQUIRER:
+                        inquirerNextButton();
                         break;
 
                     case PHILSTAR:
@@ -130,28 +132,31 @@ public class CategorySelectionActivity extends AppCompatActivity {
 
     }
 
-    private void absBackButton () {
-            setNum--;
-            btnBack.setAlpha((float) 0.5);
-            btnNext.setAlpha((float) 1);
-
-            tv.setText(R.string.abs_categories1);
+    private void backButton () {
+        setNum--;
+        btnBack.setAlpha((float) 0.5);
+        btnNext.setAlpha((float) 1);
     }
 
-    private void absNextButton() {
-            setNum++;
-            btnBack.setAlpha((float) 1);
-            btnNext.setAlpha((float) 0.5);
+    private void nextButton () {
+        setNum++;
+        btnBack.setAlpha((float) 1);
+        btnNext.setAlpha((float) 0.5);
+    }
 
+    private void absBackButton () {
+        backButton();
+        tv.setText(R.string.abs_categories1);
+    }
+
+
+    private void absNextButton () {
+            nextButton();
             tv.setText(R.string.abs_categories2);
     }
 
     private void absSubmitButton() {
         Context context = getApplicationContext();
-
-        //error checking pag walang laman ang et
-
-
         if ( (categoryInt < 1)|| (categoryInt > 5) ) {
             TextReader.invalidInput(mTTS, tv);
         } else {
@@ -160,7 +165,17 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
     }
 
-    private String getAbsCategoryString() {
+    private void inquirerBackButton () {
+        backButton();
+        tv.setText(R.string.inquirer_categories1);
+    }
+
+    private void inquirerNextButton () {
+        nextButton();
+        tv.setText(R.string.inquirer_categories2);
+    }
+
+    private String getAbsCategoryString () {
         String output = "";
 
         switch (setNum) {
@@ -197,33 +212,34 @@ public class CategorySelectionActivity extends AppCompatActivity {
         return output;
     }
 
-        private void setTv () {
+    private void setTv () {
 
-            switch (source) {
-                case ABS:
-                    tv.setText(R.string.abs_categories1);
-                    setMax = 2;
-                    break;
+        switch (source) {
+            case ABS:
+                tv.setText(R.string.abs_categories1);
+                setMax = 2;
+                break;
 
-                case GMA:
-                    hasSubcategory = true;
-                    tv.setText(R.string.gma_categories1);
-                    setMax = 3;
-                    break;
+            case GMA:
+                hasSubcategory = true;
+                tv.setText(R.string.gma_categories1);
+                setMax = 3;
+                break;
 
-                case INQUIRER:
-                    hasSubcategory = true;
-                    tv.setText(R.string.inquirer_categories1);
-                    setMax = 2;
-                    break;
+            case INQUIRER:
+                hasSubcategory = true;
+                tv.setText(R.string.inquirer_categories1);
+                setMax = 2;
+                break;
 
-                case PHILSTAR:
-                    tv.setText(R.string.philstar_categories1);
-                    setMax = 2;
-                    break;
+            case PHILSTAR:
+                tv.setText(R.string.philstar_categories1);
+                setMax = 2;
+                break;
 
-            }
         }
+    }
+
 
 
 }

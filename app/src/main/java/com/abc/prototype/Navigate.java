@@ -21,8 +21,16 @@ public class Navigate {
         context.startActivity(intent);
     }
 
+    public static void goToSubcategorySelectionActivity (Context context, String source, String category) {
+        Intent intent = new Intent(context, SubcategorySelectionActivity.class);
+        intent.putExtra("source", source);
+        intent.putExtra("category", category);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 
-     public static void goToArticleSelectionActivity (Context context, String source,  String category, String subcategory) {
+
+     public static void goToArticleSelectionActivity (Context context, String source, String category, String subcategory) {
          Intent intent = new Intent(context, ArticleSelectionActivity.class);
          intent.putExtra("source", source);
          intent.putExtra("category", category);

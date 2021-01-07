@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
+import static com.abc.prototype.Navigate.goToSubcategorySelectionActivity;
 
 public class CategorySelectionActivity extends AppCompatActivity {
 
@@ -141,15 +142,19 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
     private void backButton () {
-        setNum--;
-        btnBack.setAlpha((float) 0.5);
-        btnNext.setAlpha((float) 1);
+        while (setNum == 2) {
+            setNum--;
+            btnBack.setAlpha((float) 0.5);
+            btnNext.setAlpha((float) 1);
+        }
     }
 
     private void nextButton () {
-        setNum++;
-        btnBack.setAlpha((float) 1);
-        btnNext.setAlpha((float) 0.5);
+        while (setNum == 1) {
+            setNum++;
+            btnBack.setAlpha((float) 1);
+            btnNext.setAlpha((float) 0.5);
+        }
     }
 
 
@@ -264,14 +269,14 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     category = getGmaCategoryString();
-//                    goToArticleSelectionActivity(context, source, category, subcategory);
+                    goToSubcategorySelectionActivity(context, source, category);
                 }
                 break;
 
             case 3:
                 if (categoryInt == 1) {
                     category = getGmaCategoryString();
-//                    goToArticleSelectionActivity(context, source, category, subcategory);
+                    goToSubcategorySelectionActivity(context, source, category);
                 } else {
                     TextReader.invalidInput(mTTS, tv);
                 }
@@ -349,7 +354,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     category = getInquirerCategoryString();
-//                    goToArticleSelectionActivity(context, source, category, subcategory);
+                    goToSubcategorySelectionActivity(context, source, category);
                 }
                 break;
             case 2:
@@ -357,12 +362,13 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     category = getInquirerCategoryString();
-//                    goToArticleSelectionActivity(context, source, category, subcategory);
+                    goToSubcategorySelectionActivity(context, source, category);
                 }
                 break;
         }
 
     }
+
 
     private String getInquirerCategoryString () {
         String output = "";
@@ -406,6 +412,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
     //// TODO: 07/01/2021 clear / reset variables kapag nag next activity
+    //prbably sa back and next button check your code lalo sa increment at decrement
 
 
     private void philstarBackButton () {

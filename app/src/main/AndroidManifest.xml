@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ArticleSelectionActivity"></activity>
+        <activity android:name=".SubcategorySelectionActivity"></activity>
+        <activity android:name=".ArticleSelectionActivity" />
         <activity android:name=".CategorySelectionActivity" />
         <activity android:name=".SourceSelectionActivity" />
         <activity android:name=".MainActivity">

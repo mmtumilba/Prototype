@@ -123,6 +123,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                     case INQUIRER:
+                        inquirerSubmitButton();
                         break;
 
                     case PHILSTAR:
@@ -177,7 +178,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 }
                 break;
         }
-
     }
 
     private String getAbsCategoryString () {
@@ -227,6 +227,74 @@ public class CategorySelectionActivity extends AppCompatActivity {
         nextButton();
         tv.setText(R.string.inquirer_categories2);
     }
+
+    private void inquirerSubmitButton() {
+        Context context = getApplicationContext();
+        switch (setNum) {
+            case 1:
+                if ( (categoryInt < 1)|| (categoryInt > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getInquirerCategoryString();
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+            case 2:
+                if ( (categoryInt < 1)|| (categoryInt > 3) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getInquirerCategoryString();
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+        }
+
+    }
+
+    //// TODO: 07/01/2021 clear / reset variables kapag nag next activity
+
+
+    private String getInquirerCategoryString () {
+        String output = "";
+
+        switch (setNum) {
+            case 1:
+                switch (categoryInt) {
+                    case 1:
+                        output = "news";
+                        break;
+                    case 2:
+                        output = "opinion";
+                        break;
+                    case 3:
+                        output = "sports";
+                        break;
+                    case 4:
+                        output = "lifestyle";
+                        break;
+                    case 5:
+                        output = "entertainment";
+                        break;
+                }
+                break;
+
+            case 2:
+                switch (categoryInt) {
+                    case 1:
+                        output = "business";
+                        break;
+                    case 2:
+                        output = "technology";
+                        break;
+                    case 3:
+                        output = "global_nation";
+                        break;
+                }
+        }
+
+        return output;
+    }
+
 
 
     private void philstarBackButton () {

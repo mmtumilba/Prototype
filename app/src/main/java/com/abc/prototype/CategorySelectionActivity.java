@@ -73,6 +73,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                     case PHILSTAR:
+                        philstarBackButton();
                         break;
 
                 }
@@ -96,6 +97,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         break;
 
                     case PHILSTAR:
+                        philstarNextButton();
                         break;
 
                 }
@@ -144,11 +146,11 @@ public class CategorySelectionActivity extends AppCompatActivity {
         btnNext.setAlpha((float) 0.5);
     }
 
+
     private void absBackButton () {
         backButton();
         tv.setText(R.string.abs_categories1);
     }
-
 
     private void absNextButton () {
             nextButton();
@@ -163,16 +165,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             category = getAbsCategoryString();
             goToArticleSelectionActivity(context, source, category, subcategory);
         }
-    }
-
-    private void inquirerBackButton () {
-        backButton();
-        tv.setText(R.string.inquirer_categories1);
-    }
-
-    private void inquirerNextButton () {
-        nextButton();
-        tv.setText(R.string.inquirer_categories2);
     }
 
     private String getAbsCategoryString () {
@@ -211,6 +203,29 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
         return output;
     }
+
+
+    private void inquirerBackButton () {
+        backButton();
+        tv.setText(R.string.inquirer_categories1);
+    }
+
+    private void inquirerNextButton () {
+        nextButton();
+        tv.setText(R.string.inquirer_categories2);
+    }
+
+
+    private void philstarBackButton () {
+        backButton();
+        tv.setText(R.string.philstar_categories1);
+    }
+
+    private void philstarNextButton () {
+        nextButton();
+        tv.setText(R.string.philstar_categories2);
+    }
+
 
     private void setTv () {
 

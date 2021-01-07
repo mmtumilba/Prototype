@@ -122,6 +122,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         absSubmitButton();
                         break;
                     case GMA:
+                        gmaSubmitButton();
                         break;
 
                     case INQUIRER:
@@ -136,6 +137,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             }
         });
 
+        //// TODO: 07/01/2021 gma and inquirer should go to subcategoryselection instead of articleselection
     }
 
     private void backButton () {
@@ -253,6 +255,79 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
     }
 
+    private void gmaSubmitButton () {
+        Context context = getApplicationContext();
+        switch (setNum) {
+            case 1:
+            case 2:
+                if ( (categoryInt < 1)|| (categoryInt > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getGmaCategoryString();
+//                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+
+            case 3:
+                if (categoryInt == 1) {
+                    category = getGmaCategoryString();
+//                    goToArticleSelectionActivity(context, source, category, subcategory);
+                } else {
+                    TextReader.invalidInput(mTTS, tv);
+                }
+        }
+    }
+
+    private String getGmaCategoryString () {
+        String output = "";
+
+        switch (setNum) {
+            case 1:
+                switch (categoryInt) {
+                    case 1:
+                        output = "news";
+                        break;
+                    case 2:
+                        output = "money";
+                        break;
+                    case 3:
+                        output = "sports";
+                        break;
+                    case 4:
+                        output = "pinoy_abroad";
+                        break;
+                    case 5:
+                        output = "sci_tech";
+                        break;
+                }
+                break;
+
+            case 2:
+                switch (categoryInt) {
+                    case 1:
+                        output = "showbiz";
+                        break;
+                    case 2:
+                        output = "lifesty;e";
+                        break;
+                    case 3:
+                        output = "opinion";
+                        break;
+                    case 4:
+                        output = "hashtag";
+                        break;
+                    case 5:
+                        output = "serbisiyo_publiko";
+                        break;
+                }
+                break;
+
+            case 3:
+                output = "community_bulletin_board";
+                break;
+        }
+        return output;
+    }
 
 
 
@@ -274,7 +349,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     category = getInquirerCategoryString();
-                    goToArticleSelectionActivity(context, source, category, subcategory);
+//                    goToArticleSelectionActivity(context, source, category, subcategory);
                 }
                 break;
             case 2:
@@ -282,7 +357,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     category = getInquirerCategoryString();
-                    goToArticleSelectionActivity(context, source, category, subcategory);
+//                    goToArticleSelectionActivity(context, source, category, subcategory);
                 }
                 break;
         }

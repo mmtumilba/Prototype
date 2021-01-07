@@ -159,12 +159,25 @@ public class CategorySelectionActivity extends AppCompatActivity {
 
     private void absSubmitButton() {
         Context context = getApplicationContext();
-        if ( (categoryInt < 1)|| (categoryInt > 5) ) {
-            TextReader.invalidInput(mTTS, tv);
-        } else {
-            category = getAbsCategoryString();
-            goToArticleSelectionActivity(context, source, category, subcategory);
+        switch (setNum) {
+            case 1:
+                if ( (categoryInt < 1)|| (categoryInt > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getAbsCategoryString();
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+            case 2:
+                if ( (categoryInt < 1)|| (categoryInt > 2) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    category = getAbsCategoryString();
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
         }
+
     }
 
     private String getAbsCategoryString () {

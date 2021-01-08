@@ -1,5 +1,7 @@
 package com.abc.prototype;
 
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,7 +40,7 @@ public class AbsScraper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.e("CHECKPOINT", "AbsScraper.class");
     }
 
     /**

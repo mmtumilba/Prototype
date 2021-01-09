@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 
 import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
+import static com.abc.prototype.Navigate.goToSpeedActivity;
 
 public class SourceSelectionActivity extends AppCompatActivity  {
 
@@ -44,6 +45,16 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         });
 
         Log.e("CHECKPOINT", "ONcREATE");
+
+        Button btnSpeed = findViewById(R.id.buttonSourceSelectionSpeed);
+        btnSpeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                Context context = getApplicationContext();
+                goToSpeedActivity(context);
+            }
+        });
 
     }
 
@@ -89,6 +100,9 @@ public class SourceSelectionActivity extends AppCompatActivity  {
 
     }
 
-
-
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
 }

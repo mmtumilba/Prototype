@@ -17,9 +17,12 @@ public class AbsScraper {
     Vector <String> titles;
     Vector <String> titleSets;
 
+
     String link;
     String title;
     String category;
+
+    String articleText;
 
     /**
      * instantiates absScraper
@@ -41,6 +44,17 @@ public class AbsScraper {
             e.printStackTrace();
         }
     }
+
+    public AbsScraper (String source, String link) {
+        this.articleText = "";
+        try{
+            scrapeArticle(link);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     /**
      * populates links and titles
@@ -88,6 +102,32 @@ public class AbsScraper {
         if (counter != 0) {
             titleSets.add(sets);
         }
+    }
 
+    public void scrapeArticle(String url) throws IOException {	// param should contain link
+//        String articleText = "";
+
+        Document doc = Jsoup.connect(url).get();
+
+        Elements article = doc.select("article");
+        Elements articleContainer = article.select("div.article-content");
+        Elements vidContainer = article.select("div.media-block");
+        Elements paragraphs = new Elements();
+
+        if (vidContainer.isEmpty()) {
+            paragraphs = articleContainer.select("p");
+        }
+        else {
+            paragraphs = vidContainer.select("p");
+        }
+
+        StringBuilder text = new StringBuilder();
+        for (Element paragraph : paragraphs) {
+            text.append(paragraph.text()).append("\n");
+        }
+
+        articleText = text.toString();
+
+//        return articleText;
     }
 }

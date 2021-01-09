@@ -16,6 +16,7 @@ import static com.abc.prototype.Navigate.goToSourceSelection;
 // // TODO: 09/01/2021 needs more work :)) 
 public class ChooseActionActivity extends AppCompatActivity {
 
+    private String source;
     private String title;
     private String link;
 
@@ -33,6 +34,7 @@ public class ChooseActionActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            source = extras.getString("source");
             link = extras.getString("link");
             title = extras.getString("title");
 
@@ -51,7 +53,7 @@ public class ChooseActionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                goToReadArticleActivity(context, link, title);
+                goToReadArticleActivity(context,source, link, title);
             }
         });
         

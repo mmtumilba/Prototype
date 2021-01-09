@@ -135,7 +135,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                         TextReader.invalidInput(mTTS, tv);
                     } else {
                         getArticleDetails();
-                        goToChooseActionActivity(context, link, title);
+                        goToChooseActionActivity(context, source, link, title);
                     }
                 } else {
                     if (setNum == setMax) {
@@ -143,14 +143,14 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                             TextReader.invalidInput(mTTS, tv);
                         } else {
                             getArticleDetails();
-                            goToChooseActionActivity(context, link, title);
+                            goToChooseActionActivity(context, source, link, title);
                         }
                     } else {
                         if ( (article < 1) || (article > 5) ) {
                             TextReader.invalidInput(mTTS, tv);
                         } else {
                             getArticleDetails();
-                            goToChooseActionActivity(context, link, title);
+                            goToChooseActionActivity(context, source, link, title);
                         }
                     }
                 }

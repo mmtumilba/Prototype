@@ -163,11 +163,9 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     }
 
     private void getArticleDetails() {
-        int temp = setNumIndex * 5;
+        int temp = article + (setNumIndex * 5) - 1;
         link = links.get(temp);
         title = titles.get(temp);
-        Log.e("title", title);
-        Log.e("link", link);
     }
 
     // TODO: 08/01/2021 Warning: This 'AsyncTask' class should be static or leaks might occur (com.abc.prototype.ArticleSelectionActivity.ScraperThread)

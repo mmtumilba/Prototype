@@ -40,7 +40,6 @@ public class AbsScraper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.e("CHECKPOINT", "AbsScraper.class");
     }
 
     /**

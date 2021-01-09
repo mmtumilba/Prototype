@@ -39,4 +39,10 @@ public class Navigate {
          context.startActivity(intent);
      }
 
+     public static void goToSpeedActivity (Context context) {
+         Intent intent = new Intent(context, SpeedActivity.class);
+         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+         context.startActivity(intent);
+     }
+
 }

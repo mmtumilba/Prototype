@@ -42,14 +42,18 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article_selection);
 
         Bundle extras = getIntent().getExtras();
-        source = extras.getString("source");         // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
-        category = extras.getString("category");
-        subcategory = extras.getString("subcategory");
+        if (extras != null) {
+            source = extras.getString("source");         // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
+            category = extras.getString("category");
+            subcategory = extras.getString("subcategory");
+
+            new ScraperThread().execute();
+        }
+
 
         tv = findViewById(R.id.textViewChooseArticle);
         et = findViewById(R.id.editTextNumberInputArticle);
 
-        new ScraperThread().execute();
 
         btnBack = findViewById(R.id.buttonArticleSelectionBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -83,14 +87,9 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private class ScraperThread extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            Log.e("CHECKPOINT", "scraper thread");
-            Log.e("CHECKPOINT", source);
             switch (source) {
                 case ABS:
-                    Log.e("CHECKPOINT", "CASE ABS");
                     absScraper = new AbsScraper(category);
-                    String temp = absScraper.titles.get(0);
-                    Log.e("CHECKPOINT", "temp :: " + temp);
                     break;
 
 //                case GMA:
@@ -117,8 +116,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             switch (source) {
                 case ABS:
                     tv.setText(absScraper.titleSets.get(0));
-                    Log.e("CHECKPOINT", "Postexecute for ABS");
-                    Log.e("text", absScraper.titleSets.get(0));
                     break;
 
                 case GMA:
@@ -136,25 +133,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         }
     }
 
-//    private void scrapeArticles () {
-//        switch (source) {
-//            case ABS:
-//                absScraper = new AbsScraper(category);
-//                tv.setText(absScraper.titleSets.get(0));
-//
-//            case GMA:
-//
-//                break;
-//
-//            case INQUIRER:
-//
-//                break;
-//
-//            case PHILSTAR:
-//
-//                break;
-//        }
-//    }
 
     // TODO: 08/01/2021 add bookmars and settings button to all activities na kailangan lagyan
 }

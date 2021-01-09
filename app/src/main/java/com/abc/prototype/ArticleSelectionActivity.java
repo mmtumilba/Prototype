@@ -33,7 +33,13 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private Button btnNext;
     private Button btnSubmit;
 
+    private Vector<String> links;
+    private Vector<String> titles;
+    private Vector<String> titleSets;
+
+
     private int setNum = 1;
+    private int setNumIndex;
     private int setMax;
 
     @Override
@@ -60,7 +66,16 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (setNum == 2) {
+                    btnBack.setAlpha((float) 0.5);
+                } else if (setNum == setMax) {
+                    btnNext.setAlpha((float) 1);
+                }
+                if (setNum > 1) {
+                    setNum--;
+                    setNumIndex = setNum - 1;
+                    tv.setText(titleSets.get(setNumIndex));
+                }
             }
         });
 
@@ -68,9 +83,22 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int temp = setMax - 1;
+                if (setNum == (temp)) {
+                    btnNext.setAlpha((float) 0.5);
+                } else if (setNum == 1) {
+                    btnBack.setAlpha((float) 1);
+                }
+                if (setNum < setMax) {
+                    setNum++;
+                    setNumIndex = setNum - 1;
+                    tv.setText(titleSets.get(setNumIndex));
+                }
+                Log.e("setNum", Integer.toString(setNum));
             }
         });
+        
+        //// TODO: 09/01/2021 twice ang size sang titlesets 
 
         btnSubmit = findViewById(R.id.buttonArticleSelectionSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +119,11 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             switch (source) {
                 case ABS:
                     absScraper = new AbsScraper(category);
+                    links = absScraper.links;
+                    titles = absScraper.titles;
+                    titleSets = absScraper.titleSets;
                     setMax = absScraper.titleSets.size();
+                    Log.e("setMax", Integer.toString(setMax));
                     break;
 
 //                case GMA:

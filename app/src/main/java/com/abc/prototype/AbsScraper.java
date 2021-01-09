@@ -72,7 +72,6 @@ public class AbsScraper {
      * @param titles scraped titles from the website
      */
     public void generateTitleSets (Vector<String> titles) {
-
         int counter = 0;
         String sets = "";
 

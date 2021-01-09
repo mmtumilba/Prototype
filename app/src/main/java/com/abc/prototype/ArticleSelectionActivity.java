@@ -2,8 +2,10 @@ package com.abc.prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
     private TextView tv;
     private EditText et;
+    private TextToSpeech mTTS;
+
     private Button btnBack;
     private Button btnNext;
     private Button btnSubmit;
@@ -41,6 +45,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private int setNum = 1;
     private int setNumIndex;
     private int setMax;
+
+    private int titlesNum;
+    private int lastSetSize;
+    private int article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +64,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             new ScraperThread().execute();
         }
 
+
+        Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
+        // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
         tv = findViewById(R.id.textViewChooseArticle);
         et = findViewById(R.id.editTextNumberInputArticle);
@@ -98,12 +110,29 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             }
         });
         
-        //// TODO: 09/01/2021 twice ang size sang titlesets 
+        //// TODO: 09/01/2021 twice ang size sang titlesets
 
         btnSubmit = findViewById(R.id.buttonArticleSelectionSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (et.length() == 0) {
+                    TextReader.invalidInput(mTTS, tv);
+                    return;
+                }
+                // get titles.size()
+                // modulo5 and pinakalast
+                // if last set (setNum => 1 && setNum <= size%5)
+                String temp = et.getText().toString();
+                article = Integer.parseInt(temp);
+                if (lastSetSize == 0) {
+                    if ( (article < 1) || (article > 5) ) {
+                        TextReader.invalidInput(mTTS, tv);
+                    } else {
+                        //goToChooseActionActivity
+                    }
+                }
+
 
             }
         });
@@ -119,13 +148,17 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             switch (source) {
                 case ABS:
                     absScraper = new AbsScraper(category);
+
                     links = absScraper.links;
                     titles = absScraper.titles;
                     titleSets = absScraper.titleSets;
+                    titlesNum = titles.size();
+
+                    lastSetSize = titlesNum % 5;
                     setMax = absScraper.titleSets.size();
                     Log.e("setMax", Integer.toString(setMax));
-                    break;
 
+                    break;
 //                case GMA:
 //
 //                    break;
@@ -144,6 +177,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         //sa background pa lang gawin mo na yung pag assign ng gagawing text
 
 
+        /**
+         * this function sets the initial set of articles user will choose from
+         * @param aVoid
+         */
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);

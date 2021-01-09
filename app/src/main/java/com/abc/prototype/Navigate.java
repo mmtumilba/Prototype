@@ -13,6 +13,13 @@ public class Navigate {
         context.startActivity(intent);
     }
 
+    public static void goToChooseActionActivity (Context context, String link, String title) {
+        Intent intent = new Intent(context, ChooseActionActivity.class);
+        intent.putExtra("link", link);
+        intent.putExtra("title", title);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 
     public static void goToCategorySelectionActivity (Context context, String sourceStr) {
         Intent intent = new Intent(context, CategorySelectionActivity.class);

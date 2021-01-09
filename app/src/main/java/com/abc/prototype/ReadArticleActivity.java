@@ -2,9 +2,13 @@ package com.abc.prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.TextView;
+
+import dalvik.annotation.TestTarget;
 
 public class ReadArticleActivity extends AppCompatActivity {
 
@@ -12,6 +16,7 @@ public class ReadArticleActivity extends AppCompatActivity {
     private String link;
 
     private TextView tv;
+    private TextToSpeech mTTS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +27,11 @@ public class ReadArticleActivity extends AppCompatActivity {
         if (extras != null) {
             link = extras.getString("link");
             title = extras.getString("title");
-
-            Log.e("link in ReadArticle", link);
-            Log.e("title in ReadArticle", title);
         }
 
+        Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
+
         tv = findViewById(R.id.textViewReadArticle);
-        tv.setText(title);
     }
 }

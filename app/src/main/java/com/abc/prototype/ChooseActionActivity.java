@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class ChooseActionActivity extends AppCompatActivity {
     private String link;
 
     private TextView tv;
+    private TextToSpeech mTTS;
+
     private Button btnRead;
     private Button btnBookmark;
 
@@ -36,6 +39,9 @@ public class ChooseActionActivity extends AppCompatActivity {
             Log.e("link", link);
             Log.e("title", title);
         }
+
+        Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewChooseActionTitle);
         tv.setText(title);

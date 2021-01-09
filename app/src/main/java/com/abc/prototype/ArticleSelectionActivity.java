@@ -157,9 +157,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                 mTTS.stop();
             }
         });
-
-
-
     }
 
     private void getArticleDetails() {

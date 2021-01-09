@@ -523,6 +523,11 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
 
 }
 

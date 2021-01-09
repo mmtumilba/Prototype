@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import dalvik.annotation.TestTarget;
@@ -46,6 +48,22 @@ public class ReadArticleActivity extends AppCompatActivity {
         mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewReadArticle);
+
+        Button btnPrev = findViewById(R.id.buttonReadArticlePreviousArticle);
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        Button btnPausePlay = findViewById(R.id.buttonReadArticlePausePlay);
+        btnPausePlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

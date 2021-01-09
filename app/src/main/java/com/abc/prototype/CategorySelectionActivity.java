@@ -53,7 +53,9 @@ public class CategorySelectionActivity extends AppCompatActivity {
         et = findViewById(R.id.editTextNumberInputCategory);
 
         Bundle extras = getIntent().getExtras();
-        source = extras.getString("source");     // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
+        if (extras != null) {
+            source = extras.getString("source");     // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
+        }
         setTv();
 
         // TODO: 07/01/2021 stop reader upon action (next/back/submit)

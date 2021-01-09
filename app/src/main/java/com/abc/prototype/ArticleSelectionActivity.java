@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Vector;
 
+import static com.abc.prototype.AbsScraper.scrapeTitleSets;
+
 public class ArticleSelectionActivity extends AppCompatActivity {
 
     private String source;
@@ -42,71 +44,92 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article_selection);
 
         Bundle extras = getIntent().getExtras();
-        source = extras.getString("source");         // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
-        category = extras.getString("category");
-        subcategory = extras.getString("subcategory");
+        if (extras != null) {
+            source = extras.getString("source");         // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
+            category = extras.getString("category");
+            subcategory = extras.getString("subcategory");
+
+            new ScraperThread().execute();
+        }
 
         tv = findViewById(R.id.textViewChooseArticle);
         et = findViewById(R.id.editTextNumberInputArticle);
 
-        new ScraperThread().execute();
 
-        btnBack = findViewById(R.id.buttonArticleSelectionBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        btnNext = findViewById(R.id.buttonArticleSelectionNext);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        btnSubmit = findViewById(R.id.buttonArticleSelectionSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
+//        btnBack = findViewById(R.id.buttonArticleSelectionBack);
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        btnNext = findViewById(R.id.buttonArticleSelectionNext);
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        btnSubmit = findViewById(R.id.buttonArticleSelectionSubmit);
+//        btnSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
     }
 
     // TODO: 08/01/2021 Warning: This 'AsyncTask' class should be static or leaks might occur (com.abc.prototype.ArticleSelectionActivity.ScraperThread)
+
+    //abs lang ni nga thread
+    // make class static return data to main thread via post execute method. baka sakaling lumabas ang data??? hahahuhuhu
     private class ScraperThread extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            Log.e("CHECKPOINT", "scraper thread");
-            Log.e("CHECKPOINT", source);
-            switch (source) {
-                case ABS:
-                    Log.e("CHECKPOINT", "CASE ABS");
-                    absScraper = new AbsScraper(category);
-                    String temp = absScraper.titles.get(0);
-                    Log.e("CHECKPOINT", "temp :: " + temp);
-                    break;
+            Log.e("CHECKPOINT", "CASE ABS1");
+            titleSets = getTitleSets();
+            Log.e("CHECKPOINT", "CASE ABS2");
 
-//                case GMA:
+
+//                    Log.e("CHECKPOINT", "CASE ABS");
 //
-//                    break;
+//                    titles = getTitles();
+//                    titleSets = AbsScraper.generateTitleSets(titles);
 //
-//                case INQUIRER:
+//                    Log.e("CHECKPOINT", "CASE ABS");
 //
-//                    break;
-//
-//                case PHILSTAR:
-//
-//                    break;
-            }
             return null;
         }
+
+        private Vector<String> getTitleSets () {
+            Vector<String> output = null;
+            try {
+                output = AbsScraper.scrapeTitleSets(category);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return output;
+        }
+
+
+//        private void doThisFirst () {
+//            try {
+//                titles = AbsScraper.scrapeTitles(category);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            try {
+//                links = AbsScraper.scrapeLinks(category);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         //sa background pa lang gawin mo na yung pag assign ng gagawing text
 
@@ -116,9 +139,9 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             switch (source) {
                 case ABS:
-                    tv.setText(absScraper.titleSets.get(0));
+//                    tv.setText(absScraper.titleSets.get(0));
                     Log.e("CHECKPOINT", "Postexecute for ABS");
-                    Log.e("text", absScraper.titleSets.get(0));
+//                    Log.e("text", absScraper.titleSets.get(0));
                     break;
 
                 case GMA:

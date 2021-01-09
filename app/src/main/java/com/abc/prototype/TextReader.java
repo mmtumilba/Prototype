@@ -11,6 +11,10 @@ import org.w3c.dom.Text;
 import java.util.Locale;
 
 public class TextReader {
+    public static float speed = 1;
+    // slow 1/2
+    // normal 1
+    // fast 3/2
 
     public static TextToSpeech initialize (Context context) {
         TextToSpeech tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {   //initialize textToSpeech
@@ -36,7 +40,7 @@ public class TextReader {
             @Override
             public void onFinish() {
                 String text = tv.getText().toString();
-                reader.setSpeechRate(1);
+                reader.setSpeechRate(speed);
                 reader.setPitch(1);
                 reader.speak(text, TextToSpeech.QUEUE_FLUSH, null);
             }

@@ -13,42 +13,7 @@ import java.util.Vector;
 
 public class AbsScraper {
 
-    Vector <String> links;
-    Vector <String> titles;
-    Vector <String> titleSets;
-
-    String link;
-    String title;
-    String category;
-
-    /**
-     * instantiates absScraper
-     *  initializes the ff variables: category
-     *                                links
-     *                                titles
-     *                                titleSets
-     * @param category passed from category selection
-     */
-    public AbsScraper (String category) {
-        this.category = category;
-        this.links = new Vector<String>();
-        this.titles = new Vector<String>();
-        this.titleSets = new Vector<String>();
-        try {
-            scrapeTitlesLinks(category);
-            generateTitleSets(titles);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.e("CHECKPOINT", "AbsScraper.class");
-    }
-
-    /**
-     * populates links and titles
-     * @param category passed from category selection
-     * @throws IOException todo  pangitai kung para sa diin ni
-     */
-    public void scrapeTitlesLinks (String category) throws IOException {
+    private static Elements generateBasis (String category) throws IOException {
         String url = "https://news.abs-cbn.com/" + category;
 
         Document doc = Jsoup.connect(url).get();
@@ -57,39 +22,56 @@ public class AbsScraper {
         Elements titleBigContainer = articles.select("p.title");
         Elements titleSmallContainer = titleBigContainer.select("a");
 
-        for (Element title : titleSmallContainer) {
+        return titleSmallContainer;
+    }
+
+    public static Vector<String> scrapeTitleSets (String category) throws IOException {	// param should contain category
+        Vector<String> titles = new Vector<String>();
+        Vector<String> titleSets = new Vector<String>();
+
+        Elements basis = generateBasis(category);
+
+        for (Element title : basis) {
             titles.add(title.text());
         }
 
-        for (Element title : titleSmallContainer) {
-            String link = "https://news.abs-cbn.com" + title.attr("href");
-            links.add(link);
-        }
-
-        generateTitleSets(titles);
+        titleSets = generateTitleSets(titles);		// this is the ouput
+        return titleSets;
     }
 
-    /**
-     * populates titleSets
-     * @param titles scraped titles from the website
-     */
-    public void generateTitleSets (Vector<String> titles) {
-
+//     TODO: 20/06/2020 modify code and include numbers prior to the title
+//     TODO: 22/06/2020 lipat siguro ang generateTitleSets sa articleSelection
+//     TODO: 22/06/2020 change initial scrape to 30
+    public static Vector<String> generateTitleSets (Vector<String> titles) {
+        Vector<String> titleSets = new Vector<String>();
         int counter = 0;
-        String sets = "";
+        StringBuilder sets = new StringBuilder();
 
         for (int i = 0; i < titles.size(); i++) {
             counter++;
             String title = titles.get(i);
-            sets = sets + title + "\n";
+            sets.append(title).append("\n");
             if (counter == 5) {
                 counter = 0;
-                titleSets.add(sets);
-                sets = "";
+                titleSets.add(sets.toString());
+                sets = new StringBuilder();
             } else if (i == (titles.size() - 1)) {
-                titleSets.add(sets);
+                titleSets.add(sets.toString());
             }
         }
+        return titleSets;
+    }
 
+    public static Vector<String> scrapeLinks (String category) throws IOException {	// param should contain category
+        Vector<String> links = new Vector<String>();
+
+        Elements basis = generateBasis(category);
+
+        for (Element title : basis) {
+            String link = "https://news.abs-cbn.com" + title.attr("href");
+            links.add(link);
+        }
+
+        return links;
     }
 }

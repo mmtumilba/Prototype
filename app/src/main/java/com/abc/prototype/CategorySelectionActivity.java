@@ -64,23 +64,26 @@ public class CategorySelectionActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (source) {
-                    case ABS:
-                        absBackButton();
-                        break;
-                    case GMA:
-                        gmaBackButton();
-                        break;
+            switch (source) {
+                case ABS:
+                    absBackButton();
+                    break;
+                case GMA:
+                    gmaBackButton();
+                    break;
 
-                    case INQUIRER:
-                        inquirerBackButton();
-                        break;
+                case INQUIRER:
+                    inquirerBackButton();
+                    break;
 
-                    case PHILSTAR:
-                        philstarBackButton();
-                        break;
+                case PHILSTAR:
+                    philstarBackButton();
+                    break;
 
-                }
+            }
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
+
             }
         });
 
@@ -88,24 +91,25 @@ public class CategorySelectionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            switch (source) {
+                case ABS:
+                    absNextButton();
+                    break;
+                case GMA:
+                    gmaNextButton();
+                    break;
 
-                switch (source) {
-                    case ABS:
-                        absNextButton();
-                        break;
-                    case GMA:
-                        gmaNextButton();
-                        break;
+                case INQUIRER:
+                    inquirerNextButton();
+                    break;
 
-                    case INQUIRER:
-                        inquirerNextButton();
-                        break;
+                case PHILSTAR:
+                    philstarNextButton();
+                    break;
 
-                    case PHILSTAR:
-                        philstarNextButton();
-                        break;
-
-                }
+            }
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
             }
         });
 
@@ -114,29 +118,30 @@ public class CategorySelectionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et.length() == 0) {
-                    TextReader.invalidInput(mTTS, tv);
-                    return;
-                }
-                String temp = et.getText().toString();
-                categoryInt = Integer.parseInt(temp);
-                switch (source) {
-                    case ABS:
-                        absSubmitButton();
-                        break;
-                    case GMA:
-                        gmaSubmitButton();
-                        break;
+            if (et.length() == 0) {
+                TextReader.invalidInput(mTTS, tv);
+                return;
+            }
+            String temp = et.getText().toString();
+            categoryInt = Integer.parseInt(temp);
+            switch (source) {
+                case ABS:
+                    absSubmitButton();
+                    break;
+                case GMA:
+                    gmaSubmitButton();
+                    break;
 
-                    case INQUIRER:
-                        inquirerSubmitButton();
-                        break;
+                case INQUIRER:
+                    inquirerSubmitButton();
+                    break;
 
-                    case PHILSTAR:
-                        philstarSubmitButton();
-                        break;
+                case PHILSTAR:
+                    philstarSubmitButton();
+                    break;
 
-                }
+            }
+            mTTS.stop();
             }
         });
 

@@ -65,6 +65,7 @@ public class AbsScraper {
             String link = "https://news.abs-cbn.com" + title.attr("href");
             links.add(link);
         }
+
     }
 
     /**
@@ -76,15 +77,17 @@ public class AbsScraper {
         String sets = "";
 
         for (int i = 0; i < titles.size(); i++) {
-            int j = i + 1;
             counter++;
-            String title = j + ". " + titles.get(i) + ".";
+            String title = counter + ". " + titles.get(i) + ".";
             sets = sets + title + "\n";
             if (counter == 5) {
                 counter = 0;
                 titleSets.add(sets);
                 sets = "";
             }
+        }
+        if (counter != 0) {
+            titleSets.add(sets);
         }
 
     }

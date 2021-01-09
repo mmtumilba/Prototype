@@ -15,12 +15,15 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Vector;
 
+import static com.abc.prototype.Navigate.goToChooseActionActivity;
+
 public class ArticleSelectionActivity extends AppCompatActivity {
 
     private String source;
     private String category;
     private String subcategory;
     private String link = "";
+    private String title = "";
 
     private final String ABS = "abs";
     private final String GMA = "gma";
@@ -65,7 +68,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         }
 
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
@@ -88,6 +91,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setNumIndex = setNum - 1;
                     tv.setText(titleSets.get(setNumIndex));
                 }
+                mTTS.stop();
+                TextReader.say(mTTS, tv);
             }
         });
 
@@ -106,7 +111,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setNumIndex = setNum - 1;
                     tv.setText(titleSets.get(setNumIndex));
                 }
-                Log.e("setNum", Integer.toString(setNum));
+                mTTS.stop();
+                TextReader.say(mTTS, tv);
             }
         });
         
@@ -120,25 +126,48 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                     return;
                 }
-                // get titles.size()
-                // modulo5 and pinakalast
-                // if last set (setNum => 1 && setNum <= size%5)
+
                 String temp = et.getText().toString();
                 article = Integer.parseInt(temp);
+
                 if (lastSetSize == 0) {
                     if ( (article < 1) || (article > 5) ) {
                         TextReader.invalidInput(mTTS, tv);
                     } else {
-                        //goToChooseActionActivity
+                        getArticleDetails();
+                        goToChooseActionActivity(context, link, title);
+                    }
+                } else {
+                    if (setNum == setMax) {
+                        if ( (article < 1) || (article > lastSetSize) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            getArticleDetails();
+                            goToChooseActionActivity(context, link, title);
+                        }
+                    } else {
+                        if ( (article < 1) || (article > 5) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            getArticleDetails();
+                            goToChooseActionActivity(context, link, title);
+                        }
                     }
                 }
-
-
+                mTTS.stop();
             }
         });
 
 
 
+    }
+
+    private void getArticleDetails() {
+        int temp = setNumIndex * 5;
+        link = links.get(temp);
+        title = titles.get(temp);
+        Log.e("title", title);
+        Log.e("link", link);
     }
 
     // TODO: 08/01/2021 Warning: This 'AsyncTask' class should be static or leaks might occur (com.abc.prototype.ArticleSelectionActivity.ScraperThread)
@@ -156,7 +185,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
                     lastSetSize = titlesNum % 5;
                     setMax = absScraper.titleSets.size();
-                    Log.e("setMax", Integer.toString(setMax));
 
                     break;
 //                case GMA:

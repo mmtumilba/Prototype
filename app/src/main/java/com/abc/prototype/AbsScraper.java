@@ -79,8 +79,9 @@ public class AbsScraper {
         String sets = "";
 
         for (int i = 0; i < titles.size(); i++) {
+//            int j = i + 1;
             counter++;
-            String title = titles.get(i);
+            String title = i + ". " +titles.get(i);
             sets = sets + title + "\n";
             if (counter == 5) {
                 counter = 0;

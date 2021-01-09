@@ -26,15 +26,15 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private final String PHILSTAR = "philstar";
 
     private AbsScraper absScraper;
-    private Vector <String> links;
-    private Vector <String> titles;
-    private Vector <String> titleSets;
 
     private TextView tv;
     private EditText et;
     private Button btnBack;
     private Button btnNext;
     private Button btnSubmit;
+
+    private int setNum = 1;
+    private int setMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
 
         btnBack = findViewById(R.id.buttonArticleSelectionBack);
+        btnBack.setAlpha((float) 0.5);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +91,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             switch (source) {
                 case ABS:
                     absScraper = new AbsScraper(category);
+                    setMax = absScraper.titleSets.size();
                     break;
 
 //                case GMA:
@@ -118,17 +120,17 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     tv.setText(absScraper.titleSets.get(0));
                     break;
 
-                case GMA:
-
-                    break;
-
-                case INQUIRER:
-
-                    break;
-
-                case PHILSTAR:
-
-                    break;
+//                case GMA:
+//
+//                    break;
+//
+//                case INQUIRER:
+//
+//                    break;
+//
+//                case PHILSTAR:
+//
+//                    break;
             }
         }
     }

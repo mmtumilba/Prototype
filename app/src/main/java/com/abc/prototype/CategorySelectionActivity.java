@@ -320,7 +320,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
                         output = "showbiz";
                         break;
                     case 2:
-                        output = "lifesty;e";
+                        output = "lifestyLe";
                         break;
                     case 3:
                         output = "opinion";

@@ -210,6 +210,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             switch (source) {
                 case ABS:
                     tv.setText(absScraper.titleSets.get(0));
+                    TextReader.say(mTTS, tv);
                     break;
 
 //                case GMA:

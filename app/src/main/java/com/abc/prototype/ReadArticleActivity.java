@@ -74,7 +74,7 @@ public class ReadArticleActivity extends AppCompatActivity {
             switch (source) {
                 case ABS:
                     absScraper = new AbsScraper(source, link);
-                    articleText = absScraper.articleText;
+                    articleText = absScraper.article.get(1);
                     break;
 //                case GMA:
 //

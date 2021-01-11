@@ -90,9 +90,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setNum--;
                     setNumIndex = setNum - 1;
                     tv.setText(titleSets.get(setNumIndex));
+                    mTTS.stop();
+                    TextReader.say(mTTS, tv);
                 }
-                mTTS.stop();
-                TextReader.say(mTTS, tv);
+
             }
         });
 
@@ -110,9 +111,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setNum++;
                     setNumIndex = setNum - 1;
                     tv.setText(titleSets.get(setNumIndex));
+                    mTTS.stop();
+                    TextReader.say(mTTS, tv);
                 }
-                mTTS.stop();
-                TextReader.say(mTTS, tv);
+
             }
         });
         

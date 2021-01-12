@@ -23,7 +23,6 @@ public class ReadArticleActivity extends AppCompatActivity {
     private String link;
 
     private Vector<String> article;
-    private Vector<String> titles;
 
 //    private String articleText;
 
@@ -126,9 +125,6 @@ public class ReadArticleActivity extends AppCompatActivity {
                     article = absScraper.article;
                     maxIndex = article.size() - 1;
 
-                    Context context = getApplicationContext();
-                    Bookmark bookmark = new Bookmark(context);
-                    titles = bookmark.titles;
 
 
                     break;
@@ -155,7 +151,6 @@ public class ReadArticleActivity extends AppCompatActivity {
                 case ABS:
                     tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
-                    Log.e("bookmark", titles.firstElement());
                     break;
 //                case GMA:
 //

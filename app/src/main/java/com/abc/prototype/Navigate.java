@@ -13,6 +13,12 @@ public class Navigate {
         context.startActivity(intent);
     }
 
+    public static void goToBookmarksActivity (Context context) {
+        Intent intent = new Intent(context, BookmarksActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
     public static void goToChooseActionActivity (Context context, String source, String link, String title) {
         Intent intent = new Intent(context, ChooseActionActivity.class);
         intent.putExtra("source", source);

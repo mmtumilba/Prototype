@@ -14,4 +14,31 @@
         android:text="@string/bookmark"/>
 
 
+    <EditText
+        android:id="@+id/editTextNumberBookmarksInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/bookmark"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/buttonBookmarksBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back" />
+
+    <Button
+        android:id="@+id/buttonBookmarksNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/next" />
+
+    <Button
+        android:id="@+id/buttonBookmarkSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/submit" />
+
+
 </LinearLayout>

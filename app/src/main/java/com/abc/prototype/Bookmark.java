@@ -24,12 +24,14 @@ import java.util.Vector;
 public class Bookmark {
 
     Vector <String> titles;
+    Vector <String> titleSets;
 
     public Bookmark (Context context) {
         this.titles = getTitles(context);
+        this.titleSets = generateTitleSets(titles);
     }
 
-    public Vector<String> getTitles (Context context) {
+    private Vector<String> getTitles (Context context) {
         Vector <String> titles = new Vector <String>();
         try {
             AssetManager am = context.getAssets();
@@ -52,6 +54,29 @@ public class Bookmark {
             e.printStackTrace();
         }
         return titles;
+    }
+
+    private Vector <String> generateTitleSets (Vector <String> titles) {
+        Vector <String> output = new Vector <String>();
+
+        int counter = 0;
+        String sets = "";
+
+        for (int i = 0; i < titles.size(); i++) {
+            counter++;
+            String title = counter + ". " + titles.get(i) + ".";
+            sets = sets + title + "\n";
+            if (counter == 5) {
+                counter = 0;
+                output.add(sets);
+                sets = "";
+            }
+        }
+        if (counter != 0) {
+            output.add(sets);
+        }
+
+        return output;
     }
 
 

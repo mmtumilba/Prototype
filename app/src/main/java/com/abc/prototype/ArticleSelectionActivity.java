@@ -178,8 +178,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     links = absScraper.links;
                     titles = absScraper.titles;
                     titleSets = absScraper.titleSets;
-                    titlesNum = titles.size();
 
+                    titlesNum = titles.size();
                     lastSetSize = titlesNum % 5;
                     setMax = absScraper.titleSets.size();
 

@@ -74,45 +74,7 @@ public class BookmarksActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et.length() == 0) {
-                    TextReader.invalidInput(mTTS, tv);
-                    return;
-                }
-
-                String temp = et.getText().toString();
-                article = Integer.parseInt(temp);
-                articleIndex = article + (setNumIndex * 5) - 1;
-
-                if (lastSetSize == 0) {
-                    if ( (article < 1) || (article > 5) ) {
-                        TextReader.invalidInput(mTTS, tv);
-                    } else {
-                        goToReadBookmarkActivity(context, articleIndex);
-//                        getArticleDetails();
-//                        goToChooseActionActivity(context, source, link, title);
-
-                    }
-                } else {
-                    if (setNum == setMax) {
-                        if ( (article < 1) || (article > lastSetSize) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            goToReadBookmarkActivity(context, articleIndex);
-//                            getArticleDetails();
-//                            goToChooseActionActivity(context, source, link, title);
-                        }
-                    } else {
-                        if ( (article < 1) || (article > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            goToReadBookmarkActivity(context, articleIndex);
-//                            getArticleDetails();
-//                            goToChooseActionActivity(context, source, link, title);
-                        }
-                    }
-                }
-                mTTS.stop();
-
+                submitButton(context);
             }
         });
 
@@ -157,6 +119,42 @@ public class BookmarksActivity extends AppCompatActivity {
                 TextReader.say(mTTS, tv);
             }
         }
+    }
+
+    private void submitButton(Context context) {
+        if (et.length() == 0) {
+            TextReader.invalidInput(mTTS, tv);
+            return;
+        }
+
+        String temp = et.getText().toString();
+        article = Integer.parseInt(temp);
+        articleIndex = article + (setNumIndex * 5) - 1;
+
+        if (lastSetSize == 0) {
+            if ( (article < 1) || (article > 5) ) {
+                TextReader.invalidInput(mTTS, tv);
+            } else {
+                goToReadBookmarkActivity(context, articleIndex);
+
+            }
+        } else {
+            if (setNum == setMax) {
+                if ( (article < 1) || (article > lastSetSize) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    goToReadBookmarkActivity(context, articleIndex);
+                }
+            } else {
+                if ( (article < 1) || (article > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    goToReadBookmarkActivity(context, articleIndex);
+                }
+            }
+        }
+        mTTS.stop();
+
     }
 
     // TODO: 13/01/2021 may bug sa pag opaque ng back button kapag 2 lang ang titlesets

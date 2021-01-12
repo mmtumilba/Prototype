@@ -79,8 +79,4 @@ public class Bookmark {
         return output;
     }
 
-
-    public void addBookmark () {
-
-    }
 }

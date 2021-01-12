@@ -125,8 +125,6 @@ public class ReadArticleActivity extends AppCompatActivity {
                     article = absScraper.article;
                     maxIndex = article.size() - 1;
 
-
-
                     break;
 
 //                case GMA:

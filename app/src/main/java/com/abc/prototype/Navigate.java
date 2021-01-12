@@ -35,6 +35,13 @@ public class Navigate {
         context.startActivity(intent);
     }
 
+    public static void goToReadBookmarkActivity (Context context, int articleIndex) {
+        Intent intent = new Intent(context, ReadBookmarkActivity.class);
+        intent.putExtra("articleIndex", articleIndex);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
     public static void goToSubcategorySelectionActivity (Context context, String source, String category) {
         Intent intent = new Intent(context, SubcategorySelectionActivity.class);
         intent.putExtra("source", source);

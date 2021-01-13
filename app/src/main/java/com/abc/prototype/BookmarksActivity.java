@@ -39,6 +39,7 @@ public class BookmarksActivity extends AppCompatActivity {
     private Button btnBack;
     private Button btnNext;
     private Button btnSubmit;
+    private Button btnClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +70,20 @@ public class BookmarksActivity extends AppCompatActivity {
             }
         });
 
-        btnSubmit = findViewById(R.id.buttonBookmarkSubmit);
+        btnSubmit = findViewById(R.id.buttonBookmarksSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitButton(context);
                 Log.e("articleIndexVal", articleIndex);
+            }
+        });
+
+        btnClear = findViewById(R.id.buttonBookmarksClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

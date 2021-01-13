@@ -24,13 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/pause" />
+
     <Button
         android:id="@+id/buttonReadArticleNextArticle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/next" />
-
-
-
 
 </LinearLayout>

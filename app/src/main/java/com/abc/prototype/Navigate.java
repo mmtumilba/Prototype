@@ -35,7 +35,7 @@ public class Navigate {
         context.startActivity(intent);
     }
 
-    public static void goToReadBookmarkActivity (Context context, int articleIndex) {
+    public static void goToReadBookmarkActivity (Context context, String articleIndex) {
         Intent intent = new Intent(context, ReadBookmarkActivity.class);
         intent.putExtra("articleIndex", articleIndex);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

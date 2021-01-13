@@ -24,8 +24,6 @@ public class ReadArticleActivity extends AppCompatActivity {
 
     private Vector<String> article;
 
-//    private String articleText;
-
     private final String ABS = "abs";
     private final String GMA = "gma";
     private final String INQUIRER = "inquirer";
@@ -55,7 +53,6 @@ public class ReadArticleActivity extends AppCompatActivity {
             title = extras.getString("title");
 
             new ScraperThread().execute();
-
         }
 
         Context context = getApplicationContext();
@@ -68,17 +65,7 @@ public class ReadArticleActivity extends AppCompatActivity {
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (index == 1) {
-                    btnPrev.setAlpha((float) 0.5);
-                } else if (index == maxIndex) {
-                    btnNext.setAlpha((float) 1);
-                }
-                if (index > 0) {
-                    index--;
-                    tv.setText(article.get(index));
-                    mTTS.stop();
-                    TextReader.say(mTTS, tv);
-                }
+                previousParagraph();
 
             }
         });
@@ -95,17 +82,7 @@ public class ReadArticleActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (index == maxIndex) {
-                    btnNext.setAlpha((float) 0.5);
-                } else if (index == 1) {
-                    btnPrev.setAlpha((float) 1);
-                }
-                if (index < maxIndex) {
-                    index++;
-                    tv.setText(article.get(index));
-                    mTTS.stop();
-                    TextReader.say(mTTS, tv);
-                }
+                nextParagraph();
 
             }
         });
@@ -113,6 +90,38 @@ public class ReadArticleActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void previousParagraph() {
+        if (index == 0) {
+            btnPrev.setAlpha((float) 0.5);
+        }
+        if (index == maxIndex) {
+            btnNext.setAlpha((float) 1);
+        }
+        if (index > 0) {
+            index--;
+            tv.setText(article.get(index));
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
+        }
+    }
+
+    //// TODO: 13/01/2021 hint @ articleSelection change to @string/article
+
+    private void nextParagraph() {
+        if (index == maxIndex - 1) {
+            btnNext.setAlpha((float) 0.5);
+        }
+        if (index == 0) {
+            btnPrev.setAlpha((float) 1);
+        }
+        if (index < maxIndex) {
+            index++;
+            tv.setText(article.get(index));
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
+        }
     }
 
     private class ScraperThread extends AsyncTask<Void, Void, Void> {

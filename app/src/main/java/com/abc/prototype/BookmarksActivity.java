@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class BookmarksActivity extends AppCompatActivity {
     private int titlesNum;
     private int lastSetSize;
     private int article;
-    private int articleIndex;
+    private String articleIndex;
 
 
     private TextView tv;
@@ -38,8 +39,6 @@ public class BookmarksActivity extends AppCompatActivity {
     private Button btnBack;
     private Button btnNext;
     private Button btnSubmit;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +74,7 @@ public class BookmarksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submitButton(context);
+                Log.e("articleIndexVal", articleIndex);
             }
         });
 
@@ -129,7 +129,9 @@ public class BookmarksActivity extends AppCompatActivity {
 
         String temp = et.getText().toString();
         article = Integer.parseInt(temp);
-        articleIndex = article + (setNumIndex * 5) - 1;
+        int val = article + (setNumIndex * 5) - 1;
+        articleIndex = Integer.toString(val);
+
 
         if (lastSetSize == 0) {
             if ( (article < 1) || (article > 5) ) {

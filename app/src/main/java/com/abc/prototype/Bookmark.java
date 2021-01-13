@@ -26,10 +26,50 @@ public class Bookmark {
     Vector <String> titles;
     Vector <String> titleSets;
 
+    Vector <String> article;
+
+
     public Bookmark (Context context) {
         this.titles = getTitles(context);
         this.titleSets = generateTitleSets(titles);
     }
+
+    public Bookmark (Context context, int articleIndex) {
+        this.article = getArticle(context, articleIndex);
+    }
+
+
+    private Vector<String> getArticle (Context context, int articleIndex) {
+
+        Vector<String> output = new Vector<String>();
+
+        try {
+
+            AssetManager am = context.getAssets();
+            InputStream is = am.open("bookmarks.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(is);
+            doc.getDocumentElement().normalize();
+            NodeList bookmark = doc.getElementsByTagName("bookmark");
+            Node node = bookmark.item(articleIndex);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) node;
+                NodeList article = eElement.getElementsByTagName("paragraph");
+                for (int i = 0; i < article.getLength(); i++) {
+                    output.add(eElement.getElementsByTagName("paragraph").item(i).getTextContent());
+                }
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return output;
+    }
+
 
     private Vector<String> getTitles (Context context) {
         Vector <String> titles = new Vector <String>();

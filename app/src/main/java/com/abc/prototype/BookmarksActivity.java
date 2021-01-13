@@ -96,7 +96,8 @@ public class BookmarksActivity extends AppCompatActivity {
         } else {
             if (setNum == 2) {
                 btnBack.setAlpha((float) 0.5);
-            } else if (setNum == setMax) {
+            }
+            if (setNum == setMax) {
                 btnNext.setAlpha((float) 1);
             }
             if (setNum > 1) {
@@ -117,7 +118,8 @@ public class BookmarksActivity extends AppCompatActivity {
             int temp = setMax - 1;
             if (setNum == (temp)) {
                 btnNext.setAlpha((float) 0.5);
-            } else if (setNum == 1) {
+            }
+            if (setNum == 1) {
                 btnBack.setAlpha((float) 1.0);
             }
             if (setNum < setMax) {
@@ -168,7 +170,7 @@ public class BookmarksActivity extends AppCompatActivity {
 
     }
 
-    // TODO: 13/01/2021 may bug sa pag opaque ng back button kapag 2 lang ang titlesets
+
 
     private class BookmarksThread extends AsyncTask<Void, Void, Void> {
         @Override

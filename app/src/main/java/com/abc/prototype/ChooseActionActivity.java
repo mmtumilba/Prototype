@@ -3,12 +3,15 @@ package com.abc.prototype;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Vector;
 
 import static com.abc.prototype.Navigate.goToReadArticleActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
@@ -25,6 +28,13 @@ public class ChooseActionActivity extends AppCompatActivity {
 
     private Button btnRead;
     private Button btnBookmark;
+
+    private final String ABS = "abs";
+    private final String GMA = "gma";
+    private final String INQUIRER = "inquirer";
+    private final String PHILSTAR = "philstar";
+
+    private Vector<String> article;
 
 
     @Override
@@ -65,12 +75,48 @@ public class ChooseActionActivity extends AppCompatActivity {
                 // ubra bookmark obj nga isulod sa xml file ang data
                 // ubra sang article nga object (??)
 
+                // scrape the article
+
+                new BookmarkThread().execute();
+
                 Context context = getApplicationContext();
                 goToSourceSelection(context);
             }
         });
-
-
-
     }
+
+    private class BookmarkThread extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            switch (source) {
+                case ABS:
+                    AbsScraper absScraper = new AbsScraper(source, link);
+                    article = absScraper.article;
+
+                    break;
+
+//                case GMA:
+//
+//                    break;
+//
+//                case INQUIRER:
+//
+//                    break;
+//
+//                case PHILSTAR:
+//
+//                    break;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Bookmark bookmark = new Bookmark(title, article);
+            bookmark.addToXML();
+        }
+    }
+
+
 }

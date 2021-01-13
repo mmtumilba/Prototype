@@ -23,11 +23,11 @@ import java.util.Vector;
 
 public class Bookmark {
 
-    Vector <String> titles;
-    Vector <String> titleSets;
+    public Vector <String> titles;
+    public Vector <String> titleSets;
+    public Vector <String> article;
 
-    Vector <String> article;
-
+    private String title;
 
     public Bookmark (Context context) {
         this.titles = getTitles(context);
@@ -38,6 +38,14 @@ public class Bookmark {
         this.article = getArticle(context, articleIndex);
     }
 
+    public Bookmark (String title, Vector<String> article) {
+        this.title = title;
+        this.article = article;
+    }
+
+    public void addToXML() {
+
+    }
 
     private Vector<String> getArticle (Context context, int articleIndex) {
 

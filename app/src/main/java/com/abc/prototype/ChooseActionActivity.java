@@ -61,8 +61,9 @@ public class ChooseActionActivity extends AppCompatActivity {
         btnBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // TODO: 09/01/2021 mechenism for bookmarking an article
+                // ubra bookmark obj nga isulod sa xml file ang data
+                // ubra sang article nga object (??)
 
                 Context context = getApplicationContext();
                 goToSourceSelection(context);

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import static com.abc.prototype.Navigate.goToBookmarksActivity;
 import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
 import static com.abc.prototype.Navigate.goToSpeedActivity;
 
@@ -53,6 +54,17 @@ public class SourceSelectionActivity extends AppCompatActivity  {
                 mTTS.stop();
                 Context context = getApplicationContext();
                 goToSpeedActivity(context);
+            }
+        });
+
+//        buttonSourceSelectionBookmarks
+        Button btnBookmarks = findViewById(R.id.buttonSourceSelectionBookmarks);
+        btnBookmarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                Context context = getApplicationContext();
+                goToBookmarksActivity(context);
             }
         });
 

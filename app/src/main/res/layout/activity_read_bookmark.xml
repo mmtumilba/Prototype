@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutReadArticleActivity"
+    android:id="@+id/layoutReadBookmarkActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal|center_vertical">
 
     <TextView
-        android:id="@+id/textViewReadArticle"
+        android:id="@+id/textViewReadBookmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/read"/>
 
     <Button
-        android:id="@+id/buttonReadArticlePreviousArticle"
+        android:id="@+id/buttonReadBookmarkPrevious"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/prev" />
 
     <Button
-        android:id="@+id/buttonReadArticlePausePlay"
+        android:id="@+id/buttonReadBookmarkPausePlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/pause" />
 
     <Button
-        android:id="@+id/buttonReadArticleNextArticle"
+        android:id="@+id/buttonReadBookmarkNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/next" />

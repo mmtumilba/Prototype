@@ -5,29 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.print.PrinterId;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.util.Printer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Vector;
 
-import dalvik.annotation.TestTarget;
-
-public class ReadArticleActivity extends AppCompatActivity {
-
-    private String source;
-    private String title;
-    private String link;
+public class ReadBookmarkActivity extends AppCompatActivity {
 
     private Vector<String> article;
-
-    private final String ABS = "abs";
-    private final String GMA = "gma";
-    private final String INQUIRER = "inquirer";
-    private final String PHILSTAR = "philstar";
+    private int articleIndex;
+    private int index = 0;
+    private int maxIndex;
 
     private TextView tv;
     private TextToSpeech mTTS;
@@ -37,59 +29,48 @@ public class ReadArticleActivity extends AppCompatActivity {
     private Button btnNext;
 
 
-    private AbsScraper absScraper;
-    private int index = 0;
-    private int maxIndex;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_article);
+        setContentView(R.layout.activity_read_bookmark);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            source = extras.getString("source");
-            link = extras.getString("link");
-            title = extras.getString("title");
+            String temp  = extras.getString("articleIndex");
+            articleIndex = Integer.parseInt(temp);
 
-            new ScraperThread().execute();
+            new BookmarkThread().execute();
         }
 
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
-        tv = findViewById(R.id.textViewReadArticle);
+        tv = findViewById(R.id.textViewReadBookmark);
 
-        btnPrev = findViewById(R.id.buttonReadArticlePreviousArticle);
+        btnPrev = findViewById(R.id.buttonReadBookmarkPrevious);
         btnPrev.setAlpha((float) 0.5);
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 previousParagraph();
-
             }
         });
 
-        btnPausePlay = findViewById(R.id.buttonReadArticlePausePlay);
-        btnPausePlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        btnPausePlay = findViewById(R.id.buttonReadArticlePausePlay);
+//        btnPausePlay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
-            }
-        });
-
-        btnNext = findViewById(R.id.buttonReadArticleNextArticle);
+        btnNext = findViewById(R.id.buttonReadBookmarkNext);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextParagraph();
-
             }
         });
-
-
-
-
     }
 
     private void previousParagraph() {
@@ -107,8 +88,6 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
     }
 
-    //// TODO: 13/01/2021 hint @ articleSelection change to @string/article
-
     private void nextParagraph() {
         if (index == maxIndex - 1) {
             btnNext.setAlpha((float) 0.5);
@@ -124,56 +103,24 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
     }
 
-    private class ScraperThread extends AsyncTask<Void, Void, Void> {
+
+    private class BookmarkThread extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            switch (source) {
-                case ABS:
-                    absScraper = new AbsScraper(source, link);
-                    article = absScraper.article;
-                    maxIndex = article.size() - 1;
 
-                    break;
+            Context context = getApplicationContext();
+            Bookmark bookmark = new Bookmark(context, articleIndex);
+            article = bookmark.article;
+            maxIndex = article.size() - 1;
 
-//                case GMA:
-//
-//                    break;
-//
-//                case INQUIRER:
-//
-//                    break;
-//
-//                case PHILSTAR:
-//
-//                    break;
-            }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            switch (source) {
-                case ABS:
-                    tv.setText(article.get(index));
-                    TextReader.say(mTTS, tv);
-                    break;
-//                case GMA:
-//
-//                    break;
-//
-//                case INQUIRER:
-//
-//                    break;
-//
-//                case PHILSTAR:
-//
-//                    break;
-            }
+            tv.setText(article.get(index));
         }
     }
-
-    // TODO: 11/01/2021 paano kapag gusto ni user tuloy tuloy lang ang pagbasa ng article 
-
 }

@@ -74,7 +74,40 @@ public class BookmarksActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitButton(context);
+                if (et.length() == 0) {
+                    TextReader.invalidInput(mTTS, tv);
+                    return;
+                }
+
+                String temp = et.getText().toString();
+                article = Integer.parseInt(temp);
+                int val = article + (setNumIndex * 5) - 1;
+                articleIndex = Integer.toString(val);
+
+
+                if (lastSetSize == 0) {
+                    if ( (article < 1) || (article > 5) ) {
+                        TextReader.invalidInput(mTTS, tv);
+                    } else {
+                        goToReadBookmarkActivity(context, articleIndex);
+
+                    }
+                } else {
+                    if (setNum == setMax) {
+                        if ( (article < 1) || (article > lastSetSize) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            goToReadBookmarkActivity(context, articleIndex);
+                        }
+                    } else {
+                        if ( (article < 1) || (article > 5) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            goToReadBookmarkActivity(context, articleIndex);
+                        }
+                    }
+                }
+                mTTS.stop();
                 Log.e("articleIndexVal", articleIndex);
             }
         });
@@ -132,43 +165,6 @@ public class BookmarksActivity extends AppCompatActivity {
         }
     }
 
-    private void submitButton(Context context) {
-        if (et.length() == 0) {
-            TextReader.invalidInput(mTTS, tv);
-            return;
-        }
-
-        String temp = et.getText().toString();
-        article = Integer.parseInt(temp);
-        int val = article + (setNumIndex * 5) - 1;
-        articleIndex = Integer.toString(val);
-
-
-        if (lastSetSize == 0) {
-            if ( (article < 1) || (article > 5) ) {
-                TextReader.invalidInput(mTTS, tv);
-            } else {
-                goToReadBookmarkActivity(context, articleIndex);
-
-            }
-        } else {
-            if (setNum == setMax) {
-                if ( (article < 1) || (article > lastSetSize) ) {
-                    TextReader.invalidInput(mTTS, tv);
-                } else {
-                    goToReadBookmarkActivity(context, articleIndex);
-                }
-            } else {
-                if ( (article < 1) || (article > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
-                } else {
-                    goToReadBookmarkActivity(context, articleIndex);
-                }
-            }
-        }
-        mTTS.stop();
-
-    }
 
 
 

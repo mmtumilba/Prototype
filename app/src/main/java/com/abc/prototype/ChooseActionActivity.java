@@ -3,6 +3,7 @@ package com.abc.prototype;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -11,7 +12,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Vector;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import static com.abc.prototype.Navigate.goToReadArticleActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
@@ -113,8 +130,93 @@ public class ChooseActionActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Bookmark bookmark = new Bookmark(title, article);
-            bookmark.addToXML();
+
+            Context context = getApplicationContext();
+
+            Log.e("directory", getFilesDir().toString());
+
+            String path = context.getFilesDir().toString();
+            String filepath = path + "/bookmarks.xml";
+            File file = new File(filepath);
+
+            if (file.exists()) {
+                Log.e("bookmarks.xml status", "bookmarks.xml exists");
+
+                try {
+//                AssetManager am = context.getAssets();
+//                InputStream is = am.open("bookmarks.xml");
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document document = db.parse(file);
+                    Element root = document.getDocumentElement();
+
+                    Element newBookmark = document.createElement("bookmark");
+
+                    Element titleT = document.createElement("title");
+                    titleT.appendChild(document.createTextNode(title));
+                    newBookmark.appendChild(titleT);
+
+                    Element articleA = document.createElement("article");
+                    for (int i = 0; i < article.size(); i++) {
+                        Element paragraph = document.createElement("paragraph");
+                        paragraph.appendChild(document.createTextNode(article.get(i)));
+                        articleA.appendChild(paragraph);
+
+                    }
+                    newBookmark.appendChild(articleA);
+
+                    root.appendChild(newBookmark);
+
+
+                    DOMSource source = new DOMSource(document);
+
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    StreamResult result = new StreamResult("bookmarks.xml");
+                    transformer.transform(source, result);
+
+
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                Log.e("bookmarks.xml status", "need to create bookmarks.xml");
+                FileOutputStream fos = null;
+
+                try {
+
+                    DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+                    Document document = documentBuilder.newDocument();
+
+                    Element root = document.createElement("bookmarks");
+                    document.appendChild(root);
+
+                    fos = openFileOutput("bookmarks.xml", MODE_PRIVATE);
+                    fos.write(document.getTextContent().getBytes());
+                } catch (FileNotFoundException  e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (fos != null) {
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    Log.e("bookmarks.xml status", "created bookmarks.xml");
+                }
+
+            }
         }
     }
 

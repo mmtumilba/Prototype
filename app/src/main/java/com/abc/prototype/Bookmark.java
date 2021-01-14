@@ -8,6 +8,10 @@ import android.util.Log;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -38,14 +42,6 @@ public class Bookmark {
         this.article = getArticle(context, articleIndex);
     }
 
-    public Bookmark (String title, Vector<String> article) {
-        this.title = title;
-        this.article = article;
-    }
-
-    public void addToXML() {
-
-    }
 
     private Vector<String> getArticle (Context context, int articleIndex) {
 
@@ -69,6 +65,38 @@ public class Bookmark {
                 }
             }
 
+            //////////////////////////////////////////////////////////////
+            Element root = doc.getDocumentElement();
+
+
+            Element newBookmark = doc.createElement("bookmark");
+
+            Element titleT = doc.createElement("title");
+            titleT.appendChild(doc.createTextNode(title));
+            newBookmark.appendChild(titleT);
+
+            Element articleA = doc.createElement("article");
+            for (int i = 0; i < article.size(); i++) {
+                Element paragraph = doc.createElement("paragraph");
+                paragraph.appendChild(doc.createTextNode(article.get(i)));
+                articleA.appendChild(paragraph);
+
+            }
+            newBookmark.appendChild(articleA);
+
+            root.appendChild(newBookmark);
+
+
+            DOMSource source = new DOMSource(doc);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            StreamResult result = new StreamResult("bookmarks.xml");
+            transformer.transform(source, result);
+
+            //////////////////////////////////////////////////////////////
+
+
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -81,12 +109,24 @@ public class Bookmark {
 
     private Vector<String> getTitles (Context context) {
         Vector <String> titles = new Vector <String>();
+
         try {
-            AssetManager am = context.getAssets();
-            InputStream is = am.open("bookmarks.xml");
+//            AssetManager am = context.getAssets();
+
+            String path = context.getFilesDir().toString();
+            String filepath = path + "/bookmarks.xml";
+            File file = new File(filepath);
+//
+//            String path = context.getFilesDir().toString();
+//            String filepath = path + "/bookmarks.xml";
+//            File file = new File(filepath);
+
+//            InputStream is = am.open("bookmarks.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(is);
+//            Document doc = db.parse(is);
+            Document doc = db.parse(file);
+
             doc.getDocumentElement().normalize();
             NodeList bookmark = doc.getElementsByTagName("bookmark");
 

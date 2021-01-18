@@ -148,6 +148,8 @@ public class ChooseActionActivity extends AppCompatActivity {
 
                     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                     DocumentBuilder db = dbf.newDocumentBuilder();
+                    Log.e("bookmarks.xml status", "add bookmark");
+
                     Document document = db.parse(file);
                     Element root = document.getDocumentElement();
 
@@ -177,6 +179,7 @@ public class ChooseActionActivity extends AppCompatActivity {
                     transformer.transform(source, result);
 
 
+
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -198,6 +201,10 @@ public class ChooseActionActivity extends AppCompatActivity {
 
                     fos = openFileOutput("bookmarks.xml", MODE_PRIVATE);
                     fos.write(document.getTextContent().getBytes());
+
+
+                    Log.e("bookmarks contents", document.toString());
+
                 } catch (FileNotFoundException  e) {
                     e.printStackTrace();
                 } catch (ParserConfigurationException e) {

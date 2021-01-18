@@ -49,11 +49,19 @@ public class Bookmark {
 
         try {
 
-            AssetManager am = context.getAssets();
-            InputStream is = am.open("bookmarks.xml");
+            String path = context.getFilesDir().toString();
+            String filepath = path + "/bookmarks.xml";
+            File file = new File(filepath);
+
+//            AssetManager am = context.getAssets();
+//            InputStream is = am.open("bookmarks.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(is);
+//            Document doc = db.parse(is);
+            Document doc = db.parse(file);
+
+
+
             doc.getDocumentElement().normalize();
             NodeList bookmark = doc.getElementsByTagName("bookmark");
             Node node = bookmark.item(articleIndex);
@@ -113,9 +121,9 @@ public class Bookmark {
         try {
 //            AssetManager am = context.getAssets();
 
-            String path = context.getFilesDir().toString();
-            String filepath = path + "/bookmarks.xml";
-            File file = new File(filepath);
+//            String path = context.getFilesDir().toString();
+//            String filepath = path + "/bookmarks.xml";
+            File file = new File(context.getFilesDir().toString() + "/bookmarks.xml");
 //
 //            String path = context.getFilesDir().toString();
 //            String filepath = path + "/bookmarks.xml";

@@ -122,6 +122,5 @@ public class AbsScraper {
         for (Element paragraph : paragraphs) {
             article.add(paragraph.text());
         }
-
     }
 }

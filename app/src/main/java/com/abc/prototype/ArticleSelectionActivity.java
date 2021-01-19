@@ -219,9 +219,9 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 //
 //                    break;
 //
-//                case INQUIRER:
-//
-//                    break;
+                case INQUIRER:
+                    tv.setText(subcategory);
+                    break;
 //
 //                case PHILSTAR:
 //

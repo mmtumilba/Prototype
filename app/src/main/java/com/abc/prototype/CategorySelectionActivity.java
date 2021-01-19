@@ -527,7 +527,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onPostResume() {
         super.onPostResume();

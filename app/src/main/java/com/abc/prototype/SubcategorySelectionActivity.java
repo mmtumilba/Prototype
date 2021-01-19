@@ -341,16 +341,16 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                     case 2:
                         switch (subcategoryInt) {
                             case 1:
-                                output = "PBA";
+                                output = "pba";
                                 break;
                             case 2:
-                                output = "UAAP";
+                                output = "uaap";
                                 break;
                             case 3:
-                                output = "NCAA";
+                                output = "ncaa";
                                 break;
                             case 4:
-                                output = "ONE_championship";
+                                output = "one_championship";
                                 break;
                         }
                         break;
@@ -362,10 +362,10 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                     case 1:
                         switch (subcategoryInt) {
                             case 1:
-                                output = "mobility";
+                                output = "mobility"; // TODO: 19/01/2021 remove from list
                                 break;
                             case 2:
-                                output = "job_market";
+                                output = "job_market"; // TODO: 19/01/2021 remove from list
                                 break;
                             case 3:
                                 output = "stock_exchange";

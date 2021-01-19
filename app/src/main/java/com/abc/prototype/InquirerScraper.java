@@ -29,7 +29,7 @@ public class InquirerScraper {
         this.titles = new Vector<String>();
         this.titleSets = new Vector<String>();
 
-        selectLink(category, subcategory);
+        this.url = selectLink(category, subcategory);
         try {
             scrapeTitlesLinks();
             generateTitleSets();
@@ -40,8 +40,9 @@ public class InquirerScraper {
 
     public InquirerScraper (String category, String subcategory, String link) {
         this.articleVector = new Vector<String>();
+        this.category = category;
         try{
-            if (category == "lifestyle") {
+            if (category.equals("lifestyle")) {
                 scrapeLifestyleArticle(link);
             } else {
                 scrapeArticle(link);
@@ -51,173 +52,158 @@ public class InquirerScraper {
         }
     }
 
-    public void selectLink (String category, String subcategory) {
+    public String selectLink (String category, String subcategory) {
+        String output ="";
+        if (category.equals("news") ) {
+            if (subcategory.equals("headlines")) {
+                output = "https://newsinfo.inquirer.net/category/latest-stories";
+            }
+            else if (subcategory.equals("metro")) {
+                output = "https://newsinfo.inquirer.net/category/inquirer-headlines/metro";
+            }
+            else if (subcategory.equals("region")) {
+                output = "https://newsinfo.inquirer.net/regions";
+            }
+            else if (subcategory.equals("nation")) {
+                output = "https://newsinfo.inquirer.net/category/inquirer-headlines/nation";
+            }
+            else if (subcategory.equals("world")) {
+                output = "https://newsinfo.inquirer.net/category/latest-stories/world-latest-stories";
+            }
+        }
+        else if (category.equals("opinion")) {
+            if (subcategory.equals("editorial")) {
+                output = "https://opinion.inquirer.net/category/editorial";
+            }
+            else if (subcategory.equals("columns")) {
+                output = "https://opinion.inquirer.net/category/inquirer-opinion/columns";
+            }
+            else if (subcategory.equals("viewpoints")) {
+                output = "https://opinion.inquirer.net/category/viewpoints";
+            }
+            else if (subcategory.equals("talk_of_the_town")) {
+                output = "https://opinion.inquirer.net/category/inquirer-opinion/talk-of-the-town";
+            }
+            else if (subcategory.equals("lovelife")) {
+                output = "https://opinion.inquirer.net/category/love-life";
+            }
+        }
+        else if (category.equals("sports")) {
+            if (subcategory.equals("basketball")) {
+                output = "https://sports.inquirer.net/category/section/basketball";
+            }
+            else if (subcategory.equals("boxing")) {
+                output = "https://sports.inquirer.net/category/section/boxing-mma";
+            }
+            else if (subcategory.equals("volleyball")) {
+                output = "https://sports.inquirer.net/category/section/volleyball";
+            }
+            else if (subcategory.equals("football")) {
+                output = "https://sports.inquirer.net/category/section/other-sports/football";
+            }
+            else if (subcategory.equals("other_sports")) {
+                output = "https://sports.inquirer.net/category/section/other-sports";
+            }
+            else if (subcategory.equals("pba")) {
+                output = "https://sports.inquirer.net/category/latest-stories/basketball/pba";
+            }
+            else if (subcategory.equals("uaap")) {
+                output = "https://sports.inquirer.net/category/varsity-sports/latest-varsity-sports/uaap";
+            }
+            else if (subcategory.equals("ncaa")) {
+                output = "https://sports.inquirer.net/category/varsity-sports/latest-varsity-sports/ncaa";
+            }
+            else if (subcategory.equals("one_championship")) {
+                output = "https://sports.inquirer.net/category/mixed-martial-arts/one-championship";
+            }
+        }
+        else if (category.equals("lifestyle")) {
+            if (subcategory.equals("fashion")) {
+                output = "https://lifestyle.inquirer.net/category/latest-stories/fashion-and-beauty/";
+            }
+            else if (subcategory.equals("beauty")) {
+                output = "https://lifestyle.inquirer.net/category/beauty/";
+            }
+            else if (subcategory.equals("culture")) {
+                output = "https://lifestyle.inquirer.net/category/archives/arts-culture/";
+            }
+            else if (subcategory.equals("events")) {
+                output = "https://lifestyle.inquirer.net/category/events/";
+            }
+            else if (subcategory.equals("human_interest")) {
+                output = "https://lifestyle.inquirer.net/category/latest-stories-2/human-interest/";
+            }
+        }
+        else if (category.equals("entertainment")) {
+            if (subcategory.equals("headlines")) {
+                output = "https://entertainment.inquirer.net/category/headlines";
+            }
+            else if (subcategory.equals("latest_entertainment_stories")) {
+                output = "https://entertainment.inquirer.net/category/latest-stories";
+            }
+            else if (subcategory.equals("columns")) {
+                output = "https://entertainment.inquirer.net/columnists";
+            }
+            else if (subcategory.equals("movies")) {
+                output = "https://entertainment.inquirer.net/category/movies";
+            }
+            else if (subcategory.equals("indie_films")) {
+                output = "https://entertainment.inquirer.net/category/indie-films";
+            }
+        }
 
-        if (category == "news") {
-            if (subcategory == "headlines") {
-                url = "https://newsinfo.inquirer.net/category/latest-stories";
+        else if (category.equals("business")) {
+            if (subcategory.equals("stock_exhange")) {
+                output = "https://business.inquirer.net/category/stock-market-table";
             }
-            else if (subcategory == "metro") {
-                url = "https://newsinfo.inquirer.net/category/inquirer-headlines/metro";
+            else if (subcategory.equals("property_guide")) {
+                output = "https://business.inquirer.net/category/property-guide";
             }
-            else if (subcategory == "region") {
-                url = "https://newsinfo.inquirer.net/regions";
+            else if (subcategory.equals("columns")) {
+                output = "https://business.inquirer.net/columnists";
             }
-            else if (subcategory == "nation") {
-                url = "https://newsinfo.inquirer.net/category/inquirer-headlines/nation";
+            else if (subcategory.equals("stock_market_quarterly")) {
+                output = "https://business.inquirer.net/category/stock-market-quarterly";
             }
-            else if (subcategory == "world") {
-                url = "https://newsinfo.inquirer.net/category/latest-stories/world-latest-stories";
-            }
-        }
-        else if (category == "opinion") {
-            if (subcategory == "editorial") {
-                url = "https://opinion.inquirer.net/category/editorial";
-            }
-            else if (subcategory == "columns") {
-                url = "https://opinion.inquirer.net/category/inquirer-opinion/columns";
-            }
-            else if (subcategory == "viewpoints") {
-                url = "https://opinion.inquirer.net/category/viewpoints";
-            }
-            else if (subcategory == "talk_of_the_town") {
-                url = "https://opinion.inquirer.net/category/inquirer-opinion/talk-of-the-town";
-            }
-            else if (subcategory == "lovelife") {
-                url = "https://opinion.inquirer.net/category/love-life";
+            else if (subcategory.equals("classifieds")) {
+                output = "https://business.inquirer.net/category/classifieds";
             }
         }
-        else if (category == "sports") {
-            if (subcategory == "basketball") {
-                url = "https://sports.inquirer.net/category/section/basketball";
+        else if (category.equals("technology")) {
+            if (subcategory.equals("headlines")) {
+                output = "https://technology.inquirer.net/category/headlines";
             }
-            else if (subcategory == "boxing") {
-                url = "https://sports.inquirer.net/category/section/boxing-mma";
-            }
-            else if (subcategory == "volleyball") {
-                url = "https://sports.inquirer.net/category/section/volleyball";
-            }
-            else if (subcategory == "football") {
-                url = "https://sports.inquirer.net/category/section/other-sports/football";
-            }
-            else if (subcategory == "other_sports") {
-                url = "https://sports.inquirer.net/category/section/other-sports";
-            }
-            else if (subcategory == "pba") {
-                url = "https://sports.inquirer.net/category/latest-stories/basketball/pba";
-            }
-            else if (subcategory == "uaap") {
-                url = "https://sports.inquirer.net/category/varsity-sports/latest-varsity-sports/uaap";
-            }
-            else if (subcategory == "ncaa") {
-                url = "https://sports.inquirer.net/category/varsity-sports/latest-varsity-sports/ncaa";
-            }
-            else if (subcategory == "one_championship") {
-                url = "https://sports.inquirer.net/category/mixed-martial-arts/one-championship";
+            else if (subcategory.equals("latest_technology_stories")) {
+                output = "https://technology.inquirer.net/category/latest-stories";
             }
         }
-        else if (category == "lifestyle") {
-            if (subcategory == "fashion") {
-                url = "https://lifestyle.inquirer.net/category/latest-stories/fashion-and-beauty/";
+        else if (category.equals("global_nation")) {
+            if (subcategory.equals("philippines")) {
+                output = "https://globalnation.inquirer.net/category/news/philippines";
             }
-            else if (subcategory == "beauty") {
-                url = "https://lifestyle.inquirer.net/category/beauty/";
+            else if (subcategory.equals("asia_and_pacific")) {
+                output = "https://globalnation.inquirer.net/category/world-news/asia-australia";
             }
-            else if (subcategory == "culture") {
-                url = "https://lifestyle.inquirer.net/category/archives/arts-culture/";
+            else if (subcategory.equals("americas")) {
+                output = "https://globalnation.inquirer.net/category/world-news/us-canada";
             }
-            else if (subcategory == "events") {
-                url = "https://lifestyle.inquirer.net/category/events/";
+            else if (subcategory.equals("middle_east_and_africa")) {
+                output = "https://globalnation.inquirer.net/category/world-news/middle-east-africa";
             }
-            else if (subcategory == "human_interest") {
-                url = "https://lifestyle.inquirer.net/category/latest-stories-2/human-interest/";
+            else if (subcategory.equals("europe")) {
+                output = "https://globalnation.inquirer.net/category/world-news/europe";
             }
-        }
-        else if (category == "entertainment") {
-            if (subcategory == "headlines") {
-                url = "https://entertainment.inquirer.net/category/headlines";
+            else if (subcategory.equals("global")) {
+                output = "https://globalnation.inquirer.net/category/global-pinoy";
             }
-            else if (subcategory == "latest_entertainment_stories") {
-                url = "https://entertainment.inquirer.net/category/latest-stories";
+            else if (subcategory.equals("pinoy_columns")) {
+                output = "https://globalnation.inquirer.net/category/opinion/columnists";
             }
-            else if (subcategory == "columns") {
-                url = "https://entertainment.inquirer.net/columnists";
-            }
-            else if (subcategory == "movies") {
-                url = "https://entertainment.inquirer.net/category/movies";
-            }
-            else if (subcategory == "indie_films") {
-                url = "https://entertainment.inquirer.net/category/indie-films";
+            else if (subcategory.equals("events")) {
+                output = "https://globalnation.inquirer.net/category/events";
             }
         }
-        else if (category == "entertainment") {
-            if (subcategory == "headlines") {
-                url = "https://entertainment.inquirer.net/category/headlines";
-            }
-            else if (subcategory == "latest_entertainment_stories") {
-                url = "https://entertainment.inquirer.net/category/latest-stories";
-            }
-            else if (subcategory == "columns") {
-                url = "https://entertainment.inquirer.net/columnists";
-            }
-            else if (subcategory == "movies") {
-                url = "https://entertainment.inquirer.net/category/movies";
-            }
-            else if (subcategory == "indie_films") {
-                url = "https://entertainment.inquirer.net/category/indie-films";
-            }
-        }
-        else if (category == "business") {
-            if (subcategory == "stock_exhange") {
-                url = "https://business.inquirer.net/category/stock-market-table";
-            }
-            else if (subcategory == "property_guide") {
-                url = "https://business.inquirer.net/category/property-guide";
-            }
-            else if (subcategory == "columns") {
-                url = "https://business.inquirer.net/columnists";
-            }
-            else if (subcategory == "stock_market_quarterly") {
-                url = "https://business.inquirer.net/category/stock-market-quarterly";
-            }
-            else if (subcategory == "classifieds") {
-                url = "https://business.inquirer.net/category/classifieds";
-            }
-        }
-        else if (category == "technology") {
-            if (subcategory == "headlines") {
-                url = "https://technology.inquirer.net/category/headlines";
-            }
-            else if (subcategory == "latest_technology_stories") {
-                url = "https://technology.inquirer.net/category/latest-stories";
-            }
-        }
-        else if (category == "global_nation") {
-            if (subcategory == "philippines") {
-                url = "https://globalnation.inquirer.net/category/news/philippines";
-            }
-            else if (subcategory == "asia_and_pacific") {
-                url = "https://globalnation.inquirer.net/category/world-news/asia-australia";
-            }
-            else if (subcategory == "americas") {
-                url = "https://globalnation.inquirer.net/category/world-news/us-canada";
-            }
-            else if (subcategory == "middle_east_and_africa") {
-                url = "https://globalnation.inquirer.net/category/world-news/middle-east-africa";
-            }
-            else if (subcategory == "europe") {
-                url = "https://globalnation.inquirer.net/category/world-news/europe";
-            }
-            else if (subcategory == "global") {
-                url = "https://globalnation.inquirer.net/category/global-pinoy";
-            }
-            else if (subcategory == "pinoy_columns") {
-                url = "https://globalnation.inquirer.net/category/opinion/columnists";
-            }
-            else if (subcategory == "events") {
-                url = "https://globalnation.inquirer.net/category/events";
-            }
-        }
+        return output;
     }
 
     //	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -239,9 +225,8 @@ public class InquirerScraper {
 
     public void scrapeTitlesLinks() throws IOException  {
         Elements thisBasis = new Elements();
-        Document doc = Jsoup.connect(url).post();
 
-        if (category == "lifestyle") {
+        if (category.equals("lifestyle")) {
             generateLifestyleBasis();
             thisBasis = lifestyleBasis;
         }
@@ -286,7 +271,9 @@ public class InquirerScraper {
 
 
         for (Element paragraph : paragraphs) {
-            articleVector.add(paragraph.text());
+            if (paragraph.hasText()) {
+                articleVector.add(paragraph.text());
+            }
         }
     }
 
@@ -296,7 +283,9 @@ public class InquirerScraper {
         Elements paragraphs = articles.select("p");
 
         for (Element paragraph : paragraphs) {
-            articleVector.add(paragraph.text());
+            if (paragraph.hasText()) {
+                articleVector.add(paragraph.text());
+            }
         }
     }
 }

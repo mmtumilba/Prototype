@@ -19,11 +19,15 @@ public class Navigate {
         context.startActivity(intent);
     }
 
-    public static void goToChooseActionActivity (Context context, String source, String link, String title) {
+    public static void goToChooseActionActivity (Context context, String source, String link, String title, String category, String subcategory) {
         Intent intent = new Intent(context, ChooseActionActivity.class);
         intent.putExtra("source", source);
         intent.putExtra("link", link);
         intent.putExtra("title", title);
+        intent.putExtra("category", category);
+        intent.putExtra("subcategory", subcategory);
+
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
@@ -66,11 +70,14 @@ public class Navigate {
          context.startActivity(intent);
      }
 
-    public static void goToReadArticleActivity (Context context, String source, String link, String title) {
+    public static void goToReadArticleActivity (Context context, String source, String link, String title, String category, String subcategory) {
         Intent intent = new Intent(context, ReadArticleActivity.class);
         intent.putExtra("source", source);
         intent.putExtra("link", link);
         intent.putExtra("title", title);
+        intent.putExtra("category", category);
+        intent.putExtra("subcategory", subcategory);
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

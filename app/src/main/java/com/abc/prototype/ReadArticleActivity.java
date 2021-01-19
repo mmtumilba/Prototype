@@ -21,6 +21,9 @@ public class ReadArticleActivity extends AppCompatActivity {
     private String source;
     private String title;
     private String link;
+    private String category;
+    private String subcategory;
+
 
     private Vector<String> article;
 
@@ -38,6 +41,8 @@ public class ReadArticleActivity extends AppCompatActivity {
 
 
     private AbsScraper absScraper;
+    private InquirerScraper inquirerScraper;
+
     private int index = 0;
     private int maxIndex;
 
@@ -51,6 +56,12 @@ public class ReadArticleActivity extends AppCompatActivity {
             source = extras.getString("source");
             link = extras.getString("link");
             title = extras.getString("title");
+
+            category = extras.getString("category");
+            subcategory = extras.getString("subcategory");
+
+
+
 
             new ScraperThread().execute();
         }
@@ -140,9 +151,11 @@ public class ReadArticleActivity extends AppCompatActivity {
 //
 //                    break;
 //
-//                case INQUIRER:
-//
-//                    break;
+                case INQUIRER:
+                    inquirerScraper = new InquirerScraper(category, subcategory, link);
+                    article = inquirerScraper.articleVector;
+                    maxIndex = article.size() - 1;
+                    break;
 //
 //                case PHILSTAR:
 //
@@ -163,9 +176,10 @@ public class ReadArticleActivity extends AppCompatActivity {
 //
 //                    break;
 //
-//                case INQUIRER:
-//
-//                    break;
+                case INQUIRER:
+                    tv.setText(article.get(index));
+                    TextReader.say(mTTS, tv);
+                    break;
 //
 //                case PHILSTAR:
 //

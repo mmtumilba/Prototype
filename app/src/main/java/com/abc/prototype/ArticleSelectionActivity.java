@@ -246,6 +246,23 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
+    }
 
     // TODO: 08/01/2021 add bookmars and settings button to all activities na kailangan lagyan
 }

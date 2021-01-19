@@ -117,4 +117,16 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         super.onPostResume();
         TextReader.say(mTTS, tv);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
+    }
 }

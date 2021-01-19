@@ -497,4 +497,22 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
+    }
 }

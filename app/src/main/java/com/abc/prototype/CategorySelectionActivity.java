@@ -533,6 +533,18 @@ public class CategorySelectionActivity extends AppCompatActivity {
         TextReader.say(mTTS, tv);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
+    }
+
 }
 
 

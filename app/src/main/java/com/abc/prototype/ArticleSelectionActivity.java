@@ -9,7 +9,6 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -34,7 +33,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private InquirerScraper inquirerScraper;
 
     private TextView tv;
-    private EditText et;
     private TextToSpeech mTTS;
 
     private Button btnBack;
@@ -52,7 +50,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
     private int titlesNum;
     private int lastSetSize;
-    private int article;
+    private int article = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +72,46 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
         tv = findViewById(R.id.textViewChooseArticle);
-        et = findViewById(R.id.editTextNumberInputArticle);
+
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 1;
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 2;
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 3;
+            }
+        });
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 4;
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 5;
+            }
+        });
 
 
         btnBack = findViewById(R.id.buttonArticleSelectionBack);
@@ -125,13 +162,11 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et.length() == 0) {
+                if (article == 0) {
                     TextReader.invalidInput(mTTS, tv);
                     return;
                 }
 
-                String temp = et.getText().toString();
-                article = Integer.parseInt(temp);
 
                 if (lastSetSize == 0) {
                     if ( (article < 1) || (article > 5) ) {

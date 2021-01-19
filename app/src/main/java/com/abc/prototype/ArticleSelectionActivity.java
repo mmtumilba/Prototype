@@ -31,6 +31,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private final String PHILSTAR = "philstar";
 
     private AbsScraper absScraper;
+    private InquirerScraper inquirerScraper;
 
     private TextView tv;
     private EditText et;
@@ -137,7 +138,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                         TextReader.invalidInput(mTTS, tv);
                     } else {
                         getArticleDetails();
-                        goToChooseActionActivity(context, source, link, title);
+                        goToChooseActionActivity(context, source, link, title, category, subcategory);
                     }
                 } else {
                     if (setNum == setMax) {
@@ -145,14 +146,14 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                             TextReader.invalidInput(mTTS, tv);
                         } else {
                             getArticleDetails();
-                            goToChooseActionActivity(context, source, link, title);
+                            goToChooseActionActivity(context, source, link, title, category, subcategory);
                         }
                     } else {
                         if ( (article < 1) || (article > 5) ) {
                             TextReader.invalidInput(mTTS, tv);
                         } else {
                             getArticleDetails();
-                            goToChooseActionActivity(context, source, link, title);
+                            goToChooseActionActivity(context, source, link, title, category, subcategory);
                         }
                     }
                 }
@@ -188,9 +189,21 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 //
 //                    break;
 //
-//                case INQUIRER:
-//
-//                    break;
+                case INQUIRER:
+                    inquirerScraper = new InquirerScraper(category, subcategory);
+
+                    links = inquirerScraper.links;
+                    titles = inquirerScraper.titles;
+                    Log.e("titleSets size", "before asigning titlesets");
+
+                    titleSets = inquirerScraper.titleSets;
+
+
+                    titlesNum = titles.size();
+                    lastSetSize = titlesNum % 5;
+                    setMax = inquirerScraper.titleSets.size();
+
+                    break;
 //
 //                case PHILSTAR:
 //
@@ -219,9 +232,12 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 //
 //                    break;
 //
-//                case INQUIRER:
-//
-//                    break;
+                case INQUIRER:
+                    tv.setText(inquirerScraper.titleSets.get(0));
+                    TextReader.say(mTTS, tv);
+                    break;
+
+                // TODO: 19/01/2021 clear editText kung nakwa mo na ang data 
 //
 //                case PHILSTAR:
 //

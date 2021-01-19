@@ -13,6 +13,8 @@
     <string name="source">Source</string>
     <string name="category">Category</string>
     <string name="subcategory">Subcategory</string>
+    <string name="article">Article</string>
+
 
     <string name="back">Back</string>
     <string name="next">Next</string>
@@ -82,6 +84,88 @@
                                         2. Technology \n
                                         3. Global Nation
     </string>
+
+    <string name="inquirer_news_subcategories1">Choose a subcategory: \n
+                                                1. Headlines \n
+                                                2. Metro \n
+                                                3. Region \n
+                                                4. Nation \n
+                                                5. World
+    </string>
+
+    <string name="inquirer_opinion_subcategories1">Choose a subcategory: \n
+                                                   1. Editorial \n
+                                                   2. Columns \n
+                                                   3. Viewpoints \n
+                                                   4. Talk of the Town \n
+                                                   5. Lovelife
+    </string>
+
+
+    <string name="inquirer_sports_subcategories1">Choose a subcategory: \n
+                                                  1. Basketball \n
+                                                  2. Boxing \n
+                                                  3. Volleyball \n
+                                                  4. Football \n
+                                                  5. Other Sports
+    </string>
+
+    <string name="inquirer_sports_subcategories2">Choose a subcategory: \n
+                                                    1. PBA \n
+                                                    2. UAAP \n
+                                                    3. NCAA \n
+                                                    4. ONE Championship
+    </string>
+
+    <string name="inquirer_lifestyle_subcategories1">Choose a subcategory: \n
+                                                     1. Fashion \n
+                                                     2. Beauty \n
+                                                     3. Culture \n
+                                                     4. Events \n
+                                                     5. Human Interest
+    </string>
+
+    <string name="inquirer_entertainment_subcategories1">Choose a subcategory: \n
+                                                        1. Headlines \n
+                                                        2. Latest Entertainment Stories \n
+                                                        3. Columns \n
+                                                        4. Movies \n
+                                                        5. Indie Films
+    </string>
+
+    <string name="inquirer_business_subcategories1">Choose a subcategory: \n
+                                                    1. Mobility \n
+                                                    2. Job Market \n
+                                                    3. Stock Exchange \n
+                                                    4. Property Guide  \n
+                                                    5. Columns
+    </string>
+
+    <string name="inquirer_business_subcategories2">Choose a subcategory: \n
+                                                    1. Stock Market Quarterly \n
+                                                    2. Classifieds
+    </string>
+
+    <string name="inquirer_technology_subcategories1">Choose a subcategory: \n
+                                                      1. Headlines \n
+                                                      2. Latest Technology Stories
+    </string>
+
+    <string name="inquirer_global_nation_subcategories1">Choose a subcategory: \n
+                                                         1. Philippines \n
+                                                         2. Asia &amp; Pacific \n
+                                                         3. Americas \n
+                                                         4. Middle East &amp; Africa  \n
+                                                         5. Europe
+    </string>
+
+    <string name="inquirer_global_nation_subcategories2">Choose a subcategory: \n
+                                                         1. Global \n
+                                                         2. Pinoy Columns \n
+                                                         3. Events</string>
+
+    <!--                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                  -->
+
 
     <string name="philstar_categories1">Choose a category: \n
                                         1. Headlines \n

@@ -39,6 +39,8 @@ public class ChooseActionActivity extends AppCompatActivity {
     private String source;
     private String title;
     private String link;
+    private String category;
+    private String subcategory;
 
     private TextView tv;
     private TextToSpeech mTTS;
@@ -64,6 +66,7 @@ public class ChooseActionActivity extends AppCompatActivity {
             source = extras.getString("source");
             link = extras.getString("link");
             title = extras.getString("title");
+            category = extras.getString("category");
 
             Log.e("link", link);
             Log.e("title", title);
@@ -80,7 +83,7 @@ public class ChooseActionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                goToReadArticleActivity(context,source, link, title);
+                goToReadArticleActivity(context,source, link, title, category, subcategory);
             }
         });
         

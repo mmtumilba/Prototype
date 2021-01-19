@@ -134,6 +134,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 if (et.length() == 0) {
                     TextReader.invalidInput(mTTS, tv);
                     return;

@@ -77,11 +77,14 @@ public class ChooseActionActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.textViewChooseActionTitle);
         tv.setText(title);
+        TextReader.say(mTTS, tv);
 
         btnRead = findViewById(R.id.buttonChooseActionRead);
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
+
                 Context context = getApplicationContext();
                 goToReadArticleActivity(context,source, link, title, category, subcategory);
             }
@@ -96,6 +99,8 @@ public class ChooseActionActivity extends AppCompatActivity {
                 // ubra sang article nga object (??)
 
                 // scrape the article
+                mTTS.stop();
+
 
                 new BookmarkThread().execute();
 
@@ -151,9 +156,11 @@ public class ChooseActionActivity extends AppCompatActivity {
 
                     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                     DocumentBuilder db = dbf.newDocumentBuilder();
-                    Log.e("bookmarks.xml status", "add bookmark");
 
-                    Document document = db.parse(file);
+//                    Log.e("bookmarks.xml status", "add bookmark");
+//                    Document document = db.parse(file);
+
+                    Document document = db.parse(context.openFileInput("bookmarks.xml"));
                     Element root = document.getDocumentElement();
 
                     Element newBookmark = document.createElement("bookmark");
@@ -202,7 +209,7 @@ public class ChooseActionActivity extends AppCompatActivity {
                     Element root = document.createElement("bookmarks");
                     document.appendChild(root);
 
-                    fos = openFileOutput("bookmarks.xml", MODE_PRIVATE);
+                    fos = openFileOutput("bookmarks.xml", MODE_APPEND);
                     fos.write(document.getTextContent().getBytes());
 
 

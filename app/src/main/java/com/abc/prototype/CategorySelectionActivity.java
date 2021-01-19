@@ -64,25 +64,25 @@ public class CategorySelectionActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            switch (source) {
-                case ABS:
-                    absBackButton();
-                    break;
-                case GMA:
-                    gmaBackButton();
-                    break;
+                switch (source) {
+                    case ABS:
+                        absBackButton();
+                        break;
+                    case GMA:
+                        gmaBackButton();
+                        break;
 
-                case INQUIRER:
-                    inquirerBackButton();
-                    break;
+                    case INQUIRER:
+                        inquirerBackButton();
+                        break;
 
-                case PHILSTAR:
-                    philstarBackButton();
-                    break;
+                    case PHILSTAR:
+                        philstarBackButton();
+                        break;
 
-            }
-            mTTS.stop();
-            TextReader.say(mTTS, tv);
+                }
+                mTTS.stop();
+                TextReader.say(mTTS, tv);
 
             }
         });

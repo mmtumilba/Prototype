@@ -123,6 +123,8 @@ public class BookmarksActivity extends AppCompatActivity {
     }
 
     private void backButton() {
+        mTTS.stop();
+
         if (setMax == 1) {
             btnBack.setAlpha((float) 0.5);
             btnNext.setAlpha((float) 0.5);
@@ -144,6 +146,8 @@ public class BookmarksActivity extends AppCompatActivity {
     }
 
     private void nextButton () {
+        mTTS.stop();
+
         if (setMax == 1) {
             btnBack.setAlpha((float) 0.5);
             btnNext.setAlpha((float) 0.5);

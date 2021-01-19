@@ -82,6 +82,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
+
                 if (setNum == 2) {
                     btnBack.setAlpha((float) 0.5);
                 } else if (setNum == setMax) {
@@ -102,6 +104,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
+
                 int temp = setMax - 1;
                 if (setNum == (temp)) {
                     btnNext.setAlpha((float) 0.5);
@@ -125,6 +129,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
+
                 if (et.length() == 0) {
                     TextReader.invalidInput(mTTS, tv);
                     return;

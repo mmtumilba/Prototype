@@ -37,7 +37,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
     private final String GLOBAL_NATION = "global_nation";
 
     private int setNum = 1;
-    private int setMax, subcategoryInt;
+    private int subcategoryInt = 0;
+    private int setMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,6 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseSubcategory);
-        et = findViewById(R.id.editTextNumberInputSubategory);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -58,8 +58,47 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.buttonSubcategorySelectionBack);
         btnNext = findViewById(R.id.buttonSubcategorySelectionNext);
         btnSubmit = findViewById(R.id.buttonSubcategorySelectionSubmit);
-
         setTvAndOpacity();
+
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 1;
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 2;
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 3;
+            }
+        });
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 4;
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 5;
+            }
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,12 +173,12 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et.length() == 0) {
+                if (subcategoryInt == 0) {
                     TextReader.invalidInput(mTTS, tv);
                     return;
                 }
-                String temp = et.getText().toString();
-                subcategoryInt = Integer.parseInt(temp);
+
+
                 Context context = getApplicationContext();
                 switch (category) {
                     case NEWS:

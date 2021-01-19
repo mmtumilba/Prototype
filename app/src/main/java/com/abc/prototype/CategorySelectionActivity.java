@@ -19,7 +19,6 @@ import static com.abc.prototype.Navigate.goToSubcategorySelectionActivity;
 public class CategorySelectionActivity extends AppCompatActivity {
 
     private TextView tv;
-    private EditText et;
     private TextToSpeech mTTS;
 
     private Button btnBack;
@@ -39,7 +38,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
     private final String PHILSTAR = "philstar";
 
     private int setNum = 1;
-    private int setMax, categoryInt;
+    private int categoryInt = 0;
+    private int setMax;
 
 
     @Override
@@ -50,7 +50,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseCategory);
-        et = findViewById(R.id.editTextNumberInputCategory);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -58,7 +57,48 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
         setTv();
 
-        // TODO: 07/01/2021 stop reader upon action (next/back/submit)
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryInt = 1;
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryInt = 2;
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryInt = 3;
+            }
+        });
+
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryInt = 4;
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryInt = 5;
+            }
+        });
+
+
         btnBack = findViewById(R.id.buttonCategorySelectionBack);
         btnBack.setAlpha((float) 0.5);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -118,12 +158,11 @@ public class CategorySelectionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if (et.length() == 0) {
+            if (categoryInt == 0) {
                 TextReader.invalidInput(mTTS, tv);
                 return;
             }
-            String temp = et.getText().toString();
-            categoryInt = Integer.parseInt(temp);
+
             switch (source) {
                 case ABS:
                     absSubmitButton();

@@ -39,6 +39,8 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 source = 1;
+                mTTS.stop();
+                goToSource();
             }
         });
 
@@ -47,6 +49,8 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 source = 2;
+                mTTS.stop();
+                goToSource();
             }
         });
 
@@ -55,6 +59,8 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 source = 3;
+                mTTS.stop();
+                goToSource();
             }
         });
 
@@ -64,17 +70,11 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 source = 4;
-            }
-        });
-
-        Button btnSubmit = findViewById(R.id.buttonSourceSelectionSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 mTTS.stop();
                 goToSource();
             }
         });
+
 
         Log.e("CHECKPOINT", "ONcREATE");
 

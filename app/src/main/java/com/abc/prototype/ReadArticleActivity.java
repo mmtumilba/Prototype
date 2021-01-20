@@ -185,7 +185,9 @@ public class ReadArticleActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             switch (source) {
                 case ABS:
-                    tv.setText(article.get(index));
+                    String temp = article.get(index) + getText(R.string.end_paragraph);
+                    tv.setText(temp);
+//                    tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
                     break;
 //                case GMA:
@@ -193,7 +195,9 @@ public class ReadArticleActivity extends AppCompatActivity {
 //                    break;
 //
                 case INQUIRER:
-                    tv.setText(article.get(index));
+                    String tempy = article.get(index) + getText(R.string.end_paragraph);
+                    tv.setText(tempy);
+//                    tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
                     break;
 //

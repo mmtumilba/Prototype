@@ -40,6 +40,8 @@ public class ReadArticleActivity extends AppCompatActivity {
     private Button btnNext;
 
 
+
+
     private AbsScraper absScraper;
     private InquirerScraper inquirerScraper;
 
@@ -112,7 +114,9 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
         if (index > 0) {
             index--;
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
+//            tv.setText(article.get(index));
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -129,7 +133,9 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
         if (index < maxIndex) {
             index++;
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
+//            tv.setText(article.get(index));
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }

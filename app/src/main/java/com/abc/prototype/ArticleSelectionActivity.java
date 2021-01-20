@@ -9,7 +9,6 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -34,7 +33,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private InquirerScraper inquirerScraper;
 
     private TextView tv;
-    private EditText et;
     private TextToSpeech mTTS;
 
     private Button btnBack;
@@ -52,7 +50,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
     private int titlesNum;
     private int lastSetSize;
-    private int article;
+    private int article = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +72,56 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
         tv = findViewById(R.id.textViewChooseArticle);
-        et = findViewById(R.id.editTextNumberInputArticle);
+
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 1;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 2;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 3;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 4;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 5;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
 
 
         btnBack = findViewById(R.id.buttonArticleSelectionBack);
@@ -82,8 +129,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTTS.stop();
-
                 if (setNum == 2) {
                     btnBack.setAlpha((float) 0.5);
                 } else if (setNum == setMax) {
@@ -104,8 +149,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTTS.stop();
-
                 int temp = setMax - 1;
                 if (setNum == (temp)) {
                     btnNext.setAlpha((float) 0.5);
@@ -125,47 +168,36 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         
         //// TODO: 09/01/2021 twice ang size sang titlesets
 
-        btnSubmit = findViewById(R.id.buttonArticleSelectionSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
 
-                if (et.length() == 0) {
-                    TextReader.invalidInput(mTTS, tv);
-                    return;
-                }
+    }
 
-                String temp = et.getText().toString();
-                article = Integer.parseInt(temp);
 
-                if (lastSetSize == 0) {
-                    if ( (article < 1) || (article > 5) ) {
-                        TextReader.invalidInput(mTTS, tv);
-                    } else {
-                        getArticleDetails();
-                        goToChooseActionActivity(context, source, link, title, category, subcategory);
-                    }
-                } else {
-                    if (setNum == setMax) {
-                        if ( (article < 1) || (article > lastSetSize) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            getArticleDetails();
-                            goToChooseActionActivity(context, source, link, title, category, subcategory);
-                        }
-                    } else {
-                        if ( (article < 1) || (article > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            getArticleDetails();
-                            goToChooseActionActivity(context, source, link, title, category, subcategory);
-                        }
-                    }
-                }
-                mTTS.stop();
+    private void submit(Context context) {
+        if (lastSetSize == 0) {
+            if ( (article < 1) || (article > 5) ) {
+                TextReader.invalidInput(mTTS, tv);
+            } else {
+                getArticleDetails();
+                goToChooseActionActivity(context, source, link, title, category, subcategory);
             }
-        });
+        } else {
+            if (setNum == setMax) {
+                if ( (article < 1) || (article > lastSetSize) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    getArticleDetails();
+                    goToChooseActionActivity(context, source, link, title, category, subcategory);
+                }
+            } else {
+                if ( (article < 1) || (article > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    getArticleDetails();
+                    goToChooseActionActivity(context, source, link, title, category, subcategory);
+                }
+            }
+        }
+        mTTS.stop();
     }
 
     private void getArticleDetails() {
@@ -252,6 +284,23 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
+    }
 
     // TODO: 08/01/2021 add bookmars and settings button to all activities na kailangan lagyan
 }

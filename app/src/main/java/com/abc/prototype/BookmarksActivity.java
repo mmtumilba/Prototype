@@ -196,5 +196,25 @@ public class BookmarksActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             tv.setText(titleSets.get(0));
         }
+
+
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
     }
 }

@@ -21,7 +21,6 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
 
     private Button btnBack;
     private Button btnNext;
-    private Button btnSubmit;
 
     private String source;
     private String category;
@@ -37,7 +36,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
     private final String GLOBAL_NATION = "global_nation";
 
     private int setNum = 1;
-    private int setMax, subcategoryInt;
+    private int subcategoryInt = 0;
+    private int setMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,6 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseSubcategory);
-        et = findViewById(R.id.editTextNumberInputSubategory);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -57,9 +56,61 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
 
         btnBack = findViewById(R.id.buttonSubcategorySelectionBack);
         btnNext = findViewById(R.id.buttonSubcategorySelectionNext);
-        btnSubmit = findViewById(R.id.buttonSubcategorySelectionSubmit);
-
         setTvAndOpacity();
+
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 1;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 2;
+                Context context = getApplicationContext();
+                submit(context);
+
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 3;
+                Context context = getApplicationContext();
+                submit(context);
+
+            }
+        });
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 4;
+                Context context = getApplicationContext();
+                submit(context);
+
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoryInt = 5;
+                Context context = getApplicationContext();
+                submit(context);
+
+            }
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,22 +182,36 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
             }
         });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
-                if (et.length() == 0) {
+//        btnSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//
+//            }
+//
+//        });
+
+
+    }
+
+    private void submit (Context context) {
+        switch (category) {
+            case NEWS:
+            case OPINION:
+            case LIFESTYLE:
+            case ENTERTAINMENT:
+                if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
                     TextReader.invalidInput(mTTS, tv);
-                    return;
+                } else {
+                    subcategory = getSubcategoryString(subcategoryInt);
+                    goToArticleSelectionActivity(context, source, category, subcategory);
                 }
-                String temp = et.getText().toString();
-                subcategoryInt = Integer.parseInt(temp);
-                Context context = getApplicationContext();
-                switch (category) {
-                    case NEWS:
-                    case OPINION:
-                    case LIFESTYLE:
-                    case ENTERTAINMENT:
+                break;
+
+            case SPORTS:
+                switch (setNum) {
+                    case 1:
                         if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
                             TextReader.invalidInput(mTTS, tv);
                         } else {
@@ -154,51 +219,29 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                             goToArticleSelectionActivity(context, source, category, subcategory);
                         }
                         break;
-
-                    case SPORTS:
-                        switch (setNum) {
-                            case 1:
-                                if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                                    TextReader.invalidInput(mTTS, tv);
-                                } else {
-                                    subcategory = getSubcategoryString(subcategoryInt);
-                                    goToArticleSelectionActivity(context, source, category, subcategory);
-                                }
-                                break;
-                            case 2:
-                                if ( (subcategoryInt < 1)|| (subcategoryInt > 4) ) {
-                                    TextReader.invalidInput(mTTS, tv);
-                                } else {
-                                    subcategory = getSubcategoryString(subcategoryInt);
-                                    goToArticleSelectionActivity(context, source, category, subcategory);
-                                }
-                                break;
+                    case 2:
+                        if ( (subcategoryInt < 1)|| (subcategoryInt > 4) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            subcategory = getSubcategoryString(subcategoryInt);
+                            goToArticleSelectionActivity(context, source, category, subcategory);
                         }
                         break;
+                }
+                break;
 
 
-                    case BUSINESS:
-                        switch (setNum) {
-                            case 1:
-                                if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                                    TextReader.invalidInput(mTTS, tv);
-                                } else {
-                                    subcategory = getSubcategoryString(subcategoryInt);
-                                    goToArticleSelectionActivity(context, source, category, subcategory);
-                                }
-                                break;
-                            case 2:
-                                if ( (subcategoryInt < 1)|| (subcategoryInt > 2) ) {
-                                    TextReader.invalidInput(mTTS, tv);
-                                } else {
-                                    subcategory = getSubcategoryString(subcategoryInt);
-                                    goToArticleSelectionActivity(context, source, category, subcategory);
-                                }
-                                break;
+            case BUSINESS:
+                switch (setNum) {
+                    case 1:
+                        if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            subcategory = getSubcategoryString(subcategoryInt);
+                            goToArticleSelectionActivity(context, source, category, subcategory);
                         }
                         break;
-
-                    case TECHNOLOGY:
+                    case 2:
                         if ( (subcategoryInt < 1)|| (subcategoryInt > 2) ) {
                             TextReader.invalidInput(mTTS, tv);
                         } else {
@@ -206,33 +249,39 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                             goToArticleSelectionActivity(context, source, category, subcategory);
                         }
                         break;
+                }
+                break;
 
-                    case GLOBAL_NATION:
-                        switch (setNum) {
-                            case 1:
-                                if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                                    TextReader.invalidInput(mTTS, tv);
-                                } else {
-                                    subcategory = getSubcategoryString(subcategoryInt);
-                                    goToArticleSelectionActivity(context, source, category, subcategory);
-                                }
-                                break;
-                            case 2:
-                                if ( (subcategoryInt < 1)|| (subcategoryInt > 3) ) {
-                                    TextReader.invalidInput(mTTS, tv);
-                                } else {
-                                    subcategory = getSubcategoryString(subcategoryInt);
-                                    goToArticleSelectionActivity(context, source, category, subcategory);
-                                }
-                                break;
+            case TECHNOLOGY:
+                if ( (subcategoryInt < 1)|| (subcategoryInt > 2) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    subcategory = getSubcategoryString(subcategoryInt);
+                    goToArticleSelectionActivity(context, source, category, subcategory);
+                }
+                break;
+
+            case GLOBAL_NATION:
+                switch (setNum) {
+                    case 1:
+                        if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            subcategory = getSubcategoryString(subcategoryInt);
+                            goToArticleSelectionActivity(context, source, category, subcategory);
+                        }
+                        break;
+                    case 2:
+                        if ( (subcategoryInt < 1)|| (subcategoryInt > 3) ) {
+                            TextReader.invalidInput(mTTS, tv);
+                        } else {
+                            subcategory = getSubcategoryString(subcategoryInt);
+                            goToArticleSelectionActivity(context, source, category, subcategory);
                         }
                         break;
                 }
-            }
-
-        });
-
-
+                break;
+        }
     }
 
     private String getSubcategoryString(int subcategoryInt) {
@@ -497,5 +546,23 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                 setMax = 2;
                 break;
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
     }
 }

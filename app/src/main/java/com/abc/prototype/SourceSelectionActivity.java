@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +19,9 @@ import static com.abc.prototype.Navigate.goToSpeedActivity;
 public class SourceSelectionActivity extends AppCompatActivity  {
 
     private TextView tv;
-    private EditText et;
     private TextToSpeech mTTS;
+
+    int source = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +29,52 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_source_selection);
 
         tv = findViewById(R.id.textViewChooseSource);
-        et = findViewById(R.id.editTextNumberInputSource);
-
 
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         TextReader.say(mTTS, tv);
 
-        Button btnSubmit = findViewById(R.id.buttonSourceSelectionSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                source = 1;
                 mTTS.stop();
-                goToSource(et);
+                goToSource();
             }
         });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                source = 2;
+                mTTS.stop();
+                goToSource();
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                source = 3;
+                mTTS.stop();
+                goToSource();
+            }
+        });
+
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                source = 4;
+                mTTS.stop();
+                goToSource();
+            }
+        });
+
 
         Log.e("CHECKPOINT", "ONcREATE");
 
@@ -93,17 +124,15 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         return output;
     }
 
-    private void goToSource(EditText et) {
+    private void goToSource() {
         Context sourceContext = getApplicationContext();
 
-        if (et.length() == 0) {
+        if (source == 0) {
             TextReader.invalidInput(mTTS, tv);
             return;
         }
 
-        String temp = et.getText().toString();
-        int source = Integer.parseInt(temp);
-        if ( (source < 1) || (source > 5)){
+        if ( (source < 1) || (source > 4)){
             TextReader.invalidInput(mTTS, tv);
         } else {
             String sourceStr = getSourceString(source);
@@ -116,5 +145,17 @@ public class SourceSelectionActivity extends AppCompatActivity  {
     protected void onPostResume() {
         super.onPostResume();
         TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
     }
 }

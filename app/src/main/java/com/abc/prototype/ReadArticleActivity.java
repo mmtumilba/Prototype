@@ -16,6 +16,8 @@ import java.util.Vector;
 
 import dalvik.annotation.TestTarget;
 
+import static com.abc.prototype.Navigate.goToSourceSelection;
+
 public class ReadArticleActivity extends AppCompatActivity {
 
     private String source;
@@ -23,7 +25,6 @@ public class ReadArticleActivity extends AppCompatActivity {
     private String link;
     private String category;
     private String subcategory;
-
 
     private Vector<String> article;
 
@@ -36,7 +37,6 @@ public class ReadArticleActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
 
     private Button btnPrev;
-    private Button btnPausePlay;
     private Button btnNext;
 
 
@@ -45,6 +45,8 @@ public class ReadArticleActivity extends AppCompatActivity {
 
     private int index = 0;
     private int maxIndex;
+
+    private String temp="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +61,6 @@ public class ReadArticleActivity extends AppCompatActivity {
 
             category = extras.getString("category");
             subcategory = extras.getString("subcategory");
-
-
-
 
             new ScraperThread().execute();
         }
@@ -81,13 +80,6 @@ public class ReadArticleActivity extends AppCompatActivity {
             }
         });
 
-        btnPausePlay = findViewById(R.id.buttonReadArticlePausePlay);
-        btnPausePlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         btnNext = findViewById(R.id.buttonReadArticleNextArticle);
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +87,26 @@ public class ReadArticleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 nextParagraph();
 
+            }
+        });
+
+        Button btnReadAgain = findViewById(R.id.button3);
+        btnReadAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index = 0;
+                tv.setText(article.get(index));
+                mTTS.stop();
+                TextReader.say(mTTS, tv);
+            }
+        });
+
+        Button btnNewArticle = findViewById(R.id.button4);
+        btnNewArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                goToSourceSelection(context);
             }
         });
 
@@ -112,7 +124,8 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
         if (index > 0) {
             index--;
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -123,13 +136,19 @@ public class ReadArticleActivity extends AppCompatActivity {
     private void nextParagraph() {
         if (index == maxIndex - 1) {
             btnNext.setAlpha((float) 0.5);
+            index++;
+            String temp = article.get(index) + getText(R.string.end_article);
+            tv.setText(temp);
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
         }
         if (index == 0) {
             btnPrev.setAlpha((float) 1);
         }
         if (index < maxIndex) {
             index++;
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -169,7 +188,9 @@ public class ReadArticleActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             switch (source) {
                 case ABS:
-                    tv.setText(article.get(index));
+                    String temp = article.get(index) + getText(R.string.end_paragraph);
+                    tv.setText(temp);
+//                    tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
                     break;
 //                case GMA:
@@ -177,7 +198,9 @@ public class ReadArticleActivity extends AppCompatActivity {
 //                    break;
 //
                 case INQUIRER:
-                    tv.setText(article.get(index));
+                    String tempy = article.get(index) + getText(R.string.end_paragraph);
+                    tv.setText(tempy);
+//                    tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
                     break;
 //
@@ -188,6 +211,24 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
     }
 
-    // TODO: 11/01/2021 paano kapag gusto ni user tuloy tuloy lang ang pagbasa ng article 
+    // TODO: 11/01/2021 paano kapag gusto ni user tuloy tuloy lang ang pagbasa ng article
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        TextReader.say(mTTS, tv);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTTS.stop();
+    }
 
 }

@@ -1,40 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/layoutArticleSelectionActivity"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:gravity="center_horizontal|center_vertical">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textViewChooseArticle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
+        android:layout_centerInParent="true" />
 
-    <EditText
-        android:id="@+id/editTextNumberInputArticle"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/articleLayer1"
+        android:layout_below="@+id/textViewChooseArticle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/article"
-        android:inputType="number" />
+        android:layout_centerHorizontal="true">
 
-    <Button
-        android:id="@+id/buttonArticleSelectionBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/back" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/one" />
 
-    <Button
-        android:id="@+id/buttonArticleSelectionNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/next" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/two" />
 
-    <Button
-        android:id="@+id/buttonArticleSelectionSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/submit" />
-</LinearLayout>
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/three" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/articleLayer2"
+        android:layout_below="@id/articleLayer1"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/four" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/five" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/articleLayer3"
+        android:layout_below="@id/articleLayer2"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonArticleSelectionBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back" />
+
+        <Button
+            android:id="@+id/buttonArticleSelectionNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next" />
+    </LinearLayout>
+
+
+</RelativeLayout>
+

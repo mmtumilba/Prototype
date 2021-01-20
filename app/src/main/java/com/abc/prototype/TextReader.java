@@ -48,7 +48,7 @@ public class TextReader {
     }
 
     public static void invalidInput (TextToSpeech reader, TextView tv) {
-        reader.speak("Try again.", TextToSpeech.QUEUE_FLUSH, null);
+        reader.speak("Invalid input. Try again.", TextToSpeech.QUEUE_FLUSH, null);
         TextReader.say(reader, tv);
     }
 

@@ -62,6 +62,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 categoryInt = 1;
+                submit();
             }
         });
 
@@ -70,6 +71,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 categoryInt = 2;
+                submit();
             }
         });
 
@@ -78,6 +80,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 categoryInt = 3;
+                submit();
             }
         });
 
@@ -87,6 +90,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 categoryInt = 4;
+                submit();
             }
         });
 
@@ -95,6 +99,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 categoryInt = 5;
+                submit();
             }
         });
 
@@ -154,37 +159,30 @@ public class CategorySelectionActivity extends AppCompatActivity {
         });
 
 
-        btnSubmit = findViewById(R.id.buttonCategorySelectionSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            if (categoryInt == 0) {
-                TextReader.invalidInput(mTTS, tv);
-                return;
-            }
-
-            switch (source) {
-                case ABS:
-                    absSubmitButton();
-                    break;
-                case GMA:
-                    gmaSubmitButton();
-                    break;
-
-                case INQUIRER:
-                    inquirerSubmitButton();
-                    break;
-
-                case PHILSTAR:
-                    philstarSubmitButton();
-                    break;
-
-            }
-            mTTS.stop();
-            }
-        });
 
         //// TODO: 07/01/2021 gma and inquirer should go to subcategoryselection instead of articleselection
+    }
+
+    private void submit() {
+
+        switch (source) {
+            case ABS:
+                absSubmitButton();
+                break;
+            case GMA:
+                gmaSubmitButton();
+                break;
+
+            case INQUIRER:
+                inquirerSubmitButton();
+                break;
+
+            case PHILSTAR:
+                philstarSubmitButton();
+                break;
+
+        }
+        mTTS.stop();
     }
 
     private void backButton () {

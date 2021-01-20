@@ -16,6 +16,8 @@ import java.util.Vector;
 
 import dalvik.annotation.TestTarget;
 
+import static com.abc.prototype.Navigate.goToSourceSelection;
+
 public class ReadArticleActivity extends AppCompatActivity {
 
     private String source;
@@ -23,7 +25,6 @@ public class ReadArticleActivity extends AppCompatActivity {
     private String link;
     private String category;
     private String subcategory;
-
 
     private Vector<String> article;
 
@@ -36,7 +37,6 @@ public class ReadArticleActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
 
     private Button btnPrev;
-    private Button btnPausePlay;
     private Button btnNext;
 
 
@@ -45,6 +45,8 @@ public class ReadArticleActivity extends AppCompatActivity {
 
     private int index = 0;
     private int maxIndex;
+
+    private String temp="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,6 @@ public class ReadArticleActivity extends AppCompatActivity {
             category = extras.getString("category");
             subcategory = extras.getString("subcategory");
 
-
-
-
             new ScraperThread().execute();
         }
 
@@ -71,30 +70,74 @@ public class ReadArticleActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.textViewReadArticle);
 
-        btnPrev = findViewById(R.id.buttonReadArticlePreviousArticle);
+        btnPrev = findViewById(R.id.button1);
         btnPrev.setAlpha((float) 0.5);
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                previousParagraph();
+//                previousParagraph();
+                if (index == 0) {
+                    btnPrev.setAlpha((float) 0.5);
+                }
+                if (index == maxIndex) {
+                    btnNext.setAlpha((float) 1);
+                }
+                if (index > 0) {
+                    index--;
+                    temp = article.get(index) + R.string.end_paragraph;
+                    tv.setText(temp);
 
+//                    tv.setText(article.get(index) + R.string.end_paragraph);
+                    mTTS.stop();
+                    TextReader.say(mTTS, tv);
+                }
             }
         });
 
-        btnPausePlay = findViewById(R.id.buttonReadArticlePausePlay);
-        btnPausePlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        btnNext = findViewById(R.id.buttonReadArticleNextArticle);
+        btnNext = findViewById(R.id.button2);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextParagraph();
+//                nextParagraph();
+                if (index == maxIndex - 1) {
+                    btnNext.setAlpha((float) 0.5);
+//            index++;
+//            tv.setText(article.get(index) + "end of paragraph.");
+//            mTTS.stop();
+//            TextReader.say(mTTS, tv);
+                }
+                else if (index == 0) {
+                    btnPrev.setAlpha((float) 1);
+                }
+                else if (index < maxIndex) {
+                    index++;
+                    temp = article.get(index) + R.string.end_paragraph;
+                    tv.setText(temp);
+//                    tv.setText(article.get(index) + " end of paragraph");
+                    mTTS.stop();
+                    TextReader.say(mTTS, tv);
+                }
+            }
+        });
 
+        Button btnReadAgain = findViewById(R.id.button3);
+        btnReadAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index = 0;
+                tv.setText(article.get(index));
+                mTTS.stop();
+                TextReader.say(mTTS, tv);
+            }
+        });
+
+        Button btnNewArticle = findViewById(R.id.button4);
+        btnNewArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                goToSourceSelection(context);
             }
         });
 
@@ -112,7 +155,8 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
         if (index > 0) {
             index--;
-            tv.setText(article.get(index));
+
+//            tv.setText(article.get(index) + "end of paragraph");
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -123,13 +167,17 @@ public class ReadArticleActivity extends AppCompatActivity {
     private void nextParagraph() {
         if (index == maxIndex - 1) {
             btnNext.setAlpha((float) 0.5);
+//            index++;
+//            tv.setText(article.get(index) + "end of paragraph.");
+//            mTTS.stop();
+//            TextReader.say(mTTS, tv);
         }
-        if (index == 0) {
+        else if (index == 0) {
             btnPrev.setAlpha((float) 1);
         }
-        if (index < maxIndex) {
+        else if (index < maxIndex) {
             index++;
-            tv.setText(article.get(index));
+//            tv.setText(article.get(index) + " end of paragraph");
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }

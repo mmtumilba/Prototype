@@ -67,27 +67,6 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/buttonBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/back" />
-
-            <Button
-                android:id="@+id/buttonNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/next" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layer4"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/layer3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
                 android:id="@+id/buttonSourceSelectionSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,81 +89,4 @@
     </RelativeLayout>
 
 </RelativeLayout>
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:id="@+id/layoutSourceSelectionActivity"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:gravity="center_horizontal|center_vertical"-->
-<!--    android:orientation="vertical">-->
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/textViewChooseSource"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/source_label" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextNumberInputSource"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/source"-->
-<!--        android:inputType="number" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSourceSelectionSubmit"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/submit" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button3"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button4"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button5"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSourceSelectionSpeed"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/speed"/>-->
-
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSourceSelectionBookmarks"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/bookmark"/>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button" />-->
-
-
-<!--</LinearLayout>-->
 

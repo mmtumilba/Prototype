@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.Vector;
 
+import static com.abc.prototype.Navigate.goToSourceSelection;
+
 public class ReadBookmarkActivity extends AppCompatActivity {
 
     private Vector<String> article;
@@ -25,7 +27,6 @@ public class ReadBookmarkActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
 
     private Button btnPrev;
-    private Button btnPausePlay;
     private Button btnNext;
 
 
@@ -56,19 +57,31 @@ public class ReadBookmarkActivity extends AppCompatActivity {
             }
         });
 
-//        btnPausePlay = findViewById(R.id.buttonReadArticlePausePlay);
-//        btnPausePlay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
         btnNext = findViewById(R.id.buttonReadBookmarkNext);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextParagraph();
+            }
+        });
+
+        Button btnReadAgain = findViewById(R.id.button3);
+        btnReadAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                index = 0;
+                tv.setText(article.get(index));
+                mTTS.stop();
+                TextReader.say(mTTS, tv);
+            }
+        });
+
+        Button btnNewArticle = findViewById(R.id.button4);
+        btnNewArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                goToSourceSelection(context);
             }
         });
     }

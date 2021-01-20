@@ -177,16 +177,13 @@ public class BookmarksActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             Context context = getApplicationContext();
             Bookmark bookmark = new Bookmark(context);
-            titles = bookmark.titles;
-            titleSets = bookmark.titleSets;
+//            titles = bookmark.titles;
+//            titleSets = bookmark.titleSets;
+//
+//            titlesNum = titles.size();
+//            lastSetSize = titlesNum % 5;
+//            setMax = titleSets.size();
 
-            titlesNum = titles.size();
-            lastSetSize = titlesNum % 5;
-            setMax = titleSets.size();
-
-            if (setMax == 1 ){
-                btnNext.setAlpha((float) 0.5);
-            }
 
             return null;
         }
@@ -194,7 +191,12 @@ public class BookmarksActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            tv.setText(titleSets.get(0));
+//
+//            if (setMax == 1 ){
+//                btnNext.setAlpha((float) 0.5);
+//            }
+//
+//            tv.setText(titleSets.get(0));
         }
 
 

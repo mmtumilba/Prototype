@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Vector;
 
-import static com.abc.prototype.Navigate.goToChooseActionActivity;
+import static com.abc.prototype.Navigate.goToReadArticleActivity;
 
 public class ArticleSelectionActivity extends AppCompatActivity {
 
@@ -77,6 +77,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 article = 1;
                 Context context = getApplicationContext();
                 submit(context);
@@ -87,6 +88,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 article = 2;
                 Context context = getApplicationContext();
                 submit(context);
@@ -97,6 +99,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 article = 3;
                 Context context = getApplicationContext();
                 submit(context);
@@ -107,6 +110,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 article = 4;
                 Context context = getApplicationContext();
                 submit(context);
@@ -117,6 +121,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 article = 5;
                 Context context = getApplicationContext();
                 submit(context);
@@ -178,7 +183,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                 TextReader.invalidInput(mTTS, tv);
             } else {
                 getArticleDetails();
-                goToChooseActionActivity(context, source, link, title, category, subcategory);
+                goToReadArticleActivity(context, source, link, title, category, subcategory);
             }
         } else {
             if (setNum == setMax) {
@@ -186,18 +191,17 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     getArticleDetails();
-                    goToChooseActionActivity(context, source, link, title, category, subcategory);
+                    goToReadArticleActivity(context, source, link, title, category, subcategory);
                 }
             } else {
                 if ( (article < 1) || (article > 5) ) {
                     TextReader.invalidInput(mTTS, tv);
                 } else {
                     getArticleDetails();
-                    goToChooseActionActivity(context, source, link, title, category, subcategory);
+                    goToReadArticleActivity(context, source, link, title, category, subcategory);
                 }
             }
         }
-        mTTS.stop();
     }
 
     private void getArticleDetails() {
@@ -299,6 +303,12 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mTTS.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         mTTS.stop();
     }
 

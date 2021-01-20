@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.Vector;
 
 import static com.abc.prototype.Navigate.goToChooseActionActivity;
@@ -212,14 +213,25 @@ public class BookmarksActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             Context context = getApplicationContext();
-            Bookmark bookmark = new Bookmark(context);
 
-//            titles = bookmark.titles;
-//            titleSets = bookmark.titleSets;
-//
-//            titlesNum = titles.size();
-//            lastSetSize = titlesNum % 5;
-//            setMax = titleSets.size();
+//            if wala pa file say no items in list
+            File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
+            if (newXML.exists()) {
+                Log.e("EXISTENCE", "IT LIIIIVESS");
+
+                Bookmark bookmark = new Bookmark(context);
+                titles = bookmark.titles;
+                titleSets = bookmark.titleSets;
+
+                titlesNum = titles.size();
+                lastSetSize = titlesNum % 5;
+                setMax = titleSets.size();
+
+            } else {
+                Log.e("EXISTENCE", "MUST CREATE");
+            }
+
+
 
 
             return null;
@@ -228,12 +240,21 @@ public class BookmarksActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-//
-//            if (setMax == 1 ){
-//                btnNext.setAlpha((float) 0.5);
-//            }
-//
-//            tv.setText(titleSets.get(0));
+
+            Context context = getApplicationContext();
+            File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
+            if (newXML.exists()) {
+                Log.e("EXISTENCE", "IT LIIIIVESS");
+                if (setMax == 1 ){
+                btnNext.setAlpha((float) 0.5);
+            }
+
+            tv.setText(titleSets.get(0));
+
+            } else {
+                Log.e("EXISTENCE", "MUST CREATE");
+                tv.setText(R.string.empty);
+            }
         }
 
 

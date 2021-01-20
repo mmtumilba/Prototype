@@ -112,6 +112,17 @@ public class ReadArticleActivity extends AppCompatActivity {
             }
         });
 
+        Button btnBookmarkArticle = findViewById(R.id.buttonBookmarkArticle);
+        btnBookmarkArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                Context context = getApplicationContext();
+                Bookmark bookmark = new Bookmark(context, title, article);
+                mTTS.speak("This article has been added to list of bookmarks.", TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
 
 
 

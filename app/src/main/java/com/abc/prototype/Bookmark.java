@@ -1,14 +1,11 @@
 package com.abc.prototype;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.util.Log;
 import android.util.Xml;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -18,15 +15,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Vector;
 
 
@@ -40,23 +34,27 @@ public class Bookmark {
     private String title;
 
     public Bookmark (Context context) {
-//        this.titles = getTitles(context);
-//        this.titleSets = generateTitleSets(titles);
-
-        // display contents :))
-        File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
-        if (newXML.exists()) {
-            Log.e("EXISTENCE", "IT LIIIIVESS");
-        } else {
-            Log.e("EXISTENCE", "MUST CREATE");
-            createXMLFile(context);
-        }
-
+        this.titles = getTitles(context);
+        this.titleSets = generateTitleSets(titles);
     }
 
     public Bookmark (Context context, int articleIndex) {
         this.article = getArticle(context, articleIndex);
     }
+
+    public Bookmark (Context context, String title, Vector<String> article) {
+        this.title = title;
+        this.article = article;
+        File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
+        if (newXML.exists()) {
+            Log.e("EXISTENCE", "IT LIIIIVESS");
+            addBookmark(context);
+        } else {
+            Log.e("EXISTENCE", "MUST CREATE");
+            createXMLFile(context);
+        }
+    }
+
 
     public void createXMLFile (Context context) {
         String filename = "bookmarks.xml";
@@ -70,6 +68,21 @@ public class Bookmark {
             serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 
             serializer.startTag(null, "bookmarks");
+            serializer.startTag(null, "bookmark");
+
+            serializer.startTag(null, "title");
+            serializer.text(title);
+            serializer.endTag(null, "title");
+
+            serializer.startTag(null, "article");
+                for(String par : article) {
+                    serializer.startTag(null, "paragraph");
+                    serializer.text(par);
+                    serializer.endTag(null, "paragraph");
+                }
+            serializer.endTag(null, "article");
+
+            serializer.endTag(null, "bookmark");
             serializer.endTag(null, "bookmarks");
 
             serializer.endDocument();
@@ -87,20 +100,10 @@ public class Bookmark {
 
         try {
 
-//            String path = context.getFilesDir().toString();
-//            String filepath = path + "/bookmarks.xml";
-//            File file = new File(filepath);
-
-            AssetManager am = context.getAssets();
-            InputStream is = am.open("bookmarks.xml");
+            File file = new File(context.getFilesDir() + "/bookmarks.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(is);
-
-
-//            Document doc = db.parse(file);
-
-
+            Document doc = db.parse(file);
 
             doc.getDocumentElement().normalize();
             NodeList bookmark = doc.getElementsByTagName("bookmark");
@@ -149,18 +152,18 @@ public class Bookmark {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return output;
     }
 
-    private void addBookmark (Context context) {
+    public void addBookmark (Context context) {
         try {
+
             File file = new File(context.getFilesDir() + "/bookmarks.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(file);
             Element root = document.getDocumentElement();
+
 
             Element newBookmark = document.createElement("bookmark");
 
@@ -179,16 +182,14 @@ public class Bookmark {
 
             root.appendChild(newBookmark);
 
-
             DOMSource source = new DOMSource(document);
-
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
-            StreamResult result = new StreamResult("bookmarks.xml");
+            StreamResult result = new StreamResult(file);
             transformer.transform(source, result);
+            Log.e("checkpoint!!!", titleT.getTextContent());
 
         }
-
         catch (Exception e) {
             e.printStackTrace();
         }
@@ -199,23 +200,13 @@ public class Bookmark {
 
         try {
 
+            File file = new File(context.getFilesDir() + "/bookmarks.xml");
 
-//            String path = context.getFilesDir().toString();
-//            String filepath = path + "/bookmarks.xml";
-//            File file = new File(context.getFilesDir().toString() + "/bookmarks.xml");
-//
-//            String path = context.getFilesDir().toString();
-//            String filepath = path + "/bookmarks.xml";
-//            File file = new File(filepath);
-
-            AssetManager am = context.getAssets();
-            InputStream is = am.open("bookmarks.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(is);
 
 
-//            Document doc = db.parse(file);
+            Document doc = db.parse(file);
 
             doc.getDocumentElement().normalize();
             NodeList bookmark = doc.getElementsByTagName("bookmark");

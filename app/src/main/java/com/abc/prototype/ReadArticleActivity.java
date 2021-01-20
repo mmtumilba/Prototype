@@ -95,7 +95,9 @@ public class ReadArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 index = 0;
-                tv.setText(article.get(index));
+                String temp = article.get(index) + getText(R.string.end_paragraph);
+                tv.setText(temp);
+//                tv.setText(article.get(index));
                 mTTS.stop();
                 TextReader.say(mTTS, tv);
             }

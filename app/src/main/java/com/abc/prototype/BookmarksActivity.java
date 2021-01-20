@@ -28,7 +28,7 @@ public class BookmarksActivity extends AppCompatActivity {
 
     private int titlesNum;
     private int lastSetSize;
-    private int article;
+    private int article = 0;
     private String articleIndex;
 
 
@@ -47,11 +47,56 @@ public class BookmarksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bookmarks);
 
         tv = findViewById(R.id.textViewBookmarks);
-        et = findViewById(R.id.editTextNumberBookmarksInput);
         new BookmarksThread().execute();
 
         final Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
+
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 1;
+                submit();
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 2;
+                submit();
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 3;
+                submit();
+            }
+        });
+
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 4;
+                submit();
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article = 5;
+                submit();
+            }
+        });
 
         btnBack = findViewById(R.id.buttonBookmarksBack);
         btnBack.setAlpha((float) 0.5);
@@ -69,50 +114,51 @@ public class BookmarksActivity extends AppCompatActivity {
                 nextButton();
             }
         });
+        
 
-        btnSubmit = findViewById(R.id.buttonBookmarksSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (et.length() == 0) {
-                    TextReader.invalidInput(mTTS, tv);
-                    return;
-                }
+//        btnSubmit = findViewById(R.id.buttonBookmarksSubmit);
+//        btnSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (et.length() == 0) {
+//                    TextReader.invalidInput(mTTS, tv);
+//                    return;
+//                }
+//
+//                String temp = et.getText().toString();
+//                article = Integer.parseInt(temp);
+//                int val = article + (setNumIndex * 5) - 1;
+//                articleIndex = Integer.toString(val);
+//
+//
+//                if (lastSetSize == 0) {
+//                    if ( (article < 1) || (article > 5) ) {
+//                        TextReader.invalidInput(mTTS, tv);
+//                    } else {
+//                        goToReadBookmarkActivity(context, articleIndex);
+//
+//                    }
+//                } else {
+//                    if (setNum == setMax) {
+//                        if ( (article < 1) || (article > lastSetSize) ) {
+//                            TextReader.invalidInput(mTTS, tv);
+//                        } else {
+//                            goToReadBookmarkActivity(context, articleIndex);
+//                        }
+//                    } else {
+//                        if ( (article < 1) || (article > 5) ) {
+//                            TextReader.invalidInput(mTTS, tv);
+//                        } else {
+//                            goToReadBookmarkActivity(context, articleIndex);
+//                        }
+//                    }
+//                }
+//                mTTS.stop();
+//                Log.e("articleIndexVal", articleIndex);
+//            }
+//        });
 
-                String temp = et.getText().toString();
-                article = Integer.parseInt(temp);
-                int val = article + (setNumIndex * 5) - 1;
-                articleIndex = Integer.toString(val);
-
-
-                if (lastSetSize == 0) {
-                    if ( (article < 1) || (article > 5) ) {
-                        TextReader.invalidInput(mTTS, tv);
-                    } else {
-                        goToReadBookmarkActivity(context, articleIndex);
-
-                    }
-                } else {
-                    if (setNum == setMax) {
-                        if ( (article < 1) || (article > lastSetSize) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            goToReadBookmarkActivity(context, articleIndex);
-                        }
-                    } else {
-                        if ( (article < 1) || (article > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            goToReadBookmarkActivity(context, articleIndex);
-                        }
-                    }
-                }
-                mTTS.stop();
-                Log.e("articleIndexVal", articleIndex);
-            }
-        });
-
-        btnClear = findViewById(R.id.buttonBookmarksClear);
+        btnClear = findViewById(R.id.buttonClearList);
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +166,38 @@ public class BookmarksActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void submit() {
+        Context context = getApplicationContext();
+
+        int val = article + (setNumIndex * 5) - 1;
+        articleIndex = Integer.toString(val);
+
+
+        if (lastSetSize == 0) {
+            if ( (article < 1) || (article > 5) ) {
+                TextReader.invalidInput(mTTS, tv);
+            } else {
+                goToReadBookmarkActivity(context, articleIndex);
+            }
+        } else {
+            if (setNum == setMax) {
+                if ( (article < 1) || (article > lastSetSize) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    goToReadBookmarkActivity(context, articleIndex);
+                }
+            } else {
+                if ( (article < 1) || (article > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    goToReadBookmarkActivity(context, articleIndex);
+                }
+            }
+        }
+        mTTS.stop();
+        Log.e("articleIndexVal", articleIndex);
     }
 
     private void backButton() {
@@ -177,12 +255,12 @@ public class BookmarksActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             Context context = getApplicationContext();
             Bookmark bookmark = new Bookmark(context);
-//            titles = bookmark.titles;
-//            titleSets = bookmark.titleSets;
-//
-//            titlesNum = titles.size();
-//            lastSetSize = titlesNum % 5;
-//            setMax = titleSets.size();
+            titles = bookmark.titles;
+            titleSets = bookmark.titleSets;
+
+            titlesNum = titles.size();
+            lastSetSize = titlesNum % 5;
+            setMax = titleSets.size();
 
 
             return null;
@@ -192,11 +270,11 @@ public class BookmarksActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 //
-//            if (setMax == 1 ){
-//                btnNext.setAlpha((float) 0.5);
-//            }
-//
-//            tv.setText(titleSets.get(0));
+            if (setMax == 1 ){
+                btnNext.setAlpha((float) 0.5);
+            }
+
+            tv.setText(titleSets.get(0));
         }
 
 

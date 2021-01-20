@@ -147,17 +147,13 @@
     </string>
 
     <string name="inquirer_business_subcategories1">Choose a subcategory: \n
-                                                    1. Mobility \n
-                                                    2. Job Market \n
-                                                    3. Stock Exchange \n
-                                                    4. Property Guide  \n
-                                                    5. Columns
+                                                    1. Stock Exchange \n
+                                                    2. Property Guide \n
+                                                    3. Columns \n
+                                                    4.  Stock Market Quarterly \n
+                                                    5. Classifieds
     </string>
 
-    <string name="inquirer_business_subcategories2">Choose a subcategory: \n
-                                                    1. Stock Market Quarterly \n
-                                                    2. Classifieds
-    </string>
 
     <string name="inquirer_technology_subcategories1">Choose a subcategory: \n
                                                       1. Headlines \n

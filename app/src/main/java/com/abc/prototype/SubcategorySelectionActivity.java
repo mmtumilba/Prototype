@@ -125,14 +125,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                             tv.setText(R.string.inquirer_sports_subcategories1);
                         }
                         break;
-                    case BUSINESS:
-                        while (setNum == 2) {
-                            setNum--;
-                            btnBack.setAlpha((float) 0.5);
-                            btnNext.setAlpha((float) 1);
-                            tv.setText(R.string.inquirer_business_subcategories1);
-                        }
-                        break;
+
                     case GLOBAL_NATION:
                         while (setNum == 2) {
                             setNum--;
@@ -160,14 +153,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                             tv.setText(R.string.inquirer_sports_subcategories2);
                         }
                         break;
-                    case BUSINESS:
-                        while (setNum == 1) {
-                            setNum++;
-                            btnBack.setAlpha((float) 1);
-                            btnNext.setAlpha((float) 0.5);
-                            tv.setText(R.string.inquirer_business_subcategories2);
-                        }
-                        break;
+
                     case GLOBAL_NATION:
                         while (setNum == 1) {
                             setNum++;
@@ -232,23 +218,11 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
 
 
             case BUSINESS:
-                switch (setNum) {
-                    case 1:
-                        if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            subcategory = getSubcategoryString(subcategoryInt);
-                            goToArticleSelectionActivity(context, source, category, subcategory);
-                        }
-                        break;
-                    case 2:
-                        if ( (subcategoryInt < 1)|| (subcategoryInt > 2) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            subcategory = getSubcategoryString(subcategoryInt);
-                            goToArticleSelectionActivity(context, source, category, subcategory);
-                        }
-                        break;
+                if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    subcategory = getSubcategoryString(subcategoryInt);
+                    goToArticleSelectionActivity(context, source, category, subcategory);
                 }
                 break;
 
@@ -408,36 +382,22 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                 break;
 
             case BUSINESS:
-                switch (setNum) {
+                switch (subcategoryInt) {
                     case 1:
-                        switch (subcategoryInt) {
-                            case 1:
-                                output = "mobility"; // TODO: 19/01/2021 remove from list
-                                break;
-                            case 2:
-                                output = "job_market"; // TODO: 19/01/2021 remove from list
-                                break;
-                            case 3:
-                                output = "stock_exchange";
-                                break;
-                            case 4:
-                                output = "property_guide";
-                                break;
-                            case 5:
-                                output = "columns";
-                                break;
-                        }
+                        output = "stock_exhange";
                         break;
-
                     case 2:
-                        switch (subcategoryInt) {
-                            case 1:
-                                output = "stock_market_quarterly";
-                                break;
-                            case 2:
-                                output = "classifieds";
-                                break;
-                        }
+                        output = "property_guide";
+                        break;
+                    case 3:
+                        output = "columns";
+                        break;
+                    case 4:
+                        output = "stock_market_quarterly";
+                        break;
+                    case 5:
+                        output = "classifieds";
+                        break;
                 }
                 break;
 
@@ -530,7 +490,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
             case BUSINESS:
                 tv.setText(R.string.inquirer_business_subcategories1);
                 btnBack.setAlpha((float) 0.5);
-                setMax = 2;
+                btnNext.setAlpha((float) 0.5);
+                setMax = 1;
                 break;
 
             case TECHNOLOGY:

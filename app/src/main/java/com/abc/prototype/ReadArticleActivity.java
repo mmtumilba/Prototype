@@ -70,54 +70,23 @@ public class ReadArticleActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.textViewReadArticle);
 
-        btnPrev = findViewById(R.id.button1);
+        btnPrev = findViewById(R.id.buttonReadArticlePreviousArticle);
         btnPrev.setAlpha((float) 0.5);
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                previousParagraph();
-                if (index == 0) {
-                    btnPrev.setAlpha((float) 0.5);
-                }
-                if (index == maxIndex) {
-                    btnNext.setAlpha((float) 1);
-                }
-                if (index > 0) {
-                    index--;
-                    temp = article.get(index) + R.string.end_paragraph;
-                    tv.setText(temp);
+                previousParagraph();
 
-//                    tv.setText(article.get(index) + R.string.end_paragraph);
-                    mTTS.stop();
-                    TextReader.say(mTTS, tv);
-                }
             }
         });
 
 
-        btnNext = findViewById(R.id.button2);
+        btnNext = findViewById(R.id.buttonReadArticleNextArticle);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                nextParagraph();
-                if (index == maxIndex - 1) {
-                    btnNext.setAlpha((float) 0.5);
-//            index++;
-//            tv.setText(article.get(index) + "end of paragraph.");
-//            mTTS.stop();
-//            TextReader.say(mTTS, tv);
-                }
-                else if (index == 0) {
-                    btnPrev.setAlpha((float) 1);
-                }
-                else if (index < maxIndex) {
-                    index++;
-                    temp = article.get(index) + R.string.end_paragraph;
-                    tv.setText(temp);
-//                    tv.setText(article.get(index) + " end of paragraph");
-                    mTTS.stop();
-                    TextReader.say(mTTS, tv);
-                }
+                nextParagraph();
+
             }
         });
 
@@ -155,8 +124,9 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
         if (index > 0) {
             index--;
-
-//            tv.setText(article.get(index) + "end of paragraph");
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
+//            tv.setText(article.get(index));
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -167,17 +137,15 @@ public class ReadArticleActivity extends AppCompatActivity {
     private void nextParagraph() {
         if (index == maxIndex - 1) {
             btnNext.setAlpha((float) 0.5);
-//            index++;
-//            tv.setText(article.get(index) + "end of paragraph.");
-//            mTTS.stop();
-//            TextReader.say(mTTS, tv);
         }
-        else if (index == 0) {
+        if (index == 0) {
             btnPrev.setAlpha((float) 1);
         }
-        else if (index < maxIndex) {
+        if (index < maxIndex) {
             index++;
-//            tv.setText(article.get(index) + " end of paragraph");
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
+//            tv.setText(article.get(index));
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }

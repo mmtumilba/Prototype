@@ -114,49 +114,7 @@ public class BookmarksActivity extends AppCompatActivity {
                 nextButton();
             }
         });
-        
 
-//        btnSubmit = findViewById(R.id.buttonBookmarksSubmit);
-//        btnSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (et.length() == 0) {
-//                    TextReader.invalidInput(mTTS, tv);
-//                    return;
-//                }
-//
-//                String temp = et.getText().toString();
-//                article = Integer.parseInt(temp);
-//                int val = article + (setNumIndex * 5) - 1;
-//                articleIndex = Integer.toString(val);
-//
-//
-//                if (lastSetSize == 0) {
-//                    if ( (article < 1) || (article > 5) ) {
-//                        TextReader.invalidInput(mTTS, tv);
-//                    } else {
-//                        goToReadBookmarkActivity(context, articleIndex);
-//
-//                    }
-//                } else {
-//                    if (setNum == setMax) {
-//                        if ( (article < 1) || (article > lastSetSize) ) {
-//                            TextReader.invalidInput(mTTS, tv);
-//                        } else {
-//                            goToReadBookmarkActivity(context, articleIndex);
-//                        }
-//                    } else {
-//                        if ( (article < 1) || (article > 5) ) {
-//                            TextReader.invalidInput(mTTS, tv);
-//                        } else {
-//                            goToReadBookmarkActivity(context, articleIndex);
-//                        }
-//                    }
-//                }
-//                mTTS.stop();
-//                Log.e("articleIndexVal", articleIndex);
-//            }
-//        });
 
         btnClear = findViewById(R.id.buttonClearList);
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -255,12 +213,13 @@ public class BookmarksActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             Context context = getApplicationContext();
             Bookmark bookmark = new Bookmark(context);
-            titles = bookmark.titles;
-            titleSets = bookmark.titleSets;
 
-            titlesNum = titles.size();
-            lastSetSize = titlesNum % 5;
-            setMax = titleSets.size();
+//            titles = bookmark.titles;
+//            titleSets = bookmark.titleSets;
+//
+//            titlesNum = titles.size();
+//            lastSetSize = titlesNum % 5;
+//            setMax = titleSets.size();
 
 
             return null;
@@ -270,11 +229,11 @@ public class BookmarksActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 //
-            if (setMax == 1 ){
-                btnNext.setAlpha((float) 0.5);
-            }
-
-            tv.setText(titleSets.get(0));
+//            if (setMax == 1 ){
+//                btnNext.setAlpha((float) 0.5);
+//            }
+//
+//            tv.setText(titleSets.get(0));
         }
 
 

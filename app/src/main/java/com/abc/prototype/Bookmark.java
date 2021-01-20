@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.util.Log;
+import android.util.Xml;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -18,12 +19,17 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
+
+
 
 public class Bookmark {
 
@@ -34,14 +40,46 @@ public class Bookmark {
     private String title;
 
     public Bookmark (Context context) {
-        this.titles = getTitles(context);
-        this.titleSets = generateTitleSets(titles);
+//        this.titles = getTitles(context);
+//        this.titleSets = generateTitleSets(titles);
+
+        // display contents :))
+        File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
+        if (newXML.exists()) {
+            Log.e("EXISTENCE", "IT LIIIIVESS");
+        } else {
+            Log.e("EXISTENCE", "MUST CREATE");
+            createXMLFile(context);
+        }
+
     }
 
     public Bookmark (Context context, int articleIndex) {
         this.article = getArticle(context, articleIndex);
     }
 
+    public void createXMLFile (Context context) {
+        String filename = "bookmarks.xml";
+        try {
+            FileOutputStream fos;
+            fos = context.openFileOutput(filename,Context.MODE_APPEND);
+
+            XmlSerializer serializer = Xml.newSerializer();
+            serializer.setOutput(fos, "UTF-8");
+            serializer.startDocument(null, Boolean.valueOf(true));
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+
+            serializer.startTag(null, "bookmarks");
+            serializer.endTag(null, "bookmarks");
+
+            serializer.endDocument();
+            serializer.flush();
+
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private Vector<String> getArticle (Context context, int articleIndex) {
 
@@ -116,6 +154,45 @@ public class Bookmark {
         return output;
     }
 
+    private void addBookmark (Context context) {
+        try {
+            File file = new File(context.getFilesDir() + "/bookmarks.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(file);
+            Element root = document.getDocumentElement();
+
+            Element newBookmark = document.createElement("bookmark");
+
+            Element titleT = document.createElement("title");
+            titleT.appendChild(document.createTextNode(title));
+            newBookmark.appendChild(titleT);
+
+            Element articleA = document.createElement("article");
+            for (int i = 0; i < article.size(); i++) {
+                Element paragraph = document.createElement("paragraph");
+                paragraph.appendChild(document.createTextNode(article.get(i)));
+                articleA.appendChild(paragraph);
+
+            }
+            newBookmark.appendChild(articleA);
+
+            root.appendChild(newBookmark);
+
+
+            DOMSource source = new DOMSource(document);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            StreamResult result = new StreamResult("bookmarks.xml");
+            transformer.transform(source, result);
+
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private Vector<String> getTitles (Context context) {
         Vector <String> titles = new Vector <String>();

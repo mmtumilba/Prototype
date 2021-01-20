@@ -78,6 +78,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 article = 1;
+                Context context = getApplicationContext();
+                submit(context);
             }
         });
 
@@ -86,6 +88,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 article = 2;
+                Context context = getApplicationContext();
+                submit(context);
             }
         });
 
@@ -94,6 +98,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 article = 3;
+                Context context = getApplicationContext();
+                submit(context);
             }
         });
 
@@ -102,6 +108,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 article = 4;
+                Context context = getApplicationContext();
+                submit(context);
             }
         });
 
@@ -110,6 +118,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 article = 5;
+                Context context = getApplicationContext();
+                submit(context);
             }
         });
 
@@ -158,43 +168,36 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         
         //// TODO: 09/01/2021 twice ang size sang titlesets
 
-        btnSubmit = findViewById(R.id.buttonArticleSelectionSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (article == 0) {
-                    TextReader.invalidInput(mTTS, tv);
-                    return;
-                }
+
+    }
 
 
-                if (lastSetSize == 0) {
-                    if ( (article < 1) || (article > 5) ) {
-                        TextReader.invalidInput(mTTS, tv);
-                    } else {
-                        getArticleDetails();
-                        goToChooseActionActivity(context, source, link, title, category, subcategory);
-                    }
-                } else {
-                    if (setNum == setMax) {
-                        if ( (article < 1) || (article > lastSetSize) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            getArticleDetails();
-                            goToChooseActionActivity(context, source, link, title, category, subcategory);
-                        }
-                    } else {
-                        if ( (article < 1) || (article > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
-                        } else {
-                            getArticleDetails();
-                            goToChooseActionActivity(context, source, link, title, category, subcategory);
-                        }
-                    }
-                }
-                mTTS.stop();
+    private void submit(Context context) {
+        if (lastSetSize == 0) {
+            if ( (article < 1) || (article > 5) ) {
+                TextReader.invalidInput(mTTS, tv);
+            } else {
+                getArticleDetails();
+                goToChooseActionActivity(context, source, link, title, category, subcategory);
             }
-        });
+        } else {
+            if (setNum == setMax) {
+                if ( (article < 1) || (article > lastSetSize) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    getArticleDetails();
+                    goToChooseActionActivity(context, source, link, title, category, subcategory);
+                }
+            } else {
+                if ( (article < 1) || (article > 5) ) {
+                    TextReader.invalidInput(mTTS, tv);
+                } else {
+                    getArticleDetails();
+                    goToChooseActionActivity(context, source, link, title, category, subcategory);
+                }
+            }
+        }
+        mTTS.stop();
     }
 
     private void getArticleDetails() {

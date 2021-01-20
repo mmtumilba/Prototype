@@ -15,7 +15,8 @@
     <string name="subcategory">Subcategory</string>
     <string name="article">Article</string>
 
-    <string name="end_paragraph"> End of paragraph.</string>
+    <string name="end_paragraph">. End of paragraph.</string>
+    <string name="end_article">. End of article.</string>
 
 
     <string name="one">1</string>

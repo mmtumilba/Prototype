@@ -126,7 +126,6 @@ public class ReadArticleActivity extends AppCompatActivity {
             index--;
             String temp = article.get(index) + getText(R.string.end_paragraph);
             tv.setText(temp);
-//            tv.setText(article.get(index));
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -137,6 +136,11 @@ public class ReadArticleActivity extends AppCompatActivity {
     private void nextParagraph() {
         if (index == maxIndex - 1) {
             btnNext.setAlpha((float) 0.5);
+            index++;
+            String temp = article.get(index) + getText(R.string.end_article);
+            tv.setText(temp);
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
         }
         if (index == 0) {
             btnPrev.setAlpha((float) 1);
@@ -145,7 +149,6 @@ public class ReadArticleActivity extends AppCompatActivity {
             index++;
             String temp = article.get(index) + getText(R.string.end_paragraph);
             tv.setText(temp);
-//            tv.setText(article.get(index));
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }

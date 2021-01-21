@@ -44,6 +44,7 @@
     <string name="bookmark">Bookmark Article</string>
     <string name="bookmarks">Go to Bookmarks</string>
     <string name="clear">Clear List</string>
+    <string name="clear_list">Bookmark list clearedBookmark list cleared.</string>
     <string name="empty">List is empty.</string>
 
     <string name="prev">Previous</string>

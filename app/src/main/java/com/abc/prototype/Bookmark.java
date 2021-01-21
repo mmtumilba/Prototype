@@ -33,6 +33,8 @@ public class Bookmark {
 
     private String title;
 
+
+
     public Bookmark (Context context) {
         this.titles = getTitles(context);
         this.titleSets = generateTitleSets(titles);

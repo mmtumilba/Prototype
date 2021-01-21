@@ -121,7 +121,12 @@ public class BookmarksActivity extends AppCompatActivity {
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
+                boolean deleted = newXML.delete();
 
+                tv.setText("");
+                String text = (String) getText(R.string.clear_list);
+                mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 

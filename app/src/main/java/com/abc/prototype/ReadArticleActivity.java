@@ -107,6 +107,7 @@ public class ReadArticleActivity extends AppCompatActivity {
         btnNewArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTTS.stop();
                 Context context = getApplicationContext();
                 goToSourceSelection(context);
             }

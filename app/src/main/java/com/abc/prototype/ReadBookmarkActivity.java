@@ -82,6 +82,7 @@ public class ReadBookmarkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 goToSourceSelection(context);
+                mTTS.stop();
             }
         });
     }

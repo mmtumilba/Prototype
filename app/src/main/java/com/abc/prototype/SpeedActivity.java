@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.abc.prototype.Navigate.goToSourceSelection;
+
 public class SpeedActivity extends AppCompatActivity {
 
     private TextView tv;
@@ -17,6 +19,7 @@ public class SpeedActivity extends AppCompatActivity {
     private Button btnSlow;
     private Button btnNormal;
     private Button btnFast;
+    private Button btnBack;
 
     // create a static variable for the speed
 
@@ -56,6 +59,15 @@ public class SpeedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextReader.speed = (float) 1.5;
                 TextReader.say(mTTS, tv);
+            }
+        });
+
+        btnBack = findViewById(R.id.buttonSpeedBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                goToSourceSelection(context);
             }
         });
     }

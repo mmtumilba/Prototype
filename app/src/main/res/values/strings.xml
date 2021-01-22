@@ -10,6 +10,11 @@
                                 4.Philippine Star.
     </string>
 
+    <string name="source_label1">Choose source: \n
+                                1.ABS-CBN. \n
+                                2.Inquirer. \n
+    </string>
+
     <string name="source">Source</string>
     <string name="category">Category</string>
     <string name="subcategory">Subcategory</string>
@@ -44,7 +49,7 @@
     <string name="bookmark">Bookmark Article</string>
     <string name="bookmarks">Go to Bookmarks</string>
     <string name="clear">Clear List</string>
-    <string name="clear_list">Bookmark list clearedBookmark list cleared.</string>
+    <string name="clear_list">Bookmark list cleared.</string>
     <string name="empty">List is empty.</string>
 
     <string name="prev">Previous</string>

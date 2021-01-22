@@ -32,4 +32,10 @@
         android:layout_height="wrap_content"
         android:text="@string/fast" />
 
+    <Button
+        android:id="@+id/buttonSpeedBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"/>
+
 </LinearLayout>

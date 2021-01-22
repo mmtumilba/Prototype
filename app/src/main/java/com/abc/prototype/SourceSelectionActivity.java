@@ -48,32 +48,35 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                source = 2;
-                mTTS.stop();
-                goToSource();
-            }
-        });
-
-        Button btn3 = findViewById(R.id.button3);
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//                source = 2;
+//                mTTS.stop();
+//                goToSource();
                 source = 3;
                 mTTS.stop();
                 goToSource();
             }
         });
 
-
-        Button btn4 = findViewById(R.id.button4);
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                source = 4;
-                mTTS.stop();
-                goToSource();
-            }
-        });
+//        Button btn3 = findViewById(R.id.button3);
+//        btn3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                source = 3;
+//                mTTS.stop();
+//                goToSource();
+//            }
+//        });
+//
+//
+//        Button btn4 = findViewById(R.id.button4);
+//        btn4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                source = 4;
+//                mTTS.stop();
+//                goToSource();
+//            }
+//        });
 
 
         Log.e("CHECKPOINT", "ONcREATE");

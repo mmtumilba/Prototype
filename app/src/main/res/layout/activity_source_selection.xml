@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="false"
-        android:text="@string/source_label" />
+        android:text="@string/source_label1" />
 
     <RelativeLayout
         android:id="@+id/buttonContainer"
@@ -40,31 +40,31 @@
                 android:text="@string/two" />
         </LinearLayout>
 
+<!--        <LinearLayout-->
+<!--            android:id="@+id/layer2"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/layer1">-->
+
+<!--            <Button-->
+<!--                android:id="@+id/button3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/three" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/button4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/four" />-->
+
+<!--        </LinearLayout>-->
+
         <LinearLayout
             android:id="@+id/layer2"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layer1">
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/three" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/four" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layer3"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/layer2"
+            android:layout_below="@id/layer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 

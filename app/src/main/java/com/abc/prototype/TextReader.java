@@ -20,12 +20,12 @@ public class TextReader {
         TextToSpeech tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {   //initialize textToSpeech
             @Override
             public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-//                    int result = mTTS.setLanguage(Locale.CANADA);
-//                    TextReader.say(mTTS, tv);
-                } else {
-                    Log.e("TTS", "Initialization failed");
-                }
+//                if (status == TextToSpeech.SUCCESS) {
+////                    int result = mTTS.setLanguage(Locale.CANADA);
+////                    TextReader.say(mTTS, tv);
+//                } else {
+//                    Log.e("TTS", "Initialization failed");
+//                }
             }
         });
         return tts;

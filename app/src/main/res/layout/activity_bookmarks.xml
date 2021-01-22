@@ -68,10 +68,10 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/buttonBookmarksBack"
+            android:id="@+id/buttonBookmarksPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/back" />
+            android:text="@string/prev" />
 
         <Button
             android:id="@+id/buttonBookmarksNext"
@@ -92,62 +92,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/clear"/>
+
+        <Button
+            android:id="@+id/buttonBookmarksBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"/>
     </LinearLayout>
+
 
 
 </RelativeLayout>
 
-
-
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:id="@+id/layoutBookmarksActivity"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:gravity="center_horizontal|center_vertical">-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textViewBookmarks"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text="@string/bookmark"/>-->
-
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextNumberBookmarksInput"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/bookmark"-->
-<!--        android:inputType="number" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonBookmarksBack"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/back" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonBookmarksNext"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/next" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonBookmarksSubmit"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/submit" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonBookmarksClear"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/clear" />-->
-
-
-<!--</LinearLayout>-->

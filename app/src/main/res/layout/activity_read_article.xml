@@ -75,6 +75,21 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/layer4"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/layer3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonReadArticletArticleBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back"/>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 

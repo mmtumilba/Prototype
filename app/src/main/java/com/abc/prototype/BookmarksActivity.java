@@ -15,8 +15,10 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.Vector;
 
+import static com.abc.prototype.Navigate.goToBookmarksActivity;
 import static com.abc.prototype.Navigate.goToChooseActionActivity;
 import static com.abc.prototype.Navigate.goToReadBookmarkActivity;
+import static com.abc.prototype.Navigate.goToSourceSelection;
 
 public class BookmarksActivity extends AppCompatActivity {
 
@@ -38,8 +40,8 @@ public class BookmarksActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
 
     private Button btnBack;
+    private Button btnPrev;
     private Button btnNext;
-    private Button btnSubmit;
     private Button btnClear;
 
     @Override
@@ -99,12 +101,12 @@ public class BookmarksActivity extends AppCompatActivity {
             }
         });
 
-        btnBack = findViewById(R.id.buttonBookmarksBack);
-        btnBack.setAlpha((float) 0.5);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnPrev = findViewById(R.id.buttonBookmarksPrev);
+        btnPrev.setAlpha((float) 0.5);
+        btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backButton();
+                PrevButton();
             }
         });
 
@@ -127,6 +129,15 @@ public class BookmarksActivity extends AppCompatActivity {
                 tv.setText("");
                 String text = (String) getText(R.string.clear_list);
                 mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+        btnBack = findViewById(R.id.buttonBookmarksBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                goToSourceSelection(context);
             }
         });
 
@@ -164,15 +175,15 @@ public class BookmarksActivity extends AppCompatActivity {
         Log.e("articleIndexVal", articleIndex);
     }
 
-    private void backButton() {
+    private void PrevButton() {
         mTTS.stop();
 
         if (setMax == 1) {
-            btnBack.setAlpha((float) 0.5);
+            btnPrev.setAlpha((float) 0.5);
             btnNext.setAlpha((float) 0.5);
         } else {
             if (setNum == 2) {
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
             }
             if (setNum == setMax) {
                 btnNext.setAlpha((float) 1);
@@ -191,7 +202,7 @@ public class BookmarksActivity extends AppCompatActivity {
         mTTS.stop();
 
         if (setMax == 1) {
-            btnBack.setAlpha((float) 0.5);
+            btnPrev.setAlpha((float) 0.5);
             btnNext.setAlpha((float) 0.5);
         } else {
             int temp = setMax - 1;
@@ -199,7 +210,7 @@ public class BookmarksActivity extends AppCompatActivity {
                 btnNext.setAlpha((float) 0.5);
             }
             if (setNum == 1) {
-                btnBack.setAlpha((float) 1.0);
+                btnPrev.setAlpha((float) 1.0);
             }
             if (setNum < setMax) {
                 setNum++;

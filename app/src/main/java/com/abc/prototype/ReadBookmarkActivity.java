@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.Vector;
 
+import static com.abc.prototype.Navigate.goToBookmarksActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
 
 public class ReadBookmarkActivity extends AppCompatActivity {
@@ -43,7 +44,7 @@ public class ReadBookmarkActivity extends AppCompatActivity {
             new BookmarkThread().execute();
         }
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewReadBookmark);
@@ -70,7 +71,8 @@ public class ReadBookmarkActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 index = 0;
-                tv.setText(article.get(index));
+                String temp = article.get(index) + getText(R.string.end_paragraph);
+                tv.setText(temp);
                 mTTS.stop();
                 TextReader.say(mTTS, tv);
             }
@@ -85,6 +87,15 @@ public class ReadBookmarkActivity extends AppCompatActivity {
                 mTTS.stop();
             }
         });
+
+        Button btnBack = findViewById(R.id.buttonReadBookmarkBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                goToBookmarksActivity(context);
+            }
+        });
     }
 
     private void previousParagraph() {
@@ -96,7 +107,8 @@ public class ReadBookmarkActivity extends AppCompatActivity {
         }
         if (index > 0) {
             index--;
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -105,13 +117,19 @@ public class ReadBookmarkActivity extends AppCompatActivity {
     private void nextParagraph() {
         if (index == maxIndex - 1) {
             btnNext.setAlpha((float) 0.5);
+            index++;
+            String temp = article.get(index) + getText(R.string.end_article);
+            tv.setText(temp);
+            mTTS.stop();
+            TextReader.say(mTTS, tv);
         }
         if (index == 0) {
             btnPrev.setAlpha((float) 1);
         }
         if (index < maxIndex) {
             index++;
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
             mTTS.stop();
             TextReader.say(mTTS, tv);
         }
@@ -134,7 +152,8 @@ public class ReadBookmarkActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            tv.setText(article.get(index));
+            String temp = article.get(index) + getText(R.string.end_paragraph);
+            tv.setText(temp);
         }
     }
 

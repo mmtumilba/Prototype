@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
+import static com.abc.prototype.Navigate.goToSourceSelection;
 import static com.abc.prototype.Navigate.goToSubcategorySelectionActivity;
 
 public class CategorySelectionActivity extends AppCompatActivity {
@@ -21,9 +22,9 @@ public class CategorySelectionActivity extends AppCompatActivity {
     private TextView tv;
     private TextToSpeech mTTS;
 
-    private Button btnBack;
+    private Button btnPrev;
     private Button btnNext;
-    private Button btnSubmit;
+    private Button btnBack;
 
 
     private String source;
@@ -47,7 +48,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_selection);
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseCategory);
 
@@ -104,25 +105,25 @@ public class CategorySelectionActivity extends AppCompatActivity {
         });
 
 
-        btnBack = findViewById(R.id.buttonCategorySelectionBack);
-        btnBack.setAlpha((float) 0.5);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnPrev = findViewById(R.id.buttonCategorySelectionPrev);
+        btnPrev.setAlpha((float) 0.5);
+        btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (source) {
                     case ABS:
-                        absBackButton();
+                        absPrevButton();
                         break;
                     case GMA:
-                        gmaBackButton();
+                        gmaPrevButton();
                         break;
 
                     case INQUIRER:
-                        inquirerBackButton();
+                        inquirerPrevButton();
                         break;
 
                     case PHILSTAR:
-                        philstarBackButton();
+                        philstarPrevButton();
                         break;
 
                 }
@@ -158,6 +159,15 @@ public class CategorySelectionActivity extends AppCompatActivity {
             }
         });
 
+        btnBack = findViewById(R.id.buttonCategorySelectionBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                goToSourceSelection(context);
+            }
+        });
+
 
 
         //// TODO: 07/01/2021 gma and inquirer should go to subcategoryselection instead of articleselection
@@ -185,10 +195,10 @@ public class CategorySelectionActivity extends AppCompatActivity {
         mTTS.stop();
     }
 
-    private void backButton () {
+    private void PrevButton () {
         while (setNum == 2) {
             setNum--;
-            btnBack.setAlpha((float) 0.5);
+            btnPrev.setAlpha((float) 0.5);
             btnNext.setAlpha((float) 1);
         }
     }
@@ -196,14 +206,14 @@ public class CategorySelectionActivity extends AppCompatActivity {
     private void nextButton () {
         while (setNum == 1) {
             setNum++;
-            btnBack.setAlpha((float) 1);
+            btnPrev.setAlpha((float) 1);
             btnNext.setAlpha((float) 0.5);
         }
     }
 
 
-    private void absBackButton () {
-        backButton();
+    private void absPrevButton () {
+        PrevButton();
         tv.setText(R.string.abs_categories1);
     }
 
@@ -272,11 +282,11 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
 
-    private void gmaBackButton () {
+    private void gmaPrevButton () {
         switch (setNum) {
             case 2: // -> 1
                 setNum--;
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 tv.setText(R.string.gma_categories1);
                 break;
 
@@ -292,7 +302,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
         switch (setNum) {
             case 1: // -> 2
                 setNum++;
-                btnBack.setAlpha((float) 1);
+                btnPrev.setAlpha((float) 1);
                 tv.setText(R.string.gma_categories2);
                 break;
 
@@ -380,8 +390,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
 
 
 
-    private void inquirerBackButton () {
-        backButton();
+    private void inquirerPrevButton () {
+        PrevButton();
         tv.setText(R.string.inquirer_categories1);
     }
 
@@ -456,11 +466,11 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
     //// TODO: 07/01/2021 clear / reset variables kapag nag next activity
-    //prbably sa back and next button check your code lalo sa increment at decrement
+    //prbably sa Prev and next button check your code lalo sa increment at decrement
 
 
-    private void philstarBackButton () {
-        backButton();
+    private void philstarPrevButton () {
+        PrevButton();
         tv.setText(R.string.philstar_categories1);
     }
 

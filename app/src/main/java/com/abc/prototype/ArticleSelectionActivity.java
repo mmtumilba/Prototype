@@ -11,10 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.Vector;
 
+import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
 import static com.abc.prototype.Navigate.goToReadArticleActivity;
+import static com.abc.prototype.Navigate.goToSubcategorySelectionActivity;
 
 public class ArticleSelectionActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private String subcategory;
     private String link = "";
     private String title = "";
+
+    private String tempy;
 
     private final String ABS = "abs";
     private final String GMA = "gma";
@@ -37,7 +40,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
     private Button btnBack;
     private Button btnNext;
-    private Button btnSubmit;
+    private Button btnPrev;
+
 
     private Vector<String> links;
     private Vector<String> titles;
@@ -57,21 +61,27 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_selection);
 
+        final Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
+
+        tv = findViewById(R.id.textViewChooseArticle);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             source = extras.getString("source");         // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
+            tempy = getText(R.string.fetch) + source;
+            tv.setText(tempy);
+            TextReader.say(mTTS, tv);
+
             category = extras.getString("category");
             subcategory = extras.getString("subcategory");
 
+
             new ScraperThread().execute();
         }
-
-
-        final Context context = getApplicationContext();
-        mTTS = TextReader.initialize(context);
         // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
-        tv = findViewById(R.id.textViewChooseArticle);
+
 
         Button btn1 = findViewById(R.id.button1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -129,20 +139,21 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         });
 
 
-        btnBack = findViewById(R.id.buttonArticleSelectionBack);
-        btnBack.setAlpha((float) 0.5);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnPrev = findViewById(R.id.buttonArticleSelectionPrev);
+        btnPrev.setAlpha((float) 0.5);
+        btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (setNum == 2) {
-                    btnBack.setAlpha((float) 0.5);
+                    btnPrev.setAlpha((float) 0.5);
                 } else if (setNum == setMax) {
                     btnNext.setAlpha((float) 1);
                 }
                 if (setNum > 1) {
                     setNum--;
                     setNumIndex = setNum - 1;
-                    tv.setText(titleSets.get(setNumIndex));
+                    tempy = getText(R.string.choose_article) + titleSets.get(setNumIndex);
+                    tv.setText(tempy);
                     mTTS.stop();
                     TextReader.say(mTTS, tv);
                 }
@@ -158,19 +169,33 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                 if (setNum == (temp)) {
                     btnNext.setAlpha((float) 0.5);
                 } else if (setNum == 1) {
-                    btnBack.setAlpha((float) 1);
+                    btnPrev.setAlpha((float) 1);
                 }
                 if (setNum < setMax) {
                     setNum++;
                     setNumIndex = setNum - 1;
-                    tv.setText(titleSets.get(setNumIndex));
+                    tempy = getText(R.string.choose_article) + titleSets.get(setNumIndex);
+                    tv.setText(tempy);
                     mTTS.stop();
                     TextReader.say(mTTS, tv);
                 }
 
             }
         });
-        
+
+        btnBack = findViewById(R.id.buttonArticleSelectionBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                if (source.equals(ABS)){
+                    goToCategorySelectionActivity(context, source);
+                } else if (source.equals(INQUIRER)) {
+                    goToSubcategorySelectionActivity(context, source, category);
+                }
+            }
+        });
+
         //// TODO: 09/01/2021 twice ang size sang titlesets
 
 
@@ -214,6 +239,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private class ScraperThread extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
+
             switch (source) {
                 case ABS:
                     absScraper = new AbsScraper(category);
@@ -227,10 +253,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setMax = absScraper.titleSets.size();
 
                     break;
-//                case GMA:
-//
-//                    break;
-//
+
                 case INQUIRER:
                     inquirerScraper = new InquirerScraper(category, subcategory);
 
@@ -246,10 +269,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setMax = inquirerScraper.titleSets.size();
 
                     break;
-//
-//                case PHILSTAR:
-//
-//                    break;
             }
             return null;
         }
@@ -264,26 +283,19 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            mTTS.stop();
             switch (source) {
                 case ABS:
-                    tv.setText(absScraper.titleSets.get(0));
+                    tempy = getText(R.string.choose_article) + absScraper.titleSets.get(0);
+                    tv.setText(tempy);
                     TextReader.say(mTTS, tv);
                     break;
 
-//                case GMA:
-//
-//                    break;
-//
                 case INQUIRER:
-                    tv.setText(inquirerScraper.titleSets.get(0));
+                    tempy = getText(R.string.choose_article) + inquirerScraper.titleSets.get(0);
+                    tv.setText(tempy);
                     TextReader.say(mTTS, tv);
                     break;
-
-                // TODO: 19/01/2021 clear editText kung nakwa mo na ang data 
-//
-//                case PHILSTAR:
-//
-//                    break;
             }
         }
     }

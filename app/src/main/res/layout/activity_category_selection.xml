@@ -66,16 +66,31 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/buttonCategorySelectionBack"
+            android:id="@+id/buttonCategorySelectionPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/back" />
+            android:text="@string/prev" />
 
         <Button
             android:id="@+id/buttonCategorySelectionNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/categoryLayer4"
+        android:layout_below="@id/categoryLayer3"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonCategorySelectionBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"/>
 
     </LinearLayout>
 

@@ -16,6 +16,7 @@ import java.util.Vector;
 
 import dalvik.annotation.TestTarget;
 
+import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
 
 public class ReadArticleActivity extends AppCompatActivity {
@@ -38,6 +39,8 @@ public class ReadArticleActivity extends AppCompatActivity {
 
     private Button btnPrev;
     private Button btnNext;
+
+    private boolean flag = false;
 
 
     private AbsScraper absScraper;
@@ -65,7 +68,7 @@ public class ReadArticleActivity extends AppCompatActivity {
             new ScraperThread().execute();
         }
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewReadArticle);
@@ -118,14 +121,25 @@ public class ReadArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
-                Context context = getApplicationContext();
-                Bookmark bookmark = new Bookmark(context, title, article);
-                mTTS.speak("This article has been added to list of bookmarks.", TextToSpeech.QUEUE_FLUSH, null);
+                if (!flag) {
+                    flag = true;
+                    Context context = getApplicationContext();
+                    Bookmark bookmark = new Bookmark(context, title, article);
+                    mTTS.speak("This article has been added to list of bookmarks.", TextToSpeech.QUEUE_FLUSH, null);
+                }  else {
+                    mTTS.speak("This article is already in list of bookmarks.", TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         });
 
-
-
+        Button btnBack = findViewById(R.id.buttonReadArticletArticleBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                goToArticleSelectionActivity(context, source, category, subcategory);
+            }
+        });
 
     }
 
@@ -145,7 +159,6 @@ public class ReadArticleActivity extends AppCompatActivity {
         }
     }
 
-    //// TODO: 13/01/2021 hint @ articleSelection change to @string/article
 
     private void nextParagraph() {
         if (index == maxIndex - 1) {
@@ -180,19 +193,11 @@ public class ReadArticleActivity extends AppCompatActivity {
 
                     break;
 
-//                case GMA:
-//
-//                    break;
-//
                 case INQUIRER:
                     inquirerScraper = new InquirerScraper(category, subcategory, link);
                     article = inquirerScraper.articleVector;
                     maxIndex = article.size() - 1;
                     break;
-//
-//                case PHILSTAR:
-//
-//                    break;
             }
             return null;
         }
@@ -204,23 +209,15 @@ public class ReadArticleActivity extends AppCompatActivity {
                 case ABS:
                     String temp = article.get(index) + getText(R.string.end_paragraph);
                     tv.setText(temp);
-//                    tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
                     break;
-//                case GMA:
-//
-//                    break;
-//
+
                 case INQUIRER:
                     String tempy = article.get(index) + getText(R.string.end_paragraph);
                     tv.setText(tempy);
-//                    tv.setText(article.get(index));
                     TextReader.say(mTTS, tv);
                     break;
-//
-//                case PHILSTAR:
-//
-//                    break;
+
             }
         }
     }

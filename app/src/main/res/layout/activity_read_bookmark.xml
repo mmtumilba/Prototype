@@ -60,6 +60,21 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/layer3"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/layer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonReadBookmarkBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

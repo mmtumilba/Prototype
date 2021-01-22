@@ -23,6 +23,8 @@
     <string name="end_paragraph">\n End of paragraph.</string>
     <string name="end_article">\n End of article.</string>
 
+    <string name="choose_article">Choose an article: \n</string>
+
 
     <string name="one">1</string>
     <string name="two">2</string>
@@ -58,6 +60,8 @@
 
 
     <string name="tv">TEXT VIIIIIEEEEEEW</string>
+    <string name="fetch">Fetching news articles from </string>
+
 
     <string name="abs_categories1">Choose a category: \n
                                     1. News \n

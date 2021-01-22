@@ -12,6 +12,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
+import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
+import static com.abc.prototype.Navigate.goToSourceSelection;
 
 public class SubcategorySelectionActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
     private EditText et;
     private TextToSpeech mTTS;
 
-    private Button btnBack;
+    private Button btnPrev;
     private Button btnNext;
 
     private String source;
@@ -54,7 +56,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
             category = extras.getString("category");     // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
         }
 
-        btnBack = findViewById(R.id.buttonSubcategorySelectionBack);
+        btnPrev = findViewById(R.id.buttonSubcategorySelectionPrev);
         btnNext = findViewById(R.id.buttonSubcategorySelectionNext);
         setTvAndOpacity();
 
@@ -112,7 +114,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
@@ -120,7 +122,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                     case SPORTS:
                         while (setNum == 2) {
                             setNum--;
-                            btnBack.setAlpha((float) 0.5);
+                            btnPrev.setAlpha((float) 0.5);
                             btnNext.setAlpha((float) 1);
                             tv.setText(R.string.inquirer_sports_subcategories1);
                         }
@@ -129,7 +131,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                     case GLOBAL_NATION:
                         while (setNum == 2) {
                             setNum--;
-                            btnBack.setAlpha((float) 0.5);
+                            btnPrev.setAlpha((float) 0.5);
                             btnNext.setAlpha((float) 1);
                             tv.setText(R.string.inquirer_global_nation_subcategories1);
                         }
@@ -148,7 +150,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                     case SPORTS:
                         while (setNum == 1) {
                             setNum++;
-                            btnBack.setAlpha((float) 1);
+                            btnPrev.setAlpha((float) 1);
                             btnNext.setAlpha((float) 0.5);
                             tv.setText(R.string.inquirer_sports_subcategories2);
                         }
@@ -157,7 +159,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                     case GLOBAL_NATION:
                         while (setNum == 1) {
                             setNum++;
-                            btnBack.setAlpha((float) 1);
+                            btnPrev.setAlpha((float) 1);
                             btnNext.setAlpha((float) 0.5);
                             tv.setText(R.string.inquirer_global_nation_subcategories2);
                         }
@@ -168,17 +170,16 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
             }
         });
 
-//        btnSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//
-//            }
-//
-//        });
-
-
+        Button btnBack = findViewById(R.id.buttonSubcategorySelectionBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                mTTS.stop();
+                mTTS.shutdown();
+                goToCategorySelectionActivity(context, source);
+            }
+        });
     }
 
     private void submit (Context context) {
@@ -455,55 +456,55 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         switch (category) {
             case NEWS:
                 tv.setText(R.string.inquirer_news_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 btnNext.setAlpha((float) 0.5);
                 setMax = 1;
                 break;
 
             case OPINION:
                 tv.setText(R.string.inquirer_opinion_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 btnNext.setAlpha((float) 0.5);
                 setMax = 1;
                 break;
 
             case SPORTS:
                 tv.setText(R.string.inquirer_sports_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 setMax = 2;
                 break;
 
             case LIFESTYLE:
                 tv.setText(R.string.inquirer_lifestyle_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 btnNext.setAlpha((float) 0.5);
                 setMax = 1;
                 break;
 
             case ENTERTAINMENT:
                 tv.setText(R.string.inquirer_entertainment_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 btnNext.setAlpha((float) 0.5);
                 setMax = 1;
                 break;
 
             case BUSINESS:
                 tv.setText(R.string.inquirer_business_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 btnNext.setAlpha((float) 0.5);
                 setMax = 1;
                 break;
 
             case TECHNOLOGY:
                 tv.setText(R.string.inquirer_technology_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 btnNext.setAlpha((float) 0.5);
                 setMax = 1;
                 break;
 
             case GLOBAL_NATION:
                 tv.setText(R.string.inquirer_global_nation_subcategories1);
-                btnBack.setAlpha((float) 0.5);
+                btnPrev.setAlpha((float) 0.5);
                 setMax = 2;
                 break;
         }

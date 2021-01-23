@@ -15,6 +15,7 @@ import java.util.Vector;
 
 import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
 import static com.abc.prototype.Navigate.goToReadArticleActivity;
+import static com.abc.prototype.Navigate.goToSourceSelection;
 import static com.abc.prototype.Navigate.goToSubcategorySelectionActivity;
 
 public class ArticleSelectionActivity extends AppCompatActivity {
@@ -76,8 +77,9 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             category = extras.getString("category");
             subcategory = extras.getString("subcategory");
 
-
             new ScraperThread().execute();
+        } else {
+            emptyExtras();
         }
         // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
@@ -195,12 +197,12 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                 }
             }
         });
-
-        //// TODO: 09/01/2021 twice ang size sang titlesets
-
-
     }
 
+    private void emptyExtras () {
+        Context context = getApplicationContext();
+        goToSourceSelection(context);
+    }
 
     private void submit(Context context) {
         if (lastSetSize == 0) {

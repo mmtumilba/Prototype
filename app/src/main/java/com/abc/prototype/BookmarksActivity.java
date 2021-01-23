@@ -15,8 +15,6 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.Vector;
 
-import static com.abc.prototype.Navigate.goToBookmarksActivity;
-import static com.abc.prototype.Navigate.goToChooseActionActivity;
 import static com.abc.prototype.Navigate.goToReadBookmarkActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
 
@@ -36,7 +34,6 @@ public class BookmarksActivity extends AppCompatActivity {
 
 
     private TextView tv;
-    private EditText et;
     private TextToSpeech mTTS;
 
     private Button btnBack;
@@ -52,7 +49,7 @@ public class BookmarksActivity extends AppCompatActivity {
         tv = findViewById(R.id.textViewBookmarks);
         new BookmarksThread().execute();
 
-        final Context context = getApplicationContext();
+        Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
         Button btn1 = findViewById(R.id.button1);
@@ -123,6 +120,7 @@ public class BookmarksActivity extends AppCompatActivity {
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Context context = getApplicationContext();
                 File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
                 boolean deleted = newXML.delete();
 
@@ -137,6 +135,7 @@ public class BookmarksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
+                Context context = getApplicationContext();
                 goToSourceSelection(context);
             }
         });

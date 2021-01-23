@@ -3,14 +3,10 @@ package com.abc.prototype;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
@@ -48,7 +44,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_selection);
 
-        final Context context = getApplicationContext();
+        Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseCategory);
 
@@ -164,6 +160,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
+                Context context = getApplicationContext();
                 goToSourceSelection(context);
             }
         });

@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.print.PrinterId;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -44,7 +42,7 @@ public class ReadBookmarkActivity extends AppCompatActivity {
             new BookmarkThread().execute();
         }
 
-        final Context context = getApplicationContext();
+        Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewReadBookmark);
@@ -93,6 +91,7 @@ public class ReadBookmarkActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
+                Context context = getApplicationContext();
                 goToBookmarksActivity(context);
             }
         });

@@ -6,15 +6,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
-import android.util.Printer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Vector;
-
-import dalvik.annotation.TestTarget;
 
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
@@ -68,7 +64,7 @@ public class ReadArticleActivity extends AppCompatActivity {
             new ScraperThread().execute();
         }
 
-        final Context context = getApplicationContext();
+        Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewReadArticle);
@@ -100,7 +96,6 @@ public class ReadArticleActivity extends AppCompatActivity {
                 index = 0;
                 String temp = article.get(index) + getText(R.string.end_paragraph);
                 tv.setText(temp);
-//                tv.setText(article.get(index));
                 mTTS.stop();
                 TextReader.say(mTTS, tv);
             }
@@ -137,6 +132,7 @@ public class ReadArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
+                Context context = getApplicationContext();
                 goToArticleSelectionActivity(context, source, category, subcategory);
             }
         });

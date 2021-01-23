@@ -62,7 +62,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_selection);
 
-        final Context context = getApplicationContext();
+        Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
 
         tv = findViewById(R.id.textViewChooseArticle);
@@ -191,8 +191,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mTTS.stop();
                 if (source.equals(ABS)){
+                    Context context = getApplicationContext();
                     goToCategorySelectionActivity(context, source);
                 } else if (source.equals(INQUIRER)) {
+                    Context context = getApplicationContext();
                     goToSubcategorySelectionActivity(context, source, category);
                 }
             }

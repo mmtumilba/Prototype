@@ -50,11 +50,46 @@ public class Bookmark {
         File newXML = new File(context.getFilesDir() + "/bookmarks.xml");
         if (newXML.exists()) {
             Log.e("EXISTENCE", "IT LIIIIVESS");
-            addBookmark(context);
+            boolean inlist = inList(context, title);
+            if (!inlist) {
+                addBookmark(context);
+            }
         } else {
             Log.e("EXISTENCE", "MUST CREATE");
             createXMLFile(context);
         }
+    }
+
+
+    private boolean inList (Context context, String title) {
+        boolean output = false;
+
+        try {
+
+            File file = new File(context.getFilesDir() + "/bookmarks.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(file);
+
+            doc.getDocumentElement().normalize();
+            NodeList titleList = doc.getElementsByTagName("title");
+            for (int ind = 0; ind < titleList.getLength(); ind++) {
+                Node titleNode = titleList.item(ind);
+//                String title_content = bookmark_content.getElementsByTagName("title").item(0).getContext();
+                if (titleNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) titleNode;
+                    String title_content = eElement.getTextContent();
+                    if (title_content.equals(title)) {
+                        output = true;
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return output;
     }
 
 

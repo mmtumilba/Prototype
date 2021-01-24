@@ -34,6 +34,7 @@ public class BookmarksActivity extends AppCompatActivity {
 
 
     private TextView tv;
+    private EditText et;
     private TextToSpeech mTTS;
 
     private Button btnBack;
@@ -245,10 +246,6 @@ public class BookmarksActivity extends AppCompatActivity {
             } else {
                 Log.e("EXISTENCE", "MUST CREATE");
             }
-
-
-
-
             return null;
         }
 
@@ -264,7 +261,8 @@ public class BookmarksActivity extends AppCompatActivity {
                 btnNext.setAlpha((float) 0.5);
             }
 
-            tv.setText(titleSets.get(0));
+            String temp = "There are " + titlesNum + " bookmarks \n" + titleSets.get(0);
+            tv.setText(temp);
 
             } else {
                 Log.e("EXISTENCE", "MUST CREATE");

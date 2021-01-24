@@ -62,6 +62,10 @@
     <string name="tv">TEXT VIIIIIEEEEEEW</string>
     <string name="fetch">Fetching news articles from </string>
 
+    <string name="there_are">There are </string>
+    <string name="bookmarks_enter">bookmarks \n</string>
+
+
 
     <string name="abs_categories1">Choose a category: \n
                                     1. News \n

@@ -4,15 +4,15 @@
     <string name="opening_label">News Reader for the Blind and Visually Impaired</string>
 
     <string name="source_label">Choose source: \n
-                                1.ABS-CBN. \n
-                                2.GMA. \n
-                                3.Inquirer. \n
-                                4.Philippine Star.
+                                1. ABS-CBN. \n
+                                2. GMA. \n
+                                3. Inquirer. \n
+                                4. Philippine Star.
     </string>
 
     <string name="source_label1">Choose source: \n
-                                1.ABS-CBN. \n
-                                2.Inquirer. \n
+                                1. ABS-CBN. \n
+                                2. Inquirer. \n
     </string>
 
     <string name="source">Source</string>

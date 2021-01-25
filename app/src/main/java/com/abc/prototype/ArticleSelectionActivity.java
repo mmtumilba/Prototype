@@ -84,61 +84,10 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         // TODO: 09/01/2021 TextReader.say(mTTS, tv) kapag may laman na ang tv plug in at scraperThread
 
 
+        if (lastSetSize == 0) {
+            assign5buttons();
+        }
 
-        Button btn1 = findViewById(R.id.button1);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
-                article = 1;
-                Context context = getApplicationContext();
-                submit(context);
-            }
-        });
-
-        Button btn2 = findViewById(R.id.button2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
-                article = 2;
-                Context context = getApplicationContext();
-                submit(context);
-            }
-        });
-
-        Button btn3 = findViewById(R.id.button3);
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
-                article = 3;
-                Context context = getApplicationContext();
-                submit(context);
-            }
-        });
-
-        Button btn4 = findViewById(R.id.button4);
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
-                article = 4;
-                Context context = getApplicationContext();
-                submit(context);
-            }
-        });
-
-        Button btn5 = findViewById(R.id.button5);
-        btn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTTS.stop();
-                article = 5;
-                Context context = getApplicationContext();
-                submit(context);
-            }
-        });
 
 
         btnPrev = findViewById(R.id.buttonArticleSelectionPrev);
@@ -197,6 +146,63 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     Context context = getApplicationContext();
                     goToSubcategorySelectionActivity(context, source, category);
                 }
+            }
+        });
+    }
+
+    private void assign5buttons () {
+        Button btn1 = findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                article = 1;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                article = 2;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                article = 3;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn4 = findViewById(R.id.button4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                article = 4;
+                Context context = getApplicationContext();
+                submit(context);
+            }
+        });
+
+        Button btn5 = findViewById(R.id.button5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTTS.stop();
+                article = 5;
+                Context context = getApplicationContext();
+                submit(context);
             }
         });
     }
@@ -328,5 +334,4 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         mTTS.stop();
     }
 
-    // TODO: 08/01/2021 add bookmars and settings button to all activities na kailangan lagyan
 }

@@ -8,12 +8,10 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
 import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
-import static com.abc.prototype.Navigate.goToSourceSelection;
 
 public class SubcategorySelectionActivity extends AppCompatActivity {
 

@@ -9,7 +9,6 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.File;
@@ -363,18 +362,30 @@ public class BookmarksActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
         TextReader.say(mTTS, tv);
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         mTTS.stop();
+        mTTS.shutdown();
+        super.onStop();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         mTTS.stop();
+        mTTS.shutdown();
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        mTTS.stop();
+        mTTS.shutdown();
+        super.onDestroy();
     }
 }

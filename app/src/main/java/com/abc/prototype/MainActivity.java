@@ -6,10 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.widget.TextView;
 
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -223,19 +223,32 @@ public class ReadArticleActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        Context context = getApplicationContext();
+        mTTS = TextReader.initialize(context);
         TextReader.say(mTTS, tv);
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         mTTS.stop();
+        mTTS.shutdown();
+        super.onStop();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         mTTS.stop();
+        mTTS.shutdown();
+        super.onPause();
+
     }
 
+    @Override
+    protected void onDestroy() {
+        mTTS.stop();
+        mTTS.shutdown();
+        super.onDestroy();
+
+
+    }
 }

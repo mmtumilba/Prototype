@@ -15,6 +15,9 @@ import java.util.Vector;
 import static com.abc.prototype.Navigate.goToArticleSelectionActivity;
 import static com.abc.prototype.Navigate.goToSourceSelection;
 
+
+//commit before changing app name
+
 public class ReadArticleActivity extends AppCompatActivity {
 
     private String source;

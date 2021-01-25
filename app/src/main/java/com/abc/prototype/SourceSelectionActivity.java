@@ -173,7 +173,5 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         mTTS.stop();
         mTTS.shutdown();
         super.onDestroy();
-
-
     }
 }

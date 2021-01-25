@@ -47,9 +47,26 @@ public class TextReader {
         }.start();
     }
 
-    public static void invalidInput (TextToSpeech reader, TextView tv) {
-        reader.speak("Invalid input. Try again.", TextToSpeech.QUEUE_FLUSH, null);
-        TextReader.say(reader, tv);
+    public static void sayText(final TextToSpeech reader, final String text) {
+        new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long l) {
+            }
+
+            @Override
+            public void onFinish() {
+                reader.setSpeechRate(speed);
+                reader.setPitch(1);
+                reader.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        }.start();
     }
+
+    //there are only n choices
+//    public static void invalidInput (TextToSpeech reader, TextView tv, int choices) {
+//        String temp = "There are only " + choices + ". Trey again. " + tv.getText();
+////        reader.speak("Invalid input. Try again.", TextToSpeech.QUEUE_FLUSH, null);
+//        reader.speak(temp,TextToSpeech.QUEUE_FLUSH, null);
+//    }
 
 }

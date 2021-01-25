@@ -70,9 +70,9 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             source = extras.getString("source");         // TODO: 05/01/2021 this may produce null pointerException -> di na kasi sa prev activity, sinigurado nang hindi makakalusot pag walang laman
-            tempy = getText(R.string.fetch) + source;
+            tempy = getText(R.string.fetch) + " " + source;
+            TextReader.sayText(mTTS, tempy);
             tv.setText(tempy);
-            TextReader.say(mTTS, tv);
 
             category = extras.getString("category");
             subcategory = extras.getString("subcategory");
@@ -87,8 +87,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         if (lastSetSize == 0) {
             assign5buttons();
         }
-
-
 
         btnPrev = findViewById(R.id.buttonArticleSelectionPrev);
         btnPrev.setAlpha((float) 0.5);
@@ -139,6 +137,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTTS.stop();
+                mTTS.shutdown();
                 if (source.equals(ABS)){
                     Context context = getApplicationContext();
                     goToCategorySelectionActivity(context, source);
@@ -215,7 +214,8 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private void submit(Context context) {
         if (lastSetSize == 0) {
             if ( (article < 1) || (article > 5) ) {
-                TextReader.invalidInput(mTTS, tv);
+                String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                TextReader.sayText(mTTS, temp);
             } else {
                 getArticleDetails();
                 goToReadArticleActivity(context, source, link, title, category, subcategory);
@@ -223,14 +223,21 @@ public class ArticleSelectionActivity extends AppCompatActivity {
         } else {
             if (setNum == setMax) {
                 if ( (article < 1) || (article > lastSetSize) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    if (lastSetSize == 1) {
+                        String temp = "There is only " + lastSetSize + " choice. Try again. " + tv.getText().toString();
+                        TextReader.sayText(mTTS, temp);
+                    } else {
+                        String temp = "There are only " + lastSetSize + " choices. Try again. " + tv.getText().toString();
+                        TextReader.sayText(mTTS, temp);
+                    }
                 } else {
                     getArticleDetails();
                     goToReadArticleActivity(context, source, link, title, category, subcategory);
                 }
             } else {
                 if ( (article < 1) || (article > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     getArticleDetails();
                     goToReadArticleActivity(context, source, link, title, category, subcategory);

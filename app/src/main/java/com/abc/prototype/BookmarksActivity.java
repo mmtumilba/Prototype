@@ -221,20 +221,29 @@ public class BookmarksActivity extends AppCompatActivity {
 
         if (lastSetSize == 0) {
             if ( (article < 1) || (article > 5) ) {
-                TextReader.invalidInput(mTTS, tv);
+                String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                TextReader.sayText(mTTS, temp);
             } else {
                 goToReadBookmarkActivity(context, articleIndex);
             }
         } else {
             if (setNum == setMax) {
                 if ( (article < 1) || (article > lastSetSize) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    if (lastSetSize == 1) {
+                        String temp = "There is only " + lastSetSize + " choice. Try again. " + tv.getText().toString();
+                        TextReader.sayText(mTTS, temp);
+                    } else {
+                        String temp = "There are only " + lastSetSize + " choices. Try again. " + tv.getText().toString();
+                        TextReader.sayText(mTTS, temp);
+                    }
+
                 } else {
                     goToReadBookmarkActivity(context, articleIndex);
                 }
             } else {
                 if ( (article < 1) || (article > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     goToReadBookmarkActivity(context, articleIndex);
                 }
@@ -332,8 +341,15 @@ public class BookmarksActivity extends AppCompatActivity {
                 btnNext.setAlpha((float) 0.5);
             }
 
-            String temp = "There are " + titlesNum + " bookmarks \n" + titleSets.get(0);
-            tv.setText(temp);
+
+            if (titlesNum == 1) {
+                String temp = "There is " + titlesNum + " bookmark. \n" + titleSets.get(0);
+                tv.setText(temp);
+            } else {
+                String temp = "There are " + titlesNum + " bookmarks. \n" + titleSets.get(0);
+                tv.setText(temp);
+
+            }
 
             } else {
                 Log.e("EXISTENCE", "MUST CREATE");

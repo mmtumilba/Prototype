@@ -187,7 +187,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
             case LIFESTYLE:
             case ENTERTAINMENT:
                 if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     subcategory = getSubcategoryString(subcategoryInt);
                     goToArticleSelectionActivity(context, source, category, subcategory);
@@ -198,7 +199,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                 switch (setNum) {
                     case 1:
                         if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
+                            String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                            TextReader.sayText(mTTS, temp);
                         } else {
                             subcategory = getSubcategoryString(subcategoryInt);
                             goToArticleSelectionActivity(context, source, category, subcategory);
@@ -206,7 +208,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                         break;
                     case 2:
                         if ( (subcategoryInt < 1)|| (subcategoryInt > 4) ) {
-                            TextReader.invalidInput(mTTS, tv);
+                            String temp = "There are only 4 choices. Try again. " + tv.getText().toString();
+                            TextReader.sayText(mTTS, temp);
                         } else {
                             subcategory = getSubcategoryString(subcategoryInt);
                             goToArticleSelectionActivity(context, source, category, subcategory);
@@ -218,7 +221,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
 
             case BUSINESS:
                 if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     subcategory = getSubcategoryString(subcategoryInt);
                     goToArticleSelectionActivity(context, source, category, subcategory);
@@ -227,7 +231,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
 
             case TECHNOLOGY:
                 if ( (subcategoryInt < 1)|| (subcategoryInt > 2) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 2 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     subcategory = getSubcategoryString(subcategoryInt);
                     goToArticleSelectionActivity(context, source, category, subcategory);
@@ -238,7 +243,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                 switch (setNum) {
                     case 1:
                         if ( (subcategoryInt < 1)|| (subcategoryInt > 5) ) {
-                            TextReader.invalidInput(mTTS, tv);
+                            String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                            TextReader.sayText(mTTS, temp);
                         } else {
                             subcategory = getSubcategoryString(subcategoryInt);
                             goToArticleSelectionActivity(context, source, category, subcategory);
@@ -246,7 +252,8 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
                         break;
                     case 2:
                         if ( (subcategoryInt < 1)|| (subcategoryInt > 3) ) {
-                            TextReader.invalidInput(mTTS, tv);
+                            String temp = "There are only 3 choices. Try again. " + tv.getText().toString();
+                            TextReader.sayText(mTTS, temp);
                         } else {
                             subcategory = getSubcategoryString(subcategoryInt);
                             goToArticleSelectionActivity(context, source, category, subcategory);

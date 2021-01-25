@@ -54,6 +54,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
         }
         setTv();
 
+
         Button btn1 = findViewById(R.id.button1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,8 +167,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
         });
 
 
-
-        //// TODO: 07/01/2021 gma and inquirer should go to subcategoryselection instead of articleselection
     }
 
     private void submit() {
@@ -176,6 +175,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             case ABS:
                 absSubmitButton();
                 break;
+
             case GMA:
                 gmaSubmitButton();
                 break;
@@ -224,7 +224,9 @@ public class CategorySelectionActivity extends AppCompatActivity {
         switch (setNum) {
             case 1:
                 if ( (categoryInt < 1)|| (categoryInt > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+//                    TextReader.invalidInput(mTTS, tv, 5);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getAbsCategoryString();
                     goToArticleSelectionActivity(context, source, category, subcategory);
@@ -232,7 +234,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 break;
             case 2:
                 if ( (categoryInt < 1)|| (categoryInt > 2) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 2 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getAbsCategoryString();
                     goToArticleSelectionActivity(context, source, category, subcategory);
@@ -317,7 +320,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
             case 1:
             case 2:
                 if ( (categoryInt < 1)|| (categoryInt > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getGmaCategoryString();
                     goToSubcategorySelectionActivity(context, source, category);
@@ -329,7 +333,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     category = getGmaCategoryString();
                     goToSubcategorySelectionActivity(context, source, category);
                 } else {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There is only 1 choice. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 }
         }
     }
@@ -402,7 +407,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
         switch (setNum) {
             case 1:
                 if ( (categoryInt < 1)|| (categoryInt > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getInquirerCategoryString();
                     goToSubcategorySelectionActivity(context, source, category);
@@ -410,7 +416,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 break;
             case 2:
                 if ( (categoryInt < 1)|| (categoryInt > 3) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 3 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getInquirerCategoryString();
                     goToSubcategorySelectionActivity(context, source, category);
@@ -481,7 +488,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
         switch (setNum) {
             case 1:
                 if ( (categoryInt < 1)|| (categoryInt > 5) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getPhilstarCategoryString();
                     goToArticleSelectionActivity(context, source, category, subcategory);
@@ -489,7 +497,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 break;
             case 2:
                 if ( (categoryInt < 1)|| (categoryInt > 4) ) {
-                    TextReader.invalidInput(mTTS, tv);
+                    String temp = "There are only 4 choices. Try again. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                 } else {
                     category = getPhilstarCategoryString();
                     goToArticleSelectionActivity(context, source, category, subcategory);

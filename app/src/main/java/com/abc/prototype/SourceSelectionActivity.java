@@ -8,7 +8,6 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -91,7 +90,7 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             }
         });
 
-//        buttonSourceSelectionBookmarks
+
         Button btnBookmarks = findViewById(R.id.buttonSourceSelectionBookmarks);
         btnBookmarks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,12 +130,14 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         Context sourceContext = getApplicationContext();
 
         if (source == 0) {
-            TextReader.invalidInput(mTTS, tv);
+            String temp = "There are only 2 choices. Try again. " + tv.getText().toString();
+            TextReader.sayText(mTTS, temp);
             return;
         }
 
         if ( (source < 1) || (source > 4)){
-            TextReader.invalidInput(mTTS, tv);
+            String temp = "There are only 2 choices. Try again. " + tv.getText().toString();
+            TextReader.sayText(mTTS, temp); // TODO: 25/01/2021 change to proper number of sources
         } else {
             String sourceStr = getSourceString(source);
             goToCategorySelectionActivity(sourceContext, sourceStr);

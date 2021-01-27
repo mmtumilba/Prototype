@@ -30,7 +30,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
     private boolean hasSubcategory = false;
 
     private final String ABS = "abs";
-    private final String GMA = "gma";
+    private final String CNN = "cnn";
     private final String INQUIRER = "inquirer";
     private final String PHILSTAR = "philstar";
 
@@ -47,6 +47,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
         tv = findViewById(R.id.textViewChooseCategory);
+        btnPrev = findViewById(R.id.buttonCategorySelectionPrev);
+        btnNext = findViewById(R.id.buttonCategorySelectionNext);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -102,7 +104,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
         });
 
 
-        btnPrev = findViewById(R.id.buttonCategorySelectionPrev);
+
         btnPrev.setAlpha((float) 0.5);
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +113,9 @@ public class CategorySelectionActivity extends AppCompatActivity {
                     case ABS:
                         absPrevButton();
                         break;
-                    case GMA:
-                        gmaPrevButton();
+                    case CNN:
+                        String temp = "There are no other options. " + tv.getText().toString();
+                        TextReader.sayText(mTTS, temp);
                         break;
 
                     case INQUIRER:
@@ -130,7 +133,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             }
         });
 
-        btnNext = findViewById(R.id.buttonCategorySelectionNext);
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,8 +141,9 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 case ABS:
                     absNextButton();
                     break;
-                case GMA:
-                    gmaNextButton();
+                case CNN:
+                    String temp = "There are no other options. " + tv.getText().toString();
+                    TextReader.sayText(mTTS, temp);
                     break;
 
                 case INQUIRER:
@@ -176,8 +180,8 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 absSubmitButton();
                 break;
 
-            case GMA:
-                gmaSubmitButton();
+            case CNN:
+                cnnSubmitButton();
                 break;
 
             case INQUIRER:
@@ -282,111 +286,39 @@ public class CategorySelectionActivity extends AppCompatActivity {
     }
 
 
-    private void gmaPrevButton () {
-        switch (setNum) {
-            case 2: // -> 1
-                setNum--;
-                btnPrev.setAlpha((float) 0.5);
-                tv.setText(R.string.gma_categories1);
-                break;
-
-            case 3: // -> 2
-                setNum--;
-                btnNext.setAlpha((float) 1);
-                tv.setText(R.string.gma_categories2);
-                break;
-        }
-    }
-
-    private void gmaNextButton () {
-        switch (setNum) {
-            case 1: // -> 2
-                setNum++;
-                btnPrev.setAlpha((float) 1);
-                tv.setText(R.string.gma_categories2);
-                break;
-
-            case 2: // -> 3
-                setNum++;
-                btnNext.setAlpha((float) 0.5);
-                tv.setText(R.string.gma_categories3);
-                break;
-        }
-    }
-
-    private void gmaSubmitButton () {
+    private void cnnSubmitButton () {
         Context context = getApplicationContext();
-        switch (setNum) {
-            case 1:
-            case 2:
-                if ( (categoryInt < 1)|| (categoryInt > 5) ) {
-                    String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
-                    TextReader.sayText(mTTS, temp);
-                } else {
-                    category = getGmaCategoryString();
-                    goToSubcategorySelectionActivity(context, source, category);
-                }
-                break;
 
-            case 3:
-                if (categoryInt == 1) {
-                    category = getGmaCategoryString();
-                    goToSubcategorySelectionActivity(context, source, category);
-                } else {
-                    String temp = "There is only 1 choice. Try again. " + tv.getText().toString();
-                    TextReader.sayText(mTTS, temp);
-                }
+        if ( (categoryInt < 1)|| (categoryInt > 5) ) {
+            String temp = "There are only 5 choices. Try again. " + tv.getText().toString();
+            TextReader.sayText(mTTS, temp);
+        } else {
+            category = getCnnCategoryString();
+            goToArticleSelectionActivity(context, source, category, subcategory);
         }
     }
 
-    private String getGmaCategoryString () {
+    private String getCnnCategoryString () {
         String output = "";
 
-        switch (setNum) {
+        switch (categoryInt) {
             case 1:
-                switch (categoryInt) {
-                    case 1:
-                        output = "news";
-                        break;
-                    case 2:
-                        output = "money";
-                        break;
-                    case 3:
-                        output = "sports";
-                        break;
-                    case 4:
-                        output = "pinoy_abroad";
-                        break;
-                    case 5:
-                        output = "sci_tech";
-                        break;
-                }
+                output = "news";
                 break;
-
             case 2:
-                switch (categoryInt) {
-                    case 1:
-                        output = "showbiz";
-                        break;
-                    case 2:
-                        output = "lifestyLe";
-                        break;
-                    case 3:
-                        output = "opinion";
-                        break;
-                    case 4:
-                        output = "hashtag";
-                        break;
-                    case 5:
-                        output = "serbisiyo_publiko";
-                        break;
-                }
+                output = "world";
                 break;
-
             case 3:
-                output = "community_bulletin_board";
+                output = "business";
+                break;
+            case 4:
+                output = "entertainment";
+                break;
+            case 5:
+                output = "sports";
                 break;
         }
+
         return output;
     }
 
@@ -560,10 +492,12 @@ public class CategorySelectionActivity extends AppCompatActivity {
                 setMax = 2;
                 break;
 
-            case GMA:
+            case CNN:
                 hasSubcategory = true;
-                tv.setText(R.string.gma_categories1);
-                setMax = 3;
+                tv.setText(R.string.cnn_categories1);
+                btnPrev.setAlpha((float) 0.5);
+                btnNext.setAlpha((float) 0.5);
+                setMax = 1;
                 break;
 
             case INQUIRER:

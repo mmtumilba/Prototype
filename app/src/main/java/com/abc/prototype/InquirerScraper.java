@@ -2,6 +2,8 @@ package com.abc.prototype;
 import java.util.Vector;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -274,6 +276,26 @@ public class InquirerScraper {
             if (paragraph.hasText()) {
                 articleVector.add(paragraph.text());
             }
+
+//            if (paragraph.select("img") != null) {
+//                String img = "Contains image.";
+//                articleVector.add(img);
+//            }
+
+//            if (paragraph.hasText()) {
+//                if (!checkForAlphabet(paragraph.toString())) {
+//                    return;
+//                }else {
+//                    articleVector.add(paragraph.text());
+//                }
+//                if (paragraph.toString().contains("Subscribe to INQUIRER PLUS TO GET ACCESS")) {
+//                    return;
+//                } else {
+//                    articleVector.add(paragraph.text());
+//                }
+
+//            }
+
         }
     }
 
@@ -283,9 +305,37 @@ public class InquirerScraper {
         Elements paragraphs = articles.select("p");
 
         for (Element paragraph : paragraphs) {
+            if (paragraph.select("img") != null) {
+                String img = "Contains image.";
+                articleVector.add(img);
+            }
+
             if (paragraph.hasText()) {
-                articleVector.add(paragraph.text());
+//                if (!checkForAlphabet(paragraph.toString())) {
+//                    return;
+//                }else {
+//                    articleVector.add(paragraph.text());
+//                }
+                if (paragraph.toString().contains("Subscribe to INQUIRER PLUS TO GET ACCESS")) {
+                    return;
+                } else {
+                    articleVector.add(paragraph.text());
+                }
+
             }
         }
+    }
+
+    public boolean checkForAlphabet (String paragraph) {
+        boolean output;
+        Pattern pattern = Pattern.compile(".*[a-zA-Z]+.*");
+        Matcher matcher = pattern.matcher(paragraph);
+
+        if (matcher.matches()) {
+            output = true;
+        } else {
+            output = false;
+        }
+        return output;
     }
 }

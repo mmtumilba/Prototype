@@ -58,7 +58,7 @@ public class AbsScraper {
     /**
      * populates links and titles
      * @param category passed from category selection
-     * @throws IOException todo  pangitai kung para sa diin ni
+     * @throws IOException
      */
     public void scrapeTitlesLinks (String category) throws IOException {
         String url = "https://news.abs-cbn.com/" + category;

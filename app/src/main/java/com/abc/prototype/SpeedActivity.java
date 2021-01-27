@@ -21,10 +21,6 @@ public class SpeedActivity extends AppCompatActivity {
     private Button btnFast;
     private Button btnBack;
 
-    // create a static variable for the speed
-
-    // TODO: 09/01/2021 butangi onPostResume ang mga activities para di ka na mag implement ng sarili mong back button eheehehe
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,8 +96,6 @@ public class SpeedActivity extends AppCompatActivity {
         mTTS.stop();
         mTTS.shutdown();
         super.onDestroy();
-
-
     }
     
 }

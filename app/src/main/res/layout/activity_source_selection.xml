@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="false"
-        android:text="@string/source_label1" />
+        android:text="@string/source_label2" />
 
     <RelativeLayout
         android:id="@+id/buttonContainer"
@@ -38,6 +38,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="@string/two" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/three" />
         </LinearLayout>
 
 <!--        <LinearLayout-->
@@ -52,7 +58,7 @@
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:text="@string/three" />-->
-
+<!---->
 <!--            <Button-->
 <!--                android:id="@+id/button4"-->
 <!--                android:layout_width="wrap_content"-->

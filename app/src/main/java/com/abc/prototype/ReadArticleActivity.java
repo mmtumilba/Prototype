@@ -29,7 +29,7 @@ public class ReadArticleActivity extends AppCompatActivity {
     private Vector<String> article;
 
     private final String ABS = "abs";
-    private final String GMA = "gma";
+    private final String CNN = "cnn";
     private final String INQUIRER = "inquirer";
     private final String PHILSTAR = "philstar";
 
@@ -44,6 +44,7 @@ public class ReadArticleActivity extends AppCompatActivity {
 
     private AbsScraper absScraper;
     private InquirerScraper inquirerScraper;
+    private CnnScraper cnnScraper;
 
     private int index = 0;
     private int maxIndex;
@@ -96,6 +97,8 @@ public class ReadArticleActivity extends AppCompatActivity {
         btnReadAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnNext.setAlpha(1);
+                btnPrev.setAlpha((float) 0.5);
                 index = 0;
                 String temp = article.get(index) + getText(R.string.end_paragraph);
                 tv.setText(temp);
@@ -197,6 +200,12 @@ public class ReadArticleActivity extends AppCompatActivity {
                     article = inquirerScraper.articleVector;
                     maxIndex = article.size() - 1;
                     break;
+
+                case CNN:
+                    cnnScraper = new CnnScraper(link, category);
+                    article = cnnScraper.article;
+                    maxIndex = article.size() - 1;
+                    break;
             }
             return null;
         }
@@ -214,6 +223,12 @@ public class ReadArticleActivity extends AppCompatActivity {
                 case INQUIRER:
                     String tempy = article.get(index) + getText(R.string.end_paragraph);
                     tv.setText(tempy);
+                    TextReader.say(mTTS, tv);
+                    break;
+
+                case CNN:
+                    String tempyy = article.get(index) + getText(R.string.end_paragraph);
+                    tv.setText(tempyy);
                     TextReader.say(mTTS, tv);
                     break;
 

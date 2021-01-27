@@ -56,15 +56,15 @@ public class SourceSelectionActivity extends AppCompatActivity  {
             }
         });
 
-//        Button btn3 = findViewById(R.id.button3);
-//        btn3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                source = 3;
-//                mTTS.stop();
-//                goToSource();
-//            }
-//        });
+        Button btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                source = 2;
+                mTTS.stop();
+                goToSource();
+            }
+        });
 //
 //
 //        Button btn4 = findViewById(R.id.button4);
@@ -110,7 +110,7 @@ public class SourceSelectionActivity extends AppCompatActivity  {
                 output = "abs";
                 break;
             case 2:
-                output = "gma";
+                output = "cnn";
                 break;
 
             case 3:
@@ -130,13 +130,13 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         Context sourceContext = getApplicationContext();
 
         if (source == 0) {
-            String temp = "There are only 2 choices. Try again. " + tv.getText().toString();
+            String temp = "There are only 3 choices. Try again. " + tv.getText().toString();
             TextReader.sayText(mTTS, temp);
             return;
         }
 
         if ( (source < 1) || (source > 4)){
-            String temp = "There are only 2 choices. Try again. " + tv.getText().toString();
+            String temp = "There are only 3 choices. Try again. " + tv.getText().toString();
             TextReader.sayText(mTTS, temp); // TODO: 25/01/2021 change to proper number of sources
         } else {
             String sourceStr = getSourceString(source);

@@ -29,12 +29,13 @@ public class ArticleSelectionActivity extends AppCompatActivity {
     private String tempy;
 
     private final String ABS = "abs";
-    private final String GMA = "gma";
+    private final String CNN = "cnn";
     private final String INQUIRER = "inquirer";
     private final String PHILSTAR = "philstar";
 
     private AbsScraper absScraper;
     private InquirerScraper inquirerScraper;
+    private CnnScraper cnnScraper;
 
     private TextView tv;
     private TextToSpeech mTTS;
@@ -138,7 +139,7 @@ public class ArticleSelectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mTTS.stop();
                 mTTS.shutdown();
-                if (source.equals(ABS)){
+                if (source.equals(ABS) || source.equals(CNN)){
                     Context context = getApplicationContext();
                     goToCategorySelectionActivity(context, source);
                 } else if (source.equals(INQUIRER)) {
@@ -276,8 +277,6 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
                     links = inquirerScraper.links;
                     titles = inquirerScraper.titles;
-                    Log.e("titleSets size", "before asigning titlesets");
-
                     titleSets = inquirerScraper.titleSets;
 
 
@@ -286,6 +285,18 @@ public class ArticleSelectionActivity extends AppCompatActivity {
                     setMax = inquirerScraper.titleSets.size();
 
                     break;
+
+                case CNN:
+                    cnnScraper = new CnnScraper(category);
+
+                    links = cnnScraper.links;
+                    titles = cnnScraper.titles;
+                    titleSets = cnnScraper.titleSets;
+
+                    titlesNum = titles.size();
+                    lastSetSize = titlesNum % 5;
+                    setMax = cnnScraper.titleSets.size();
+
             }
             return null;
         }
@@ -310,6 +321,12 @@ public class ArticleSelectionActivity extends AppCompatActivity {
 
                 case INQUIRER:
                     tempy = getText(R.string.choose_article) + inquirerScraper.titleSets.get(0);
+                    tv.setText(tempy);
+                    TextReader.say(mTTS, tv);
+                    break;
+
+                case CNN:
+                    tempy = getText(R.string.choose_article) + cnnScraper.titleSets.get(0);
                     tv.setText(tempy);
                     TextReader.say(mTTS, tv);
                     break;

@@ -15,6 +15,12 @@
                                 2. Inquirer. \n
     </string>
 
+    <string name="source_label2">Choose source: \n
+                                1. ABS-CBN. \n
+                                2. Inquirer. \n
+                                3. CNN Philippines
+    </string>
+
     <string name="source">Source</string>
     <string name="category">Category</string>
     <string name="subcategory">Subcategory</string>
@@ -52,7 +58,7 @@
     <string name="bookmarks">Go to Bookmarks</string>
     <string name="clear">Clear List</string>
     <string name="clear_list">Bookmark list cleared.</string>
-    <string name="empty">List is empty.</string>
+    <string name="empty">There are no bookmarks.</string>
 
     <string name="prev">Previous</string>
     <string name="pause">Pause</string>
@@ -80,25 +86,34 @@
                                     2. Spotlight
     </string>
 
-    <string name="gma_categories1">Choose category: \n
-                                    1. News \n
-                                    2. Money \n
-                                    3. Sports \n
-                                    4. Pinoy Abroad \n
-                                    5. Sci Tech
-    </string>
-
-    <string name="gma_categories2">Choose a category: \n
-                                    1. Showbiz \n
-                                    2. Lifestyle \n
+    <string name="manila_times_categories1">Choose category: \n
+                                    1. Nations \n
+                                    2. Regions \n
                                     3. Opinion \n
-                                    4. Hashtag \n
-                                    5. Serbisiyo Publiko
+                                    4. Business \n
+                                    5. World
     </string>
 
-    <string name="gma_categories3">Choose a category: \n
-                                    1. Community Bulletin Board
+    <string name="manila_times_categories2">Choose a category: \n
+                                    1. Sports \n
+                                    2. Lifestyle \n
+                                    3. Entertainment \n
+                                    4. The Sunday Times \n
+                                    5. Public Square
     </string>
+
+    <string name="cnn_categories1">Choose a category: \n
+                                        1. News \n
+                                        2. World \n
+                                        3. Business \n
+                                        4. Entertainment \n
+                                        5. Sports
+    </string>
+
+    <string name="cnn_categories2">Choose a category: \n
+                                   1. Transportation \n
+    </string>
+
 
     <string name="inquirer_categories1">Choose a category: \n
                                         1. News \n
@@ -107,6 +122,8 @@
                                         4. Lifestyle \n
                                         5. Entertainment
     </string>
+
+
 
     <string name="inquirer_categories2">Choose a category: \n
                                         1. Business \n

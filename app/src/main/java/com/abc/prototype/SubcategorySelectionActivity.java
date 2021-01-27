@@ -16,7 +16,6 @@ import static com.abc.prototype.Navigate.goToCategorySelectionActivity;
 public class SubcategorySelectionActivity extends AppCompatActivity {
 
     private TextView tv;
-    private EditText et;
     private TextToSpeech mTTS;
 
     private Button btnPrev;
@@ -520,7 +519,7 @@ public class SubcategorySelectionActivity extends AppCompatActivity {
         super.onPostResume();
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
-        TextReader.say(mTTS, tv);
+//        TextReader.say(mTTS, tv);
     }
 
     @Override

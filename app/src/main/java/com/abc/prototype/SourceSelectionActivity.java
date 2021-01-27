@@ -78,8 +78,6 @@ public class SourceSelectionActivity extends AppCompatActivity  {
 //        });
 
 
-        Log.e("CHECKPOINT", "ONcREATE");
-
         Button btnSpeed = findViewById(R.id.buttonSourceSelectionSpeed);
         btnSpeed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +120,6 @@ public class SourceSelectionActivity extends AppCompatActivity  {
                 break;
         }
 
-        Log.e("CHECKPOINT", "getSourceString");
         return output;
     }
 
@@ -150,7 +147,7 @@ public class SourceSelectionActivity extends AppCompatActivity  {
         super.onPostResume();
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
-        TextReader.say(mTTS, tv);
+//        TextReader.say(mTTS, tv);
     }
 
     @Override

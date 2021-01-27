@@ -73,7 +73,7 @@ public class SpeedActivity extends AppCompatActivity {
         super.onPostResume();
         Context context = getApplicationContext();
         mTTS = TextReader.initialize(context);
-        TextReader.say(mTTS, tv);
+//        TextReader.say(mTTS, tv);
     }
 
     @Override

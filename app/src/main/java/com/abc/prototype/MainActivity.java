@@ -37,4 +37,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
+
+    @Override
+    protected void onStop() {
+        mTTS.stop();
+        mTTS.shutdown();
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        mTTS.stop();
+        mTTS.shutdown();
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        mTTS.stop();
+        mTTS.shutdown();
+        super.onDestroy();
+    }
 }
